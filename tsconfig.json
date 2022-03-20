@@ -16,12 +16,12 @@
         "strict": true,
         "allowJs": true,
         "paths": {
-            "@src/*": ["src/*"],
             "@components/*": ["src/components/*"],
             "@screens/*": ["src/screens/*"],
             "@navigation/*": ["src/navigation/*"],
             "@constants/*": ["src/constants/*"],
-            "@theme/*": ["src/theme/*"]
+            "@theme/*": ["src/theme/*"],
+            "@assets/*": ["./assets/*"]
         },
         "typeRoots": ["./types", "./node_modules/@types"]
     },
