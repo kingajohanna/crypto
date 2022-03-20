@@ -1,0 +1,30 @@
+{
+    "extends": "./node_modules/gts/tsconfig-google.json",
+    "compilerOptions": {
+        "rootDir": ".",
+        "baseUrl": "./",
+        "outDir": "build",
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "jsx": "react-native",
+        "lib": ["dom", "esnext"],
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "allowJs": true,
+        "paths": {
+            "@src/*": ["src/*"],
+            "@components/*": ["src/components/*"],
+            "@screens/*": ["src/screens/*"],
+            "@navigation/*": ["src/navigation/*"],
+            "@constants/*": ["src/constants/*"],
+            "@theme/*": ["src/theme/*"]
+        },
+        "typeRoots": ["./types", "./node_modules/@types"]
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "exclude": ["node_modules", "scripts", "tests"]
+}
