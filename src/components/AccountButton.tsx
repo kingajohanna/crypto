@@ -1,7 +1,8 @@
 import React from "react";
 import { PressableProps, Image } from "react-native";
 import styled from "styled-components/native";
-import Icon from "react-native-ionicons";
+// @ts-ignore
+import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "@theme/Colors";
 
 enum ButtonVariant {
