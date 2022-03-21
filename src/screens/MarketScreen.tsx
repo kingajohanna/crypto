@@ -1,12 +1,28 @@
-import * as React from "react";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, View } from "react-native";
 
 import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
 import { TabHeader } from "@components/TabHeader";
-import { AccountButton } from "@components/AccountButton";
+import { CryptoCoin } from "@components/CryptoCoin";
+import { getMarketData } from "@services/CryptoService";
+
+import { MarketData } from "@constants/MarketData";
 
 export const MarketScreen = () => {
+    let initialValue: MarketData[] = [];
+    const [data, setData] = useState(initialValue);
+
+    useEffect(() => {
+        const fetchMarketData = async () => {
+            const marketData = await getMarketData();
+            // @ts-ignore
+            setData(marketData);
+        };
+
+        fetchMarketData();
+    }, []);
+
     return (
         <View
             style={{
@@ -17,12 +33,21 @@ export const MarketScreen = () => {
             }}
         >
             <TabHeader title={Tabs.market} />
-            <AccountButton.Email />
-            <AccountButton.Apple />
-            <AccountButton.Facebook />
-            <AccountButton.Google />
-            <AccountButton.Logout />
-            <AccountButton.Delete />
+            <FlatList
+                keyExtractor={(item) => item.id}
+                data={data}
+                renderItem={({ item }) => (
+                    <CryptoCoin
+                        fav
+                        onPress={() => console.log(item)}
+                        name={item.name}
+                        shortName={item.symbol}
+                        price={item.current_price}
+                        percentage={item.price_change_percentage_7d_in_currency}
+                        imageUrl={item.image}
+                    />
+                )}
+            />
         </View>
     );
 };

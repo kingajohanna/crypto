@@ -21,7 +21,8 @@
             "@navigation/*": ["src/navigation/*"],
             "@constants/*": ["src/constants/*"],
             "@theme/*": ["src/theme/*"],
-            "@assets/*": ["./assets/*"]
+            "@assets/*": ["./assets/*"],
+            "@services/*": ["src/services/*"]
         },
         "typeRoots": ["./types", "./node_modules/@types"]
     },

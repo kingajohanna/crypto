@@ -9,13 +9,13 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = ({ title }) => {
     return (
-        <Background>
+        <Container>
             <Text>{title}</Text>
-        </Background>
+        </Container>
     );
 };
 
-const Background = styled.View({
+const Container = styled.View({
     margin: 12,
     backgroundColor: Colors.fluorescentBlue,
     width: 120,
