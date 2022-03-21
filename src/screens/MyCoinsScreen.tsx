@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Colors } from "@theme/Colors";
+import { View, StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
-import { TabHeader } from "@components/TabHeader";
+
+import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
 import { Button } from "@components/Button";
+import { TabHeader } from "@components/TabHeader";
 
 export const MyCoinsScreen = () => {
     const styles = StyleSheet.create({

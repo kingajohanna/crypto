@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useState } from "react";
 import { View } from "react-native";
+
 import { Colors } from "@theme/Colors";
-import { TabHeader } from "@components/TabHeader";
 import { Tabs } from "@constants/Tabs";
+import { TabHeader } from "@components/TabHeader";
 import { AccountButton } from "@components/AccountButton";
 
 export const MarketScreen = () => {

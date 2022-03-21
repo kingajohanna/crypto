@@ -1,9 +1,9 @@
-import { TabHeader } from "@components/TabHeader";
+import * as React from "react";
+import { View } from "react-native";
+
 import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
-import * as React from "react";
-import { useState } from "react";
-import { Button, Text, View } from "react-native";
+import { TabHeader } from "@components/TabHeader";
 
 export const FavouriteScreen = () => {
     return (

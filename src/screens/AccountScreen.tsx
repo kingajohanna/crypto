@@ -1,8 +1,5 @@
-import * as React from "react";
-import { useState } from "react";
-import { Text, View } from "react-native";
-// @ts-ignore
-import SearchableDropdown from "react-native-searchable-dropdown";
+import React from "react";
+import { View } from "react-native";
 
 import { TabHeader } from "@components/TabHeader";
 import { Colors } from "@theme/Colors";

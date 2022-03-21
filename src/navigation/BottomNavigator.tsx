@@ -1,19 +1,17 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
-
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+import { Colors } from "@theme/Colors";
+import Icon from "react-native-vector-icons/Ionicons";
+import { Tabs } from "@constants/Tabs";
 
 import { MarketScreen } from "@screens/MarketScreen";
 import { AccountScreen } from "@screens/AccountScreen";
 import { FavouriteScreen } from "@screens/FavouritesScreen";
 import { MyCoinsScreen } from "@screens/MyCoinsScreen";
-
-import { Colors } from "@theme/Colors";
-// @ts-ignore
-import Icon from "react-native-vector-icons/Ionicons";
-import { Tabs } from "@constants/Tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export const BottomNavigator = () => {
     const Tab = createMaterialBottomTabNavigator();

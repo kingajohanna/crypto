@@ -7,9 +7,7 @@
  */
 
 import React from "react";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from "react-native";
 import { BottomNavigator } from "@navigation/BottomNavigator";
-import { MyTabs } from "@navigation/Navigation";
 
 const App = () => {
     return <BottomNavigator />;
