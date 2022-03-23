@@ -6,6 +6,7 @@ import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
 import { Button } from "@components/Button";
 import { TabHeader } from "@components/TabHeader";
+import { ScreenBackground } from "@components/ScreenBackground";
 
 export const MyCoinsScreen = () => {
     const styles = StyleSheet.create({
@@ -18,17 +19,10 @@ export const MyCoinsScreen = () => {
     });
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                backgroundColor: Colors.richBlack,
-            }}
-        >
-            <TabHeader title={Tabs.mycoins} />
+        <ScreenBackground title={Tabs.mycoins}>
             <Button title="Save" />
             <Button title="Cancel" />
             <FAB style={styles.fab} icon="plus" onPress={() => {}} />
-        </View>
+        </ScreenBackground>
     );
 };

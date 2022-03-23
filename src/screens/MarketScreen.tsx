@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 
 import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
-import { TabHeader } from "@components/TabHeader";
 import { CryptoCoin } from "@components/CryptoCoin";
 import { getMarketData } from "@services/CryptoService";
 
 import { MarketData } from "@constants/MarketData";
+import { ScreenBackground } from "@components/ScreenBackground";
+import { CryptoChart } from "@components/CryptoChart";
+import { LineChart } from "react-native-wagmi-charts";
 
 export const MarketScreen = () => {
     let initialValue: MarketData[] = [];
@@ -21,18 +23,12 @@ export const MarketScreen = () => {
         };
 
         fetchMarketData();
+        console.log("data", data.length);
     }, []);
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                backgroundColor: Colors.richBlack,
-                flexDirection: "column",
-            }}
-        >
-            <TabHeader title={Tabs.market} />
+        <ScreenBackground title={Tabs.market}>
+            {data.length === (0 || undefined) && <Text style={{ color: "#ffffff" }}>Error</Text>}
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={data}
@@ -48,6 +44,11 @@ export const MarketScreen = () => {
                     />
                 )}
             />
-        </View>
+            <LineChart.Provider data={data}>
+                <LineChart>
+                    <LineChart.Path />
+                </LineChart>
+            </LineChart.Provider>
+        </ScreenBackground>
     );
 };

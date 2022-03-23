@@ -1,21 +1,18 @@
 import React from "react";
-import { View } from "react-native";
 
-import { TabHeader } from "@components/TabHeader";
-import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
+import { ScreenBackground } from "@components/ScreenBackground";
+import { AccountButton } from "@components/AccountButton";
 
 export const AccountScreen = () => {
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                backgroundColor: Colors.silverSand,
-                flexDirection: "column",
-            }}
-        >
-            <TabHeader title={Tabs.account} />
-        </View>
+        <ScreenBackground title={Tabs.account}>
+            <AccountButton.Email />
+            <AccountButton.Apple />
+            <AccountButton.Facebook />
+            <AccountButton.Google />
+            <AccountButton.Logout />
+            <AccountButton.Delete />
+        </ScreenBackground>
     );
 };
