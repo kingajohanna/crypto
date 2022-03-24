@@ -1,8 +1,9 @@
 import React from "react";
 
 import { Tabs } from "@constants/Tabs";
-import { ScreenBackground } from "@components/ScreenBackground";
+
 import { AccountButton } from "@components/AccountButton";
+import { ScreenBackground } from "@components/ScreenBackground";
 
 export const AccountScreen = () => {
     return (

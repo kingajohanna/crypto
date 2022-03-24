@@ -22,7 +22,7 @@ export interface MarketData {
     price_change_24h: number;
     price_change_percentage_24h: number;
     roi?: any;
-    sparkline_in_7d: [price: any];
+    sparkline_in_7d: { x: number; y: number };
     symbol: string;
     total_supply: number;
     total_volume: number;

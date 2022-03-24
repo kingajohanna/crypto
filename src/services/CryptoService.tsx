@@ -1,14 +1,12 @@
-import React from "react";
 import axios from "axios";
 import moment from "moment";
-import { MarketData } from "@constants/MarketData";
 
 const formatSparkline = (numbers: any) => {
     const sevenDaysAgo = moment().subtract(7, "days").unix();
     let formattedSparkline = numbers.map((item: any, index: any) => {
         return {
-            x: sevenDaysAgo + (index + 1) * 3600,
-            y: item,
+            timestamp: sevenDaysAgo + (index + 1) * 3600,
+            value: item,
         };
     });
 
@@ -42,6 +40,6 @@ export const getMarketData = async () => {
         return formatMarketData(data);
     } catch (error) {
         console.log(error);
-        return 0;
+        return null;
     }
 };

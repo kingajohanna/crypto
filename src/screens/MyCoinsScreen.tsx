@@ -1,11 +1,10 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
-import { Colors } from "@theme/Colors";
 import { Tabs } from "@constants/Tabs";
+
 import { Button } from "@components/Button";
-import { TabHeader } from "@components/TabHeader";
 import { ScreenBackground } from "@components/ScreenBackground";
 
 export const MyCoinsScreen = () => {

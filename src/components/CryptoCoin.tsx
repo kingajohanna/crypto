@@ -1,7 +1,7 @@
 import React from "react";
 import { PressableProps } from "react-native";
-import styled from "styled-components/native";
 import Icon from "react-native-vector-icons/Ionicons";
+import styled from "styled-components/native";
 
 import { Colors } from "@theme/Colors";
 
@@ -10,12 +10,12 @@ type CryptoCoinProps = {
     name?: string;
     shortName?: string;
     price?: number;
-    percentage?: number;
+    priceChange?: number;
     fav?: boolean;
     loggedIn?: boolean;
 } & PressableProps;
 
-export const CryptoCoin: React.FC<CryptoCoinProps> = ({ imageUrl, name, shortName, price, percentage, fav, onPress, loggedIn }) => {
+export const CryptoCoin: React.FC<CryptoCoinProps> = ({ imageUrl, name, shortName, price, priceChange, fav, onPress, loggedIn }) => {
     return (
         <Container onPress={onPress}>
             <LeftContainer>
@@ -28,7 +28,7 @@ export const CryptoCoin: React.FC<CryptoCoinProps> = ({ imageUrl, name, shortNam
             <RightContainer>
                 <RightTitleContainer>
                     <Title>${price!.toLocaleString("en-US", { currency: "USD" })}</Title>
-                    <PercentageText percentage={percentage}>{percentage?.toFixed(2)}%</PercentageText>
+                    <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
                 </RightTitleContainer>
                 {loggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} />}
                 {loggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} />}
@@ -46,10 +46,10 @@ const Title = styled.Text({
     color: Colors.silverSand,
 });
 
-const PercentageText = styled.Text<CryptoCoinProps>(({ percentage }) => ({
+const PriceChangeText = styled.Text<CryptoCoinProps>(({ priceChange }) => ({
     marginTop: 4,
     fontSize: 14,
-    color: percentage && percentage > 0 ? "#00ff00" : "#ff0000",
+    color: priceChange! > 0 ? "#00ff00" : "#ff0000",
 }));
 
 const Subtitle = styled.Text({

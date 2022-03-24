@@ -5,9 +5,9 @@
  * @format
  * @flow strict-local
  */
-
-import React from "react";
 import { BottomNavigator } from "@navigation/BottomNavigator";
+import React from "react";
+import "react-native-gesture-handler";
 
 const App = () => {
     return <BottomNavigator />;

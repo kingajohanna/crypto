@@ -1,8 +1,9 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from "styled-components/native";
 
-import { Colors } from "@theme/Colors";
 import { TabHeader } from "@components/TabHeader";
+
+import { Colors } from "@theme/Colors";
 
 type ScreenBackgroundProps = {
     title: string;
