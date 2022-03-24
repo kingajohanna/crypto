@@ -32,9 +32,9 @@ export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortN
                 <Price>${price?.toLocaleString("en-US")}</Price>
                 <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
             </LowerContainer>
-            <LineChart.Provider data={data}>
-                <LineChart>
-                    <LineChart.Path />
+            <LineChart.Provider data={sparkline.price}>
+                <LineChart height={300}>
+                    <LineChart.Path color={Colors.cadetBlue} />
                     <LineChart.CursorCrosshair>
                         <LineChart.Tooltip />
                     </LineChart.CursorCrosshair>

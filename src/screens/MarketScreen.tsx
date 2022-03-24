@@ -63,7 +63,7 @@ export const MarketScreen = () => {
                 closeOnPressMask={true}
                 closeDuration={180}
                 openDuration={180}
-                height={500}
+                height={400}
                 customStyles={{
                     container: {
                         borderTopLeftRadius: 15,
