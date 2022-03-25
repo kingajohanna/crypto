@@ -16,6 +16,13 @@ type CryptoChartProps = {
     sparkline?: any;
 };
 
+const format = (n: string) => {
+    return parseFloat(n).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+    });
+};
+
 export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortName, price, priceChange, sparkline }) => {
     return (
         <Container>
@@ -33,11 +40,23 @@ export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortN
                 <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
             </LowerContainer>
             <LineChart.Provider data={sparkline.price}>
-                <LineChart height={300}>
+                <LineChart.PriceText
+                    format={({ value }) => {
+                        "worklet";
+                        let formatted = "";
+                        if (value)
+                            formatted = parseFloat(value).toLocaleString("en-US", {
+                                style: "currency",
+                                currency: "USD",
+                            });
+                        return `${formatted}`;
+                    }}
+                    style={{ color: Colors.silverSand }}
+                />
+                <LineChart.DatetimeText style={{ color: Colors.silverSand }} />
+                <LineChart height={250}>
                     <LineChart.Path color={Colors.cadetBlue} />
-                    <LineChart.CursorCrosshair>
-                        <LineChart.Tooltip />
-                    </LineChart.CursorCrosshair>
+                    <LineChart.CursorCrosshair color={Colors.fluorescentBlue} />
                 </LineChart>
             </LineChart.Provider>
         </Container>

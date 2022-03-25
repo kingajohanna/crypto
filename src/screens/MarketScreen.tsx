@@ -59,7 +59,6 @@ export const MarketScreen = () => {
             />
             <RBSheet
                 ref={refRBSheet}
-                closeOnDragDown={true}
                 closeOnPressMask={true}
                 closeDuration={180}
                 openDuration={180}
