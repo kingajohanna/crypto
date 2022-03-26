@@ -18,8 +18,8 @@ export const BottomNavigator = () => {
     const Tab = createMaterialBottomTabNavigator();
 
     return (
-        <NavigationContainer>
-            <SafeAreaProvider style={styles.background}>
+        <SafeAreaProvider style={styles.background}>
+            <NavigationContainer>
                 <Tab.Navigator activeColor={Colors.fluorescentBlue} inactiveColor={Colors.cadetBlue} initialRouteName={Tabs.market} shifting={true} barStyle={styles.tabBar}>
                     <Tab.Screen
                         name={Tabs.account}
@@ -54,8 +54,8 @@ export const BottomNavigator = () => {
                         }}
                     />
                 </Tab.Navigator>
-            </SafeAreaProvider>
-        </NavigationContainer>
+            </NavigationContainer>
+        </SafeAreaProvider>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { ActivityIndicator, Dimensions, FlatList, StyleSheet } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { getMarketData } from "@services/CryptoService";
@@ -12,6 +12,8 @@ import { CryptoCoin } from "@components/CryptoCoin";
 import { ScreenBackground } from "@components/ScreenBackground";
 
 import { Colors } from "@theme/Colors";
+
+const { height: SIZE } = Dimensions.get("window");
 
 export const MarketScreen = () => {
     const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
@@ -62,7 +64,7 @@ export const MarketScreen = () => {
                 closeOnPressMask={true}
                 closeDuration={180}
                 openDuration={180}
-                height={400}
+                height={SIZE * 0.5}
                 customStyles={{
                     container: {
                         borderTopLeftRadius: 15,

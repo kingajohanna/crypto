@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 
 import { Colors } from "@theme/Colors";
 
-const { width: SIZE } = Dimensions.get("window");
+const { height: SIZE } = Dimensions.get("window");
 
 type CryptoChartProps = {
     imageUrl?: string;
@@ -54,7 +54,7 @@ export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortN
                     style={{ color: Colors.silverSand }}
                 />
                 <LineChart.DatetimeText style={{ color: Colors.silverSand }} />
-                <LineChart height={250}>
+                <LineChart height={SIZE * 0.3}>
                     <LineChart.Path color={Colors.cadetBlue} />
                     <LineChart.CursorCrosshair color={Colors.fluorescentBlue} />
                 </LineChart>

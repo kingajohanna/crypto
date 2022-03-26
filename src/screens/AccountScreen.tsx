@@ -7,6 +7,8 @@ import { ScreenBackground } from "@components/ScreenBackground";
 
 import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import axios from "axios";
+import { addUser } from "@services/UserService";
 
 GoogleSignin.configure({
     webClientId: "846343653708-2vjl1i736qqn5lgfqia80g2ieqsm3ktj.apps.googleusercontent.com",
@@ -23,6 +25,7 @@ async function onGoogleButtonPress() {
     const user = auth().signInWithCredential(googleCredential);
 
     user.then((re) => {
+        addUser(re.user.uid, re.user.email!, re.user.displayName!, re.user.metadata.creationTime!);
         console.log(re);
     });
 
@@ -44,6 +47,15 @@ async function OnEmail() {
         });
 }
 
+async function logOut() {
+    return auth()
+        .signOut()
+        .then(() => console.log("User signed out!"))
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
 export const AccountScreen = () => {
     return (
         <ScreenBackground title={Tabs.account}>
@@ -51,7 +63,7 @@ export const AccountScreen = () => {
             <AccountButton.Apple />
             <AccountButton.Facebook />
             <AccountButton.Google onPress={() => onGoogleButtonPress().then(() => console.log("Signed in with Google!"))} />
-            <AccountButton.Logout />
+            <AccountButton.Logout onPress={() => logOut()} />
             <AccountButton.Delete />
         </ScreenBackground>
     );
