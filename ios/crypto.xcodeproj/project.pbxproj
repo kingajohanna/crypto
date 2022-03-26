@@ -27,7 +27,7 @@
 		2923863927E792F200988B31 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2923862927E792F200988B31 /* EvilIcons.ttf */; };
 		2923863A27E792F200988B31 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2923862A27E792F200988B31 /* SimpleLineIcons.ttf */; };
 		2923863B27E792F200988B31 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2923862B27E792F200988B31 /* MaterialIcons.ttf */; };
-		29AB98DF27EF66530021C93F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29AB98DE27EF66530021C93F /* GoogleService-Info.plist */; };
+		29FD00C627EF885F00A0551D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29FD00C527EF885F00A0551D /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AD41669FAFC9453D2B0F794F /* libPods-crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8D45C6EB208F6C40133118 /* libPods-crypto.a */; };
 		BADE91F98896C9FED4FC0D85 /* libPods-crypto-cryptoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E9CE8340AD1C9AA9590561 /* libPods-crypto-cryptoTests.a */; };
@@ -69,8 +69,8 @@
 		2923862927E792F200988B31 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		2923862A27E792F200988B31 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		2923862B27E792F200988B31 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
-		29AB98DE27EF66530021C93F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29AB98E027EF6A7A0021C93F /* cryptoDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = cryptoDebug.entitlements; path = crypto/cryptoDebug.entitlements; sourceTree = "<group>"; };
+		29FD00C527EF885F00A0551D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		423D6FC16AE8A65126037E66 /* Pods-crypto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crypto.debug.xcconfig"; path = "Target Support Files/Pods-crypto/Pods-crypto.debug.xcconfig"; sourceTree = "<group>"; };
 		7266078AB5FBD5B4C2C8F9E7 /* Pods-crypto-cryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crypto-cryptoTests.debug.xcconfig"; path = "Target Support Files/Pods-crypto-cryptoTests/Pods-crypto-cryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = crypto/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,8 +121,8 @@
 		13B07FAE1A68108700A75B9A /* crypto */ = {
 			isa = PBXGroup;
 			children = (
+				29FD00C527EF885F00A0551D /* GoogleService-Info.plist */,
 				29AB98E027EF6A7A0021C93F /* cryptoDebug.entitlements */,
-				29AB98DE27EF66530021C93F /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -327,7 +327,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				2923863227E792F200988B31 /* AntDesign.ttf in Resources */,
 				2923863827E792F200988B31 /* Zocial.ttf in Resources */,
-				29AB98DF27EF66530021C93F /* GoogleService-Info.plist in Resources */,
+				29FD00C627EF885F00A0551D /* GoogleService-Info.plist in Resources */,
 				2923863327E792F200988B31 /* Foundation.ttf in Resources */,
 				2923862E27E792F200988B31 /* Feather.ttf in Resources */,
 				2923863927E792F200988B31 /* EvilIcons.ttf in Resources */,

@@ -60,5 +60,9 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
+
 # vscode settings
 .vscode
+
+ios/GoogleService-Info.plist
+android/app/google-services.json
