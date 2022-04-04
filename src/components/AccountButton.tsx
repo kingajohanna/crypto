@@ -9,7 +9,8 @@ enum ButtonVariant {
     google = "google",
     apple = "apple",
     facebook = "facebook",
-    email = "email",
+    emailLogIn = "emailLogIn",
+    emailSignIn = "emailSignIn",
     logout = "logout",
     delete = "delete",
 }
@@ -39,9 +40,11 @@ const socialText = (variant: ButtonVariant) => {
             return "Tap to logout";
         case ButtonVariant.delete:
             return "Tap to delete account";
-        case ButtonVariant.email:
+        case ButtonVariant.emailLogIn:
+            return "Log in with email";
+        case ButtonVariant.emailSignIn:
         default:
-            return "Continue with email";
+            return "Sign In email";
     }
 };
 
@@ -57,7 +60,8 @@ const socialIcon = (variant: ButtonVariant) => {
             return <Icon name="log-out" size={24} color={Colors.fluorescentBlue} />;
         case ButtonVariant.delete:
             return <Icon name="person-remove" size={24} color={Colors.fluorescentBlue} />;
-        case ButtonVariant.email:
+        case ButtonVariant.emailLogIn:
+        case ButtonVariant.emailSignIn:
         default:
             return <Icon name="mail" size={24} color={Colors.fluorescentBlue} />;
     }
@@ -73,7 +77,8 @@ const backgroundColor = (variant: ButtonVariant) => {
             return Colors.black;
         case ButtonVariant.logout:
         case ButtonVariant.delete:
-        case ButtonVariant.email:
+        case ButtonVariant.emailLogIn:
+        case ButtonVariant.emailSignIn:
         default:
             return Colors.gunmetal;
     }
@@ -86,7 +91,8 @@ const fontColor = (variant: ButtonVariant) => {
         case ButtonVariant.apple:
         case ButtonVariant.facebook:
             return Colors.white;
-        case ButtonVariant.email:
+        case ButtonVariant.emailLogIn:
+        case ButtonVariant.emailSignIn:
         case ButtonVariant.logout:
         case ButtonVariant.delete:
         default:
@@ -127,8 +133,11 @@ const Apple = styled(ButtonComponent).attrs(() => ({
 const Facebook = styled(ButtonComponent).attrs(() => ({
     variant: ButtonVariant.facebook,
 }))({});
-const Email = styled(ButtonComponent).attrs(() => ({
-    variant: ButtonVariant.email,
+const EmailSignIn = styled(ButtonComponent).attrs(() => ({
+    variant: ButtonVariant.emailSignIn,
+}))({});
+const EmailLogIn = styled(ButtonComponent).attrs(() => ({
+    variant: ButtonVariant.emailLogIn,
 }))({});
 const Logout = styled(ButtonComponent).attrs(() => ({
     variant: ButtonVariant.logout,
@@ -141,7 +150,8 @@ export const AccountButton = {
     Google: Google,
     Apple: Apple,
     Facebook: Facebook,
-    Email: Email,
+    EmailLogIn: EmailLogIn,
+    EmailSignIn: EmailSignIn,
     Logout: Logout,
     Delete: Delete,
 };
