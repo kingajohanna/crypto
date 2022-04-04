@@ -19,8 +19,6 @@ export const MyCoinsScreen = () => {
 
     return (
         <ScreenBackground title={Tabs.mycoins}>
-            <Button title="Save" />
-            <Button title="Cancel" />
             <FAB style={styles.fab} icon="plus" onPress={() => {}} />
         </ScreenBackground>
     );

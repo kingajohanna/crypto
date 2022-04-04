@@ -22,16 +22,16 @@ export const MarketScreen = () => {
 
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
-    useEffect(() => {
-        const fetchMarketData = async () => {
-            setLoading(true);
-            const marketData = await getMarketData();
-            if (marketData) {
-                setLoading(false);
-                setData(marketData);
-            }
-        };
+    const fetchMarketData = async () => {
+        setLoading(true);
+        const marketData = await getMarketData();
+        if (marketData) {
+            setLoading(false);
+            setData(marketData);
+        }
+    };
 
+    useEffect(() => {
         fetchMarketData();
     }, []);
 
@@ -40,13 +40,20 @@ export const MarketScreen = () => {
         refRBSheet.current!.open();
     };
 
+    const onRefresh = () => {
+        setLoading(true);
+        fetchMarketData();
+    };
+
     return (
         <ScreenBackground title={Tabs.market}>
-            {loading && <ActivityIndicator animating size="large" />}
+            {loading && <ActivityIndicator animating size="large" style={{ paddingTop: 16 }} />}
 
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={data}
+                onRefresh={() => onRefresh()}
+                refreshing={loading}
                 renderItem={({ item }) => (
                     <CryptoCoin
                         fav
@@ -93,16 +100,3 @@ export const MarketScreen = () => {
         </ScreenBackground>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-        justifyContent: "center",
-        backgroundColor: "grey",
-    },
-    contentContainer: {
-        flex: 1,
-        alignItems: "center",
-    },
-});
