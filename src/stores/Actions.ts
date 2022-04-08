@@ -4,6 +4,8 @@ import { store } from "@stores/store";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
+export const FETCH = "FETCH";
+
 const userLogin = (id: string, email: string, createdAt: string, name?: string, photoURL?: string) => ({
     type: LOGIN,
     id,
@@ -16,6 +18,10 @@ const userLogin = (id: string, email: string, createdAt: string, name?: string, 
 const userLogout = () => ({
     type: LOGOUT,
 });
+
+/*const fetch = () => ({
+    type: FETCH,
+});*/
 
 export const loginAction = (uid: string, email: string, createdAt: string, name?: string, photoURL?: string) => {
     try {
@@ -32,3 +38,11 @@ export const logoutAction = () => {
         console.log(error);
     }
 };
+
+/*export const fetchAction = () => {
+    try {
+        store.dispatch(userLogout());
+    } catch (error) {
+        console.log(error);
+    }
+};*/

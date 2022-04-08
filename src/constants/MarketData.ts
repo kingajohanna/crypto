@@ -27,4 +27,5 @@ export interface MarketData {
     total_supply: number;
     total_volume: number;
     price_change_percentage_7d_in_currency: number;
+    fav: boolean;
 }

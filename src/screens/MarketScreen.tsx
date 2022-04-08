@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Dimensions, FlatList, StyleSheet } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import { getMarketData } from "@services/CryptoServices";
+import { useSelector } from "react-redux";
+import { RootState } from "@stores/store";
+
+import { getFavsMarket, getMarketData } from "@services/CryptoServices";
 
 import { MarketData } from "@constants/MarketData";
 import { Tabs } from "@constants/Tabs";
@@ -16,18 +19,29 @@ import { Colors } from "@theme/Colors";
 const { height: SIZE } = Dimensions.get("window");
 
 export const MarketScreen = () => {
+    const user = useSelector((state: RootState) => state.user);
+
     const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
     const [data, setData] = useState<MarketData[] | null>(null);
+    const [favs, setFavs] = useState<MarketData[] | null>(null);
     const [loading, setLoading] = useState(false);
 
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
     const fetchMarketData = async () => {
         setLoading(true);
-        const marketData = await getMarketData();
+        let marketData = (await getMarketData()) as MarketData[];
+
+        if (user.isLoggedIn) {
+            const fav = await getFavsMarket(user.id);
+            setFavs(fav);
+            marketData = favs?.concat(marketData!.filter(({ id }) => !favs.find((f) => f.id == id)))!;
+        }
+
+        setData(marketData);
+
         if (marketData) {
             setLoading(false);
-            setData(marketData);
         }
     };
 
@@ -56,7 +70,8 @@ export const MarketScreen = () => {
                 refreshing={loading}
                 renderItem={({ item }) => (
                     <CryptoCoin
-                        fav
+                        id={item.id}
+                        fav={item.fav!}
                         onPress={() => openModal(item)}
                         name={item.name}
                         shortName={item.symbol}

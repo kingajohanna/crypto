@@ -3,19 +3,25 @@ import { PressableProps } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
 
+import { useSelector } from "react-redux";
+import { RootState } from "@stores/store";
+
 import { Colors } from "@theme/Colors";
+import { addFav } from "@services/UserServices";
 
 type CryptoCoinProps = {
+    id?: string;
     imageUrl?: string;
     name?: string;
     shortName?: string;
     price?: number;
     priceChange?: number;
     fav?: boolean;
-    loggedIn?: boolean;
 } & PressableProps;
 
-export const CryptoCoin: React.FC<CryptoCoinProps> = ({ imageUrl, name, shortName, price, priceChange, fav, onPress, loggedIn }) => {
+export const CryptoCoin: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, fav, onPress }) => {
+    const user = useSelector((state: RootState) => state.user);
+
     return (
         <Container onPress={onPress}>
             <LeftContainer>
@@ -30,8 +36,8 @@ export const CryptoCoin: React.FC<CryptoCoinProps> = ({ imageUrl, name, shortNam
                     <Title>${price!.toLocaleString("en-US", { currency: "USD" })}</Title>
                     <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
                 </RightTitleContainer>
-                {loggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} />}
-                {loggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} />}
+                {user.isLoggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} onPress={() => console.log("kaki")} />}
+                {user.isLoggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} size={36} onPress={() => addFav(user.id, id!)} />}
             </RightContainer>
         </Container>
     );
@@ -59,7 +65,7 @@ const Subtitle = styled.Text({
 });
 
 const Container = styled.Pressable({
-    width: 358,
+    width: 370,
     paddingHorizontal: 16,
     marginTop: 24,
     flexDirection: "row",
@@ -74,7 +80,7 @@ const LeftContainer = styled.View({
 
 const RightContainer = styled.View({
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-end",
 });
 
 const TitleContainer = styled.View({

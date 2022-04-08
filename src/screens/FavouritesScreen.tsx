@@ -2,7 +2,7 @@ import * as React from "react";
 import { ScreenBackground } from "@components/ScreenBackground";
 import { Tabs } from "@constants/Tabs";
 import { useSelector } from "react-redux";
-import { RootState } from "@stores/userStore";
+import { RootState } from "@stores/store";
 import { Button } from "@components/Button";
 
 export const FavouriteScreen = () => {

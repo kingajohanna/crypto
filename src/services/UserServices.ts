@@ -28,3 +28,28 @@ export const removeUser = async (id: string) => {
         return null;
     }
 };
+
+export const addFav = async (userId: string, coinId: string) => {
+    try {
+        const response = await axios.post("http://192.168.1.146:1337/users/addFav", {
+            userId,
+            coinId,
+        });
+        return response.data.message;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
+export const getFavs = async (userId: string) => {
+    try {
+        const response = await axios.post("http://192.168.1.146:1337/users/getfavs", {
+            userId,
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
