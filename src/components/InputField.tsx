@@ -1,7 +1,7 @@
-import { Colors, hexToRGBA } from "@theme/Colors";
 import React from "react";
 import { TextInputProps } from "react-native";
 import styled from "styled-components/native";
+import { Colors, hexToRGBA } from "@theme/Colors";
 
 type StyledTextInputProps = {
     title?: string;

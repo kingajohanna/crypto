@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Dimensions, FlatList, StyleSheet } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import { getMarketData } from "@services/CryptoService";
+import { getMarketData } from "@services/CryptoServices";
 
 import { MarketData } from "@constants/MarketData";
 import { Tabs } from "@constants/Tabs";

@@ -16,3 +16,15 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
         return null;
     }
 };
+
+export const removeUser = async (id: string) => {
+    try {
+        const response = await axios.post("http://192.168.1.146:1337/users/removeuser", {
+            id,
+        });
+        return response.data.message;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
