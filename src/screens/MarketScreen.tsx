@@ -15,39 +15,31 @@ import { CryptoCoin } from "@components/CryptoCoin";
 import { ScreenBackground } from "@components/ScreenBackground";
 
 import { Colors } from "@theme/Colors";
+import { addFav, removeFav } from "@services/UserServices";
 
 const { height: SIZE } = Dimensions.get("window");
 
 export const MarketScreen = () => {
     const user = useSelector((state: RootState) => state.user);
+    const crypto = useSelector((state: RootState) => state.crypto);
 
     const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
-    const [data, setData] = useState<MarketData[] | null>(null);
-    const [favs, setFavs] = useState<MarketData[] | null>(null);
     const [loading, setLoading] = useState(false);
 
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
     const fetchMarketData = async () => {
         setLoading(true);
-        let marketData = (await getMarketData()) as MarketData[];
+        user.isLoggedIn ? await getMarketData(user.id) : await getMarketData();
 
-        if (user.isLoggedIn) {
-            const fav = await getFavsMarket(user.id);
-            setFavs(fav);
-            marketData = favs?.concat(marketData!.filter(({ id }) => !favs.find((f) => f.id == id)))!;
-        }
-
-        setData(marketData);
-
-        if (marketData) {
+        if (crypto.marketCoins) {
             setLoading(false);
         }
     };
 
     useEffect(() => {
         fetchMarketData();
-    }, []);
+    }, [user.isLoggedIn]);
 
     const openModal = (item: MarketData) => {
         setSelectedCoinData(item);
@@ -59,13 +51,23 @@ export const MarketScreen = () => {
         fetchMarketData();
     };
 
+    const removeFavPress = (id: string) => {
+        removeFav(user.id, id);
+        fetchMarketData();
+    };
+
+    const addFavPress = (id: string) => {
+        addFav(user.id, id);
+        fetchMarketData();
+    };
+
     return (
         <ScreenBackground title={Tabs.market}>
             {loading && <ActivityIndicator animating size="large" style={{ paddingTop: 16 }} />}
 
             <FlatList
                 keyExtractor={(item) => item.id}
-                data={data}
+                data={crypto.marketCoins}
                 onRefresh={() => onRefresh()}
                 refreshing={loading}
                 renderItem={({ item }) => (
@@ -78,9 +80,12 @@ export const MarketScreen = () => {
                         price={item.current_price}
                         priceChange={item.price_change_percentage_7d_in_currency}
                         imageUrl={item.image}
+                        favAdd={() => addFavPress(item.id)}
+                        favRemove={() => removeFavPress(item.id)}
                     />
                 )}
             />
+
             <RBSheet
                 ref={refRBSheet}
                 closeOnPressMask={true}

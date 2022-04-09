@@ -1,10 +1,11 @@
-import auth from "@react-native-firebase/auth";
+import { MarketData } from "@constants/MarketData";
 import { store } from "@stores/store";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
-export const FETCH = "FETCH";
+export const FETCHMARKET = "FETCHMARKET";
+export const FETCHFAVS = "FETCHFAVS";
 
 const userLogin = (id: string, email: string, createdAt: string, name?: string, photoURL?: string) => ({
     type: LOGIN,
@@ -19,9 +20,15 @@ const userLogout = () => ({
     type: LOGOUT,
 });
 
-/*const fetch = () => ({
-    type: FETCH,
-});*/
+const fetchMarket = (marketCoins: MarketData[]) => ({
+    type: FETCHMARKET,
+    marketCoins,
+});
+
+const fetchFavs = (favs: MarketData[]) => ({
+    type: FETCHFAVS,
+    favs,
+});
 
 export const loginAction = (uid: string, email: string, createdAt: string, name?: string, photoURL?: string) => {
     try {
@@ -39,10 +46,18 @@ export const logoutAction = () => {
     }
 };
 
-/*export const fetchAction = () => {
+export const fetchMarketAction = (marketCoins: MarketData[]) => {
     try {
-        store.dispatch(userLogout());
+        store.dispatch(fetchMarket(marketCoins));
     } catch (error) {
         console.log(error);
     }
-};*/
+};
+
+export const fetchFavsAction = (favs: MarketData[]) => {
+    try {
+        store.dispatch(fetchFavs(favs));
+    } catch (error) {
+        console.log(error);
+    }
+};

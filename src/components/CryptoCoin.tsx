@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { PressableProps } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
@@ -7,19 +7,20 @@ import { useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
 import { Colors } from "@theme/Colors";
-import { addFav } from "@services/UserServices";
 
 type CryptoCoinProps = {
-    id?: string;
-    imageUrl?: string;
-    name?: string;
-    shortName?: string;
-    price?: number;
-    priceChange?: number;
-    fav?: boolean;
+    id: string;
+    imageUrl: string;
+    name: string;
+    shortName: string;
+    price: number;
+    priceChange: number;
+    fav: boolean;
+    favAdd: () => void;
+    favRemove: () => void;
 } & PressableProps;
 
-export const CryptoCoin: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, fav, onPress }) => {
+const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, fav, onPress, favAdd, favRemove }) => {
     const user = useSelector((state: RootState) => state.user);
 
     return (
@@ -36,12 +37,13 @@ export const CryptoCoin: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shor
                     <Title>${price!.toLocaleString("en-US", { currency: "USD" })}</Title>
                     <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
                 </RightTitleContainer>
-                {user.isLoggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} onPress={() => console.log("kaki")} />}
-                {user.isLoggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} size={36} onPress={() => addFav(user.id, id!)} />}
+                {user.isLoggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} onPress={() => favRemove()} />}
+                {user.isLoggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} size={36} onPress={() => favAdd()} />}
             </RightContainer>
         </Container>
     );
 };
+
 const Image = styled.Image({
     height: 48,
     width: 48,
@@ -52,7 +54,7 @@ const Title = styled.Text({
     color: Colors.silverSand,
 });
 
-const PriceChangeText = styled.Text<CryptoCoinProps>(({ priceChange }) => ({
+const PriceChangeText = styled.Text<Partial<CryptoCoinProps>>(({ priceChange }) => ({
     marginTop: 4,
     fontSize: 14,
     color: priceChange! > 0 ? "#00ff00" : "#ff0000",
@@ -93,3 +95,5 @@ const RightTitleContainer = styled.View({
     marginRight: 8,
     alignItems: "flex-end",
 });
+
+export const CryptoCoin = memo(CryptoCoinComponent);
