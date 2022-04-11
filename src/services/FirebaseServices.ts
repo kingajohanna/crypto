@@ -2,6 +2,7 @@ import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { addUser, removeUser } from "@services/UserServices";
 import { loginAction, logoutAction } from "@stores/Actions";
+import { ReLogin } from "@components/Alert";
 
 GoogleSignin.configure({
     webClientId: "846343653708-2vjl1i736qqn5lgfqia80g2ieqsm3ktj.apps.googleusercontent.com",
@@ -63,7 +64,14 @@ export async function deleteAccount() {
             removeUser(user!.uid);
             logoutAction();
         })
-        .catch((error) => {
-            console.error(error);
+        .catch(async (error) => {
+            switch (error.code) {
+                case "auth/requires-recent-login":
+                    logoutAction();
+                    ReLogin();
+                    break;
+                default:
+                    console.error(error.code);
+            }
         });
 }

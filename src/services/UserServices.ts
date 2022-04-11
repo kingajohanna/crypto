@@ -1,9 +1,10 @@
+import { BASEURL } from "@constants/server";
 import axios from "axios";
 import moment from "moment";
 
 export const addUser = async (id: string, email: string = "", createdAt: string = moment.now().toLocaleString(), name: string = "", photoURL: string = "") => {
     try {
-        const response = await axios.post("http://192.168.1.146:1337/users/adduser", {
+        const response = await axios.post(`${BASEURL}/users/adduser`, {
             id,
             name,
             email,
@@ -19,7 +20,7 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
 
 export const removeUser = async (id: string) => {
     try {
-        const response = await axios.post("http://192.168.1.146:1337/users/removeuser", {
+        const response = await axios.post(`${BASEURL}/users/removeuser`, {
             id,
         });
         return response.data.message;
@@ -31,7 +32,7 @@ export const removeUser = async (id: string) => {
 
 export const addFav = async (userId: string, coinId: string) => {
     try {
-        const response = await axios.post("http://192.168.1.146:1337/users/addfav", {
+        const response = await axios.post(`${BASEURL}/users/addfav`, {
             userId,
             coinId,
         });
@@ -44,7 +45,7 @@ export const addFav = async (userId: string, coinId: string) => {
 
 export const removeFav = async (userId: string, coinId: string) => {
     try {
-        const response = await axios.post("http://192.168.1.146:1337/users/removefav", {
+        const response = await axios.post(`${BASEURL}/users/removefav`, {
             userId,
             coinId,
         });
@@ -57,7 +58,7 @@ export const removeFav = async (userId: string, coinId: string) => {
 
 export const getFavs = async (userId: string) => {
     try {
-        const response = await axios.post("http://192.168.1.146:1337/users/getfavs", {
+        const response = await axios.post(`${BASEURL}/users/getfavs`, {
             userId,
         });
         return response.data;

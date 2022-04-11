@@ -42,3 +42,18 @@ export const LogoutAlert = () => {
         "default",
     );
 };
+
+export const ReLogin = () => {
+    Alert.prompt(
+        "",
+        `This operation is sensitive and requires recent authentication. 
+Log in again before retrying this request.`,
+        [
+            {
+                text: "OK",
+                onPress: () => logOut(),
+            },
+        ],
+        "default",
+    );
+};

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
 import { Colors } from "@theme/Colors";
+import FastImage from "react-native-fast-image";
 
 type CryptoCoinProps = {
     id: string;
@@ -26,7 +27,14 @@ const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, sh
     return (
         <Container onPress={onPress}>
             <LeftContainer>
-                <Image source={{ uri: imageUrl }} />
+                <FastImage
+                    style={{ width: 48, height: 48 }}
+                    source={{
+                        uri: imageUrl,
+                        priority: FastImage.priority.low,
+                    }}
+                    resizeMode={FastImage.resizeMode.contain}
+                />
                 <TitleContainer>
                     <Title>{name}</Title>
                     <Subtitle>{shortName!.toUpperCase()}</Subtitle>
@@ -43,28 +51,6 @@ const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, sh
         </Container>
     );
 };
-
-const Image = styled.Image({
-    height: 48,
-    width: 48,
-});
-
-const Title = styled.Text({
-    fontSize: 18,
-    color: Colors.silverSand,
-});
-
-const PriceChangeText = styled.Text<Partial<CryptoCoinProps>>(({ priceChange }) => ({
-    marginTop: 4,
-    fontSize: 14,
-    color: priceChange! > 0 ? "#00ff00" : "#ff0000",
-}));
-
-const Subtitle = styled.Text({
-    marginTop: 4,
-    fontSize: 14,
-    color: Colors.gray,
-});
 
 const Container = styled.Pressable({
     width: 370,
@@ -94,6 +80,28 @@ const RightTitleContainer = styled.View({
     marginLeft: 8,
     marginRight: 8,
     alignItems: "flex-end",
+});
+
+const Image = styled.Image({
+    height: 48,
+    width: 48,
+});
+
+const Title = styled.Text({
+    fontSize: 18,
+    color: Colors.silverSand,
+});
+
+const PriceChangeText = styled.Text<Partial<CryptoCoinProps>>(({ priceChange }) => ({
+    marginTop: 4,
+    fontSize: 14,
+    color: priceChange! > 0 ? "#00ff00" : "#ff0000",
+}));
+
+const Subtitle = styled.Text({
+    marginTop: 4,
+    fontSize: 14,
+    color: Colors.gray,
 });
 
 export const CryptoCoin = memo(CryptoCoinComponent);

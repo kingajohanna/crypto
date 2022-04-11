@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Dimensions, FlatList, StyleSheet } from "react-native";
+import { ActivityIndicator, Dimensions, FlatList } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
-import { getFavsMarket, getMarketData } from "@services/CryptoServices";
+import { getMarketData } from "@services/CryptoServices";
 
 import { MarketData } from "@constants/MarketData";
 import { Tabs } from "@constants/Tabs";
@@ -29,12 +29,8 @@ export const MarketScreen = () => {
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
     const fetchMarketData = async () => {
-        setLoading(true);
         user.isLoggedIn ? await getMarketData(user.id) : await getMarketData();
-
-        if (crypto.marketCoins) {
-            setLoading(false);
-        }
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -46,18 +42,20 @@ export const MarketScreen = () => {
         refRBSheet.current!.open();
     };
 
-    const onRefresh = () => {
+    const onRefresh = async () => {
         setLoading(true);
+        await fetchMarketData();
+    };
+
+    const removeFavPress = async (id: string) => {
+        await removeFav(user.id, id);
         fetchMarketData();
     };
 
-    const removeFavPress = (id: string) => {
-        removeFav(user.id, id);
-        fetchMarketData();
-    };
+    const addFavPress = async (id: string) => {
+        console.log(user.id, id);
 
-    const addFavPress = (id: string) => {
-        addFav(user.id, id);
+        await addFav(user.id, id);
         fetchMarketData();
     };
 
@@ -70,10 +68,12 @@ export const MarketScreen = () => {
                 data={crypto.marketCoins}
                 onRefresh={() => onRefresh()}
                 refreshing={loading}
+                initialNumToRender={100}
+                getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
                 renderItem={({ item }) => (
                     <CryptoCoin
                         id={item.id}
-                        fav={item.fav!}
+                        fav={item.fav || false}
                         onPress={() => openModal(item)}
                         name={item.name}
                         shortName={item.symbol}
