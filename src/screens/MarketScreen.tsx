@@ -1,23 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Dimensions, FlatList } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
-import { getMarketData } from "@services/CryptoServices";
-
-import { MarketData } from "@constants/MarketData";
-import { Tabs } from "@constants/Tabs";
-
-import { CryptoChart } from "@components/CryptoChart";
-import { CryptoCoin } from "@components/CryptoCoin";
-import { ScreenBackground } from "@components/ScreenBackground";
-
-import { Colors } from "@theme/Colors";
+import { getCoins, getFavsMarket, getMarketData } from "@services/CryptoServices";
 import { addFav, removeFav } from "@services/UserServices";
 
-const { height: SIZE } = Dimensions.get("window");
+import { MarketData } from "@constants/DataTypes";
+import { Tabs } from "@constants/Tabs";
+
+import { CryptoCoin } from "@components/CryptoCoin";
+import { ScreenBackground } from "@components/ScreenBackground";
+import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
 
 export const MarketScreen = () => {
     const user = useSelector((state: RootState) => state.user);
@@ -29,7 +25,11 @@ export const MarketScreen = () => {
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
     const fetchMarketData = async () => {
-        user.isLoggedIn ? await getMarketData(user.id) : await getMarketData();
+        if (user.isLoggedIn) {
+            await getMarketData(user.id);
+            await getFavsMarket(user.id);
+        } else await getMarketData();
+
         setLoading(false);
     };
 
@@ -53,8 +53,6 @@ export const MarketScreen = () => {
     };
 
     const addFavPress = async (id: string) => {
-        console.log(user.id, id);
-
         await addFav(user.id, id);
         fetchMarketData();
     };
@@ -73,7 +71,7 @@ export const MarketScreen = () => {
                 renderItem={({ item }) => (
                     <CryptoCoin
                         id={item.id}
-                        fav={item.fav || false}
+                        isFavourite={item.fav || false}
                         onPress={() => openModal(item)}
                         name={item.name}
                         shortName={item.symbol}
@@ -86,37 +84,7 @@ export const MarketScreen = () => {
                 )}
             />
 
-            <RBSheet
-                ref={refRBSheet}
-                closeOnPressMask={true}
-                closeDuration={180}
-                openDuration={180}
-                height={SIZE * 0.5}
-                customStyles={{
-                    container: {
-                        borderTopLeftRadius: 15,
-                        borderTopRightRadius: 15,
-                        backgroundColor: Colors.gunmetal,
-                    },
-                    wrapper: {
-                        backgroundColor: "transparent",
-                    },
-                    draggableIcon: {
-                        backgroundColor: Colors.cadetBlue,
-                    },
-                }}
-            >
-                {selectedCoinData && (
-                    <CryptoChart
-                        imageUrl={selectedCoinData.image}
-                        name={selectedCoinData.name}
-                        shortName={selectedCoinData.symbol}
-                        price={selectedCoinData.current_price}
-                        priceChange={selectedCoinData.price_change_percentage_7d_in_currency}
-                        sparkline={selectedCoinData.sparkline_in_7d}
-                    />
-                )}
-            </RBSheet>
+            <SelectedCoinGraph selectedCoinData={selectedCoinData!} reference={refRBSheet} />
         </ScreenBackground>
     );
 };

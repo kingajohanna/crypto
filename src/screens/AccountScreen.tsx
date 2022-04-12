@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Alert, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import RBSheet from "react-native-raw-bottom-sheet";
 
@@ -43,7 +43,10 @@ export const AccountScreen = () => {
 
     const handleFirebaseActions = (error?: string) => {
         if (error) setSignInError(error);
-        else closeModal();
+        else {
+            closeModal();
+            console.log(user.toString());
+        }
     };
 
     return (
@@ -53,11 +56,11 @@ export const AccountScreen = () => {
                     <AccountButton.Google onPress={() => googleSignIn()} />
                     <AccountButton.EmailLogIn onPress={() => logIn.current!.open()} />
                     <AccountButton.EmailSignIn onPress={() => signUp.current!.open()} />
-                    <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={SIZE * 0.5} customStyles={modalStyle}>
+                    <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={SIZE * 0.45} customStyles={modalStyle}>
                         <AccountBottomModal
                             errorText={signInError}
                             primaryButtonText="Register"
-                            primaryButtonOnPress={() => signup(email, password, handleFirebaseActions)}
+                            primaryButtonOnPress={() => signup(email, password, passwordConf, handleFirebaseActions)}
                             secondaryButtonText="Cancel"
                             secondaryButtonOnPress={() => closeModal()}
                         >
@@ -66,7 +69,7 @@ export const AccountScreen = () => {
                             <TextInput placeholder="Confirm password" title="Password" onChangeText={setPasswordConf} value={passwordConf} />
                         </AccountBottomModal>
                     </RBSheet>
-                    <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={SIZE * 0.4} customStyles={modalStyle}>
+                    <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={SIZE * 0.35} customStyles={modalStyle}>
                         <AccountBottomModal
                             errorText={signInError}
                             primaryButtonText="Login"

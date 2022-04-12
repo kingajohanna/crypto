@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { PressableProps } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
@@ -16,13 +16,14 @@ type CryptoCoinProps = {
     shortName: string;
     price: number;
     priceChange: number;
-    fav: boolean;
+    isFavourite: boolean;
     favAdd: () => void;
     favRemove: () => void;
 } & PressableProps;
 
-const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, fav, onPress, favAdd, favRemove }) => {
+const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, isFavourite, onPress, favAdd, favRemove }) => {
     const user = useSelector((state: RootState) => state.user);
+    const [fav, setFav] = useState(isFavourite);
 
     return (
         <Container onPress={onPress}>
@@ -45,8 +46,28 @@ const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, sh
                     <Title>${price!.toLocaleString("en-US", { currency: "USD" })}</Title>
                     <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
                 </RightTitleContainer>
-                {user.isLoggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} onPress={() => favRemove()} />}
-                {user.isLoggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} size={36} onPress={() => favAdd()} />}
+                {user.isLoggedIn && fav && (
+                    <Icon
+                        name="heart"
+                        color={Colors.cadetBlue}
+                        size={36}
+                        onPress={() => {
+                            setFav(!fav);
+                            favRemove();
+                        }}
+                    />
+                )}
+                {user.isLoggedIn && !fav && (
+                    <Icon
+                        name="heart-outline"
+                        color={Colors.cadetBlue}
+                        size={36}
+                        onPress={() => {
+                            setFav(!fav);
+                            favAdd();
+                        }}
+                    />
+                )}
             </RightContainer>
         </Container>
     );

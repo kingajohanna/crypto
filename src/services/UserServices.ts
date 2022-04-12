@@ -1,4 +1,5 @@
 import { BASEURL } from "@constants/server";
+import { fetchOwnedCoinsAction } from "@stores/Actions";
 import axios from "axios";
 import moment from "moment";
 
@@ -11,10 +12,9 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
             createdAt,
             photoURL,
         });
-        return response.data.message;
+        console.log(response.data.message);
     } catch (error) {
         console.log(error);
-        return null;
     }
 };
 
@@ -23,10 +23,9 @@ export const removeUser = async (id: string) => {
         const response = await axios.post(`${BASEURL}/users/removeuser`, {
             id,
         });
-        return response.data.message;
+        console.log(response.data.message);
     } catch (error) {
         console.log(error);
-        return null;
     }
 };
 
@@ -36,10 +35,9 @@ export const addFav = async (userId: string, coinId: string) => {
             userId,
             coinId,
         });
-        return response.data.message;
+        console.log(response.data.message);
     } catch (error) {
         console.log(error);
-        return null;
     }
 };
 
@@ -49,21 +47,35 @@ export const removeFav = async (userId: string, coinId: string) => {
             userId,
             coinId,
         });
-        return response.data.message;
+        console.log(response.data.message);
     } catch (error) {
         console.log(error);
-        return null;
     }
 };
 
-export const getFavs = async (userId: string) => {
+export const addCoin = async (userId: string, coinId: string, holdings: number, price: number, currency: string) => {
     try {
-        const response = await axios.post(`${BASEURL}/users/getfavs`, {
+        const response = await axios.post(`${BASEURL}/users/addcoin`, {
             userId,
+            coinId,
+            holdings,
+            price,
+            currency,
         });
-        return response.data;
+        console.log(response.data.message);
     } catch (error) {
         console.log(error);
-        return null;
+    }
+};
+
+export const getOwnedCoins = async (userId: string) => {
+    try {
+        const response = await axios.post(`${BASEURL}/users/getcoins`, {
+            userId,
+        });
+
+        fetchOwnedCoinsAction(response.data.data);
+    } catch (error) {
+        console.log(error);
     }
 };

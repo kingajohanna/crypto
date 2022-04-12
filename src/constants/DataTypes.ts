@@ -29,3 +29,8 @@ export interface MarketData {
     price_change_percentage_7d_in_currency: number;
     fav: boolean;
 }
+
+export interface KeyValue {
+    id: string;
+    name: string;
+}

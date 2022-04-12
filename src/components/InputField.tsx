@@ -6,13 +6,21 @@ import { Colors, hexToRGBA } from "@theme/Colors";
 type StyledTextInputProps = {
     title?: string;
     errorText?: string;
+    width?: number;
 } & TextInputProps;
 
-const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, errorText }) => {
+const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, errorText, width, keyboardType }) => {
     return (
         <Container>
             {title && <TitleText>{title}</TitleText>}
-            <StyledInput placeholderTextColor={hexToRGBA(Colors.cadetBlue, 0.5)} placeholder={placeholder} value={value} onChangeText={onChangeText}></StyledInput>
+            <StyledInput
+                placeholderTextColor={hexToRGBA(Colors.cadetBlue, 0.5)}
+                placeholder={placeholder}
+                value={value}
+                onChangeText={onChangeText}
+                width={width}
+                keyboardType={keyboardType ? keyboardType : "default"}
+            />
 
             {errorText && <ErrorText>{errorText}</ErrorText>}
         </Container>
@@ -36,18 +44,18 @@ const ErrorText = styled.Text(() => ({
     color: "#ff0000",
 }));
 
-const StyledInput = styled.TextInput({
+const StyledInput = styled.TextInput<Partial<StyledTextInputProps>>(({ width }) => ({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.gunmetal,
     height: 40,
-    width: 340,
+    width: width ? width : 340,
     borderWidth: 1,
     borderColor: Colors.fluorescentBlue,
     borderRadius: 4,
     color: Colors.cadetBlue,
     paddingHorizontal: 16,
-});
+}));
 
 export const TextInput = TextInputComponent;

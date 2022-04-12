@@ -1,4 +1,4 @@
-import { MarketData } from "@constants/MarketData";
+import { KeyValue, MarketData } from "@constants/DataTypes";
 import { store } from "@stores/store";
 
 export const LOGIN = "LOGIN";
@@ -6,6 +6,9 @@ export const LOGOUT = "LOGOUT";
 
 export const FETCHMARKET = "FETCHMARKET";
 export const FETCHFAVS = "FETCHFAVS";
+export const FETCHCOINS = "FETCHCOINS";
+
+export const FETCHOWNEDCOINS = "FETCHOWNEDCOINS";
 
 const userLogin = (id: string, email: string, createdAt: string, name?: string, photoURL?: string) => ({
     type: LOGIN,
@@ -28,6 +31,16 @@ const fetchMarket = (marketCoins: MarketData[]) => ({
 const fetchFavs = (favs: MarketData[]) => ({
     type: FETCHFAVS,
     favs,
+});
+
+const fetchCoins = (coins: KeyValue[]) => ({
+    type: FETCHCOINS,
+    coins,
+});
+
+const fetchOwnedCoins = (ownedCoins: KeyValue[]) => ({
+    type: FETCHOWNEDCOINS,
+    ownedCoins,
 });
 
 export const loginAction = (uid: string, email: string, createdAt: string, name?: string, photoURL?: string) => {
@@ -57,6 +70,22 @@ export const fetchMarketAction = (marketCoins: MarketData[]) => {
 export const fetchFavsAction = (favs: MarketData[]) => {
     try {
         store.dispatch(fetchFavs(favs));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const fetchCoinsAction = (coins: KeyValue[]) => {
+    try {
+        store.dispatch(fetchCoins(coins));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const fetchOwnedCoinsAction = (ownedCoins: KeyValue[]) => {
+    try {
+        store.dispatch(fetchOwnedCoins(ownedCoins));
     } catch (error) {
         console.log(error);
     }

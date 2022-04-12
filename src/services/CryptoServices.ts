@@ -1,6 +1,5 @@
 import { BASEURL } from "@constants/server";
-import { getFavs } from "@services/UserServices";
-import { fetchFavsAction, fetchMarketAction } from "@stores/Actions";
+import { fetchCoinsAction, fetchFavsAction, fetchMarketAction } from "@stores/Actions";
 import axios from "axios";
 
 export const getMarketData = async (userId: string = "") => {
@@ -14,13 +13,21 @@ export const getMarketData = async (userId: string = "") => {
     }
 };
 
-export const getFavsMarket = async (userId: string) => {
-    const coins = await getFavs(userId);
+export const getFavsMarket = async (userId: string = "") => {
     try {
         const response = await axios.post(`${BASEURL}/crypto/getfavs`, {
-            coins: coins.coins,
+            userId,
         });
         fetchFavsAction(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getCoins = async () => {
+    try {
+        const response = await axios.get(`${BASEURL}/crypto/coinlist`);
+        fetchCoinsAction(response.data.message);
     } catch (error) {
         console.log(error);
     }

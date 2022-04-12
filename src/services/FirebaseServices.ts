@@ -21,30 +21,35 @@ export async function login(email: string, password: string, handleModal: (arg0?
 }
 
 export async function googleSignIn() {
-    const { idToken } = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    const user = auth().signInWithCredential(googleCredential);
+    try {
+        const { idToken } = await GoogleSignin.signIn();
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+        const user = auth().signInWithCredential(googleCredential);
 
-    user.then((re) => {
-        loginAction(re.user.uid, re.additionalUserInfo?.profile?.email, re.user.metadata.creationTime!, re.user.displayName!, re.user.photoURL!);
-        if (re.additionalUserInfo?.isNewUser) addUser(re.user.uid, re.additionalUserInfo.profile?.email, re.user.metadata.creationTime!, re.user.displayName!, re.user.photoURL!);
-    });
-
-    return user;
+        user.then((re) => {
+            loginAction(re.user.uid, re.additionalUserInfo?.profile?.email, re.user.metadata.creationTime!, re.user.displayName!, re.user.photoURL!);
+            if (re.additionalUserInfo?.isNewUser) addUser(re.user.uid, re.additionalUserInfo.profile?.email, re.user.metadata.creationTime!, re.user.displayName!, re.user.photoURL!);
+        });
+        return user;
+    } catch (error) {
+        console.log(error);
+    }
+    return null;
 }
 
-export async function signup(email: string, password: string, handleModal: (arg0?: string) => void) {
-    return auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-            const user = auth().currentUser!;
-            addUser(user.uid, user.email!, user.metadata.creationTime);
-            loginAction(user.uid, user.email!, user.metadata.creationTime!);
-            handleModal();
-        })
-        .catch((error) => {
-            handleModal(error.toString().split("] ", 2)[1]);
-        });
+export async function signup(email: string, password: string, passwordConf: string, handleModal: (arg0?: string) => void) {
+    if (password === passwordConf)
+        return auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                const user = auth().currentUser!;
+                addUser(user.uid, user.email!, user.metadata.creationTime);
+                loginAction(user.uid, user.email!, user.metadata.creationTime!);
+                handleModal();
+            })
+            .catch((error) => {
+                handleModal(error.toString().split("] ", 2)[1]);
+            });
 }
 
 export async function logOut() {
