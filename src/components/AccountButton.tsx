@@ -41,10 +41,10 @@ const socialText = (variant: ButtonVariant) => {
         case ButtonVariant.delete:
             return "Tap to delete account";
         case ButtonVariant.emailLogIn:
-            return "Log in with email";
+            return "Login with email";
         case ButtonVariant.emailSignIn:
         default:
-            return "Sign In email";
+            return "Register with email";
     }
 };
 

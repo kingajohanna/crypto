@@ -1,10 +1,6 @@
 import React, { memo, useState } from "react";
 import { PressableProps } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
-
-import { useSelector } from "react-redux";
-import { RootState } from "@stores/store";
 
 import { Colors } from "@theme/Colors";
 import FastImage from "react-native-fast-image";
@@ -23,8 +19,6 @@ type OwnedCoinProp = {
 } & PressableProps;
 
 const OwnedCoinsComponent: React.FC<OwnedCoinProp> = (props) => {
-    const user = useSelector((state: RootState) => state.user);
-
     return (
         <Container onPress={props.onPress}>
             <ColumnContainer>

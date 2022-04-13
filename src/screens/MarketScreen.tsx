@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
 import { getCoins, getFavsMarket, getMarketData } from "@services/CryptoServices";
@@ -16,8 +16,8 @@ import { ScreenBackground } from "@components/ScreenBackground";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
 
 export const MarketScreen = () => {
-    const user = useSelector((state: RootState) => state.user);
-    const crypto = useSelector((state: RootState) => state.crypto);
+    const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
+    const user = useSelector((state: RootState) => state.user, shallowEqual);
 
     const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
     const [loading, setLoading] = useState(false);

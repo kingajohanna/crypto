@@ -3,7 +3,7 @@ import { PressableProps } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
 
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
 import { Colors } from "@theme/Colors";
@@ -22,7 +22,7 @@ type CryptoCoinProps = {
 } & PressableProps;
 
 const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, isFavourite, onPress, favAdd, favRemove }) => {
-    const user = useSelector((state: RootState) => state.user);
+    const user = useSelector((state: RootState) => state.user, shallowEqual);
     const [fav, setFav] = useState(isFavourite);
 
     return (

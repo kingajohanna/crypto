@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
 import { removeFav } from "@services/UserServices";
@@ -14,10 +14,11 @@ import { MarketData } from "@constants/DataTypes";
 import { ScreenBackground } from "@components/ScreenBackground";
 import { CryptoCoin } from "@components/CryptoCoin";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
+import { UserRequiredContent } from "@components/UserRequiredContent";
 
 export const FavouriteScreen = () => {
-    const user = useSelector((state: RootState) => state.user);
-    const crypto = useSelector((state: RootState) => state.crypto);
+    const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
+    const user = useSelector((state: RootState) => state.user, shallowEqual);
 
     const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
 
@@ -46,26 +47,29 @@ export const FavouriteScreen = () => {
 
     return (
         <ScreenBackground title={Tabs.favourites}>
-            <FlatList
-                keyExtractor={(item) => item.id}
-                data={user.isLoggedIn ? crypto.favs : []}
-                initialNumToRender={100}
-                getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
-                renderItem={({ item }) => (
-                    <CryptoCoin
-                        id={item.id}
-                        isFavourite={item.fav || false}
-                        onPress={() => openModal(item)}
-                        name={item.name}
-                        shortName={item.symbol}
-                        price={item.current_price}
-                        priceChange={item.price_change_percentage_7d_in_currency}
-                        imageUrl={item.image}
-                        favAdd={() => {}}
-                        favRemove={() => removeFavPress(item.id)}
-                    />
-                )}
-            />
+            {!user.isLoggedIn && <UserRequiredContent />}
+            {user.isLoggedIn && (
+                <FlatList
+                    keyExtractor={(item) => item.id}
+                    data={user.isLoggedIn ? crypto.favs : []}
+                    initialNumToRender={100}
+                    getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
+                    renderItem={({ item }) => (
+                        <CryptoCoin
+                            id={item.id}
+                            isFavourite={item.fav || false}
+                            onPress={() => openModal(item)}
+                            name={item.name}
+                            shortName={item.symbol}
+                            price={item.current_price}
+                            priceChange={item.price_change_percentage_7d_in_currency}
+                            imageUrl={item.image}
+                            favAdd={() => {}}
+                            favRemove={() => removeFavPress(item.id)}
+                        />
+                    )}
+                />
+            )}
 
             <SelectedCoinGraph selectedCoinData={selectedCoinData!} reference={refRBSheet} />
         </ScreenBackground>

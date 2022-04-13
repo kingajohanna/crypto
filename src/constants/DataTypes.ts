@@ -30,6 +30,18 @@ export interface MarketData {
     fav: boolean;
 }
 
+export interface Coins {
+    id: string;
+    userId: string;
+    coinId: string;
+    holdings: number;
+    price: number;
+    currency: string;
+    image: string;
+    symbol: string;
+    current_price: number;
+}
+
 export interface KeyValue {
     id: string;
     name: string;

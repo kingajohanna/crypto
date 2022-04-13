@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Dimensions } from "react-native";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { RootState } from "@stores/store";
@@ -18,7 +18,7 @@ import { DeleteAlert, LogoutAlert } from "@components/Alert";
 const { height: SIZE } = Dimensions.get("window");
 
 export const AccountScreen = () => {
-    const user = useSelector((state: RootState) => state.user);
+    const user = useSelector((state: RootState) => state.user, shallowEqual);
 
     const signUp = useRef() as React.MutableRefObject<RBSheet>;
     const logIn = useRef() as React.MutableRefObject<RBSheet>;

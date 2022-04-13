@@ -79,3 +79,18 @@ export const getOwnedCoins = async (userId: string) => {
         console.log(error);
     }
 };
+
+export const setCoin = async (id: string, purchasedHoldings: string, purchasedTotalCost: string, soldHoldings: string, soldTotalCost: string) => {
+    try {
+        const response = await axios.post(`${BASEURL}/users/setcoin`, {
+            id,
+            purchasedHoldings,
+            purchasedTotalCost,
+            soldHoldings,
+            soldTotalCost,
+        });
+        console.log(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
