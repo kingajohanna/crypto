@@ -1,7 +1,7 @@
 import { CryptoChart } from "@components/CryptoChart";
 import { NAVBARHEIGHT } from "@constants/androidHelper";
 import { MarketData } from "@constants/DataTypes";
-import { Colors } from "@theme/Colors";
+import { Colors, hexToRGBA } from "@theme/Colors";
 import React from "react";
 import { Dimensions, Platform } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -28,7 +28,7 @@ export const SelectedCoinGraph: React.FC<SelectedProps> = ({ selectedCoinData, r
                     backgroundColor: Colors.gunmetal,
                 },
                 wrapper: {
-                    backgroundColor: "transparent",
+                    backgroundColor: hexToRGBA(Colors.richBlack, 0.5),
                 },
                 draggableIcon: {
                     backgroundColor: Colors.cadetBlue,

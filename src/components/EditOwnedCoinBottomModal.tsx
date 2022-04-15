@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Dimensions, PressableProps } from "react-native";
+import React from "react";
+import { Dimensions, Platform, PressableProps } from "react-native";
 import styled from "styled-components/native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import { Colors } from "@theme/Colors";
+import { Colors, hexToRGBA } from "@theme/Colors";
 import { TextInput } from "@components/InputField";
 import { Button } from "@components/Button";
+import { NAVBARHEIGHT } from "@constants/androidHelper";
 const { height: SIZE } = Dimensions.get("window");
 
 type BottomModalProps = {
@@ -25,7 +26,7 @@ export const EditOwnedCoinBottomModal: React.FC<BottomModalProps> = (props) => {
             closeOnPressMask={true}
             closeDuration={180}
             openDuration={180}
-            height={SIZE * 0.5}
+            height={Platform.OS === "ios" ? SIZE * 0.55 : SIZE * 0.55 + NAVBARHEIGHT}
             customStyles={{
                 container: {
                     borderTopLeftRadius: 15,
@@ -33,7 +34,7 @@ export const EditOwnedCoinBottomModal: React.FC<BottomModalProps> = (props) => {
                     backgroundColor: Colors.gunmetal,
                 },
                 wrapper: {
-                    backgroundColor: "transparent",
+                    backgroundColor: hexToRGBA(Colors.richBlack, 0.5),
                 },
                 draggableIcon: {
                     backgroundColor: Colors.cadetBlue,

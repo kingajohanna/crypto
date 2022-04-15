@@ -9,7 +9,7 @@ import { AccountButton } from "@components/AccountButton";
 import { ScreenBackground } from "@components/ScreenBackground";
 import { TextInput } from "@components/InputField";
 
-import { Colors } from "@theme/Colors";
+import { Colors, hexToRGBA } from "@theme/Colors";
 
 import { AccountBottomModal } from "@components/AccountBottomModal";
 import { googleSignIn, login, logOut, signup } from "@services/FirebaseServices";
@@ -25,8 +25,8 @@ export const AccountScreen = () => {
     const signUp = useRef() as React.MutableRefObject<RBSheet>;
     const logIn = useRef() as React.MutableRefObject<RBSheet>;
 
-    const [email, setEmail] = useState("A@b.com");
-    const [password, setPassword] = useState("Asdfasdf");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [passwordConf, setPasswordConf] = useState("");
     const [signInError, setSignInError] = useState("");
 
@@ -123,7 +123,7 @@ const modalStyle = {
         backgroundColor: Colors.gunmetal,
     },
     wrapper: {
-        backgroundColor: "transparent",
+        backgroundColor: hexToRGBA(Colors.richBlack, 0.5),
     },
     draggableIcon: {
         backgroundColor: Colors.cadetBlue,
