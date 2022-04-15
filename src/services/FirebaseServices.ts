@@ -20,7 +20,6 @@ export async function login(email: string, password: string, handleModal: (arg0?
 export async function googleSignIn() {
     try {
         const data = await GoogleSignin.signIn();
-        console.log(data);
 
         const googleCredential = auth.GoogleAuthProvider.credential(data.idToken);
         const user = auth().signInWithCredential(googleCredential);

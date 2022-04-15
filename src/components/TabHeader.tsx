@@ -18,11 +18,11 @@ export const TabHeader: React.FC<TabHeaderProps> = ({ title }) => {
 const Background = styled.View({
     backgroundColor: Colors.gunmetal,
     width: "100%",
-    height: 60,
+    height: 50,
     borderWidth: 1,
-    borderBottomWidth: 0.5,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
+    borderColor: Colors.gunmetal,
     alignItems: "center",
     justifyContent: "center",
 });

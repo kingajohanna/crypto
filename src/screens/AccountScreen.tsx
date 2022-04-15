@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import { shallowEqual, useSelector } from "react-redux";
 import RBSheet from "react-native-raw-bottom-sheet";
 
@@ -12,8 +12,10 @@ import { TextInput } from "@components/InputField";
 import { Colors } from "@theme/Colors";
 
 import { AccountBottomModal } from "@components/AccountBottomModal";
-import { googleSignIn, login, signup } from "@services/FirebaseServices";
+import { googleSignIn, login, logOut, signup } from "@services/FirebaseServices";
 import { DeleteAlert, LogoutAlert } from "@components/Alert";
+import { NAVBARHEIGHT } from "@constants/androidHelper";
+import Dialog from "react-native-dialog";
 
 const { height: SIZE } = Dimensions.get("window");
 
@@ -27,6 +29,9 @@ export const AccountScreen = () => {
     const [password, setPassword] = useState("Asdfasdf");
     const [passwordConf, setPasswordConf] = useState("");
     const [signInError, setSignInError] = useState("");
+
+    const [logoutPopup, setLogoutPopup] = useState(false);
+    const [deletePopup, setDeletePopup] = useState(false);
 
     const resetStates = () => {
         setEmail("");
@@ -56,7 +61,15 @@ export const AccountScreen = () => {
                     <AccountButton.Google onPress={() => googleSignIn()} />
                     <AccountButton.EmailLogIn onPress={() => logIn.current!.open()} />
                     <AccountButton.EmailSignIn onPress={() => signUp.current!.open()} />
-                    <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={SIZE * 0.45} customStyles={modalStyle}>
+                    <RBSheet
+                        ref={signUp}
+                        closeOnPressMask={true}
+                        onClose={() => resetStates()}
+                        closeDuration={180}
+                        openDuration={180}
+                        height={Platform.OS === "ios" ? SIZE * 0.35 : SIZE * 0.45 + NAVBARHEIGHT}
+                        customStyles={modalStyle}
+                    >
                         <AccountBottomModal
                             errorText={signInError}
                             primaryButtonText="Register"
@@ -69,7 +82,15 @@ export const AccountScreen = () => {
                             <TextInput placeholder="Confirm password" title="Password" onChangeText={setPasswordConf} value={passwordConf} />
                         </AccountBottomModal>
                     </RBSheet>
-                    <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={SIZE * 0.35} customStyles={modalStyle}>
+                    <RBSheet
+                        ref={logIn}
+                        closeOnPressMask={true}
+                        onClose={() => resetStates()}
+                        closeDuration={180}
+                        openDuration={180}
+                        height={Platform.OS === "ios" ? SIZE * 0.33 : SIZE * 0.33 + NAVBARHEIGHT}
+                        customStyles={modalStyle}
+                    >
                         <AccountBottomModal
                             errorText={signInError}
                             primaryButtonText="Login"
@@ -85,8 +106,10 @@ export const AccountScreen = () => {
             )}
             {user.isLoggedIn && (
                 <>
-                    <AccountButton.Logout onPress={() => LogoutAlert()} />
-                    <AccountButton.Delete onPress={() => DeleteAlert()} />
+                    <AccountButton.Logout onPress={() => setLogoutPopup(true)} />
+                    <AccountButton.Delete onPress={() => setDeletePopup(true)} />
+                    <LogoutAlert visible={logoutPopup} setVisible={setLogoutPopup} />
+                    <DeleteAlert visible={deletePopup} setVisible={setDeletePopup} />
                 </>
             )}
         </ScreenBackground>

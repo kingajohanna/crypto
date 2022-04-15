@@ -1,8 +1,9 @@
 import { CryptoChart } from "@components/CryptoChart";
+import { NAVBARHEIGHT } from "@constants/androidHelper";
 import { MarketData } from "@constants/DataTypes";
 import { Colors } from "@theme/Colors";
 import React from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 const { height: SIZE } = Dimensions.get("window");
@@ -19,7 +20,7 @@ export const SelectedCoinGraph: React.FC<SelectedProps> = ({ selectedCoinData, r
             closeOnPressMask={true}
             closeDuration={180}
             openDuration={180}
-            height={SIZE * 0.5}
+            height={Platform.OS === "ios" ? SIZE * 0.5 : SIZE * 0.5 + NAVBARHEIGHT}
             customStyles={{
                 container: {
                     borderTopLeftRadius: 15,
