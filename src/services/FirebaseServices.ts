@@ -1,12 +1,9 @@
-import auth from "@react-native-firebase/auth";
+import auth, { firebase } from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { initializeApp } from "firebase/app";
 import { addUser, removeUser } from "@services/UserServices";
 import { loginAction, logoutAction } from "@stores/Actions";
 import { ReLogin } from "@components/Alert";
-
-GoogleSignin.configure({
-    webClientId: "846343653708-2vjl1i736qqn5lgfqia80g2ieqsm3ktj.apps.googleusercontent.com",
-});
 
 export async function login(email: string, password: string, handleModal: (arg0?: string) => void) {
     auth()
@@ -22,8 +19,10 @@ export async function login(email: string, password: string, handleModal: (arg0?
 
 export async function googleSignIn() {
     try {
-        const { idToken } = await GoogleSignin.signIn();
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+        const data = await GoogleSignin.signIn();
+        console.log(data);
+
+        const googleCredential = auth.GoogleAuthProvider.credential(data.idToken);
         const user = auth().signInWithCredential(googleCredential);
 
         user.then((re) => {
@@ -31,8 +30,20 @@ export async function googleSignIn() {
             if (re.additionalUserInfo?.isNewUser) addUser(re.user.uid, re.additionalUserInfo.profile?.email, re.user.metadata.creationTime!, re.user.displayName!, re.user.photoURL!);
         });
         return user;
-    } catch (error) {
-        console.log(error);
+    } catch (error: any) {
+        if (error.code === "SIGN_IN_CANCELLED") {
+            // user cancelled the login flow
+            console.log("User cancelled the login flow");
+        } else if (error.code === "IN_PROGRESS") {
+            // operation (e.g. sign in) is in progress already
+            console.log("Peration (e.g. sign in) is in progress already: ", error.toString());
+        } else if (error.code === "PLAY_SERVICES_NOT_AVAILABLE") {
+            // play services not available or outdated
+            console.log("Play services not available or outdated");
+        } else {
+            // some other error happened
+            console.log("Some other error happened: ", error.toString());
+        }
     }
     return null;
 }

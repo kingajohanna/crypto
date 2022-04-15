@@ -7,14 +7,22 @@
     "client": [
         {
             "client_info": {
-                "mobilesdk_app_id": "1:846343653708:android:324c74d9cf84a77d1ca7e9",
+                "mobilesdk_app_id": "1:846343653708:android:c6a2e3b2501f8c3f1ca7e9",
                 "android_client_info": {
-                    "package_name": "com.crypto"
+                    "package_name": "hu.crypto.szakdoga"
                 }
             },
             "oauth_client": [
                 {
-                    "client_id": "846343653708-c95lcs86a2lo17r6s9mn2rsaj724is6q.apps.googleusercontent.com",
+                    "client_id": "846343653708-uptt75882gfkq4aacd0gd2u073o1r9rs.apps.googleusercontent.com",
+                    "client_type": 1,
+                    "android_info": {
+                        "package_name": "hu.crypto.szakdoga",
+                        "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+                    }
+                },
+                {
+                    "client_id": "846343653708-ckj2qftgl2b72pmvine7u4da124pc414.apps.googleusercontent.com",
                     "client_type": 3
                 }
             ],
@@ -27,14 +35,14 @@
                 "appinvite_service": {
                     "other_platform_oauth_client": [
                         {
-                            "client_id": "846343653708-ckj2qftgl2b72pmvine7u4da124pc414.apps.googleusercontent.com",
+                            "client_id": "846343653708-c95lcs86a2lo17r6s9mn2rsaj724is6q.apps.googleusercontent.com",
                             "client_type": 3
                         },
                         {
-                            "client_id": "846343653708-2vjl1i736qqn5lgfqia80g2ieqsm3ktj.apps.googleusercontent.com",
+                            "client_id": "846343653708-pvm2rje8ph4g5itge0k92jq8bd2h8mhk.apps.googleusercontent.com",
                             "client_type": 2,
                             "ios_info": {
-                                "bundle_id": "com.crypto"
+                                "bundle_id": "hu.crypto.szakdoga"
                             }
                         }
                     ]

@@ -1,4 +1,4 @@
-package com.crypto;
+package hu.crypto.szakdoga;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
