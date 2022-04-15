@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { TextInputProps, View } from "react-native";
+import { Button, TextInputProps, View } from "react-native";
 import styled from "styled-components/native";
 import { Colors, hexToRGBA } from "@theme/Colors";
-import { List, Menu } from "react-native-paper";
+import { List, Menu, Provider } from "react-native-paper";
 import { KeyValue } from "@constants/DataTypes";
+import { ScrollView } from "react-native-gesture-handler";
 
 type AutocompleteProps = {
     title?: string;
@@ -46,18 +47,21 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ data, title, placeho
 
             {menuVisible && filteredData && (
                 <SearchContainer>
-                    {filteredData.slice(0, 1).map((word, i) => (
-                        <Menu.Item
-                            key={i}
-                            onPress={() => {
-                                onChangeText!(word.id);
-                                setValue(word.name);
-                                setMenuVisible(false);
-                            }}
-                            titleStyle={{ color: Colors.fluorescentBlue, height: 30 }}
-                            title={word.name}
-                        />
-                    ))}
+                    <ScrollView style={{ position: "absolute", borderColor: Colors.cadetBlue, borderWidth: 1, borderRadius: 5, maxHeight: 230 }}>
+                        {filteredData.map((word, i) => (
+                            <Menu.Item
+                                key={i}
+                                onPress={() => {
+                                    onChangeText!(word.id);
+                                    setValue(word.name);
+                                    setMenuVisible(false);
+                                }}
+                                style={{ backgroundColor: Colors.gunmetal, height: 40, width: 150 }}
+                                titleStyle={{ color: Colors.fluorescentBlue }}
+                                title={word.name}
+                            />
+                        ))}
+                    </ScrollView>
                 </SearchContainer>
             )}
         </Container>
@@ -77,7 +81,7 @@ const TitleText = styled.Text(() => ({
 
 const SearchContainer = styled.View({
     flexDirection: "column",
-    width: 120,
+    width: 150,
     height: 16,
     backgroundColor: Colors.gunmetal,
 });
@@ -88,7 +92,7 @@ const StyledInput = styled.TextInput<Partial<AutocompleteProps>>(({ width }) => 
     justifyContent: "center",
     backgroundColor: Colors.gunmetal,
     height: 40,
-    width: 120,
+    width: width ? width : 150,
     borderWidth: 1,
     borderColor: Colors.fluorescentBlue,
     borderRadius: 4,

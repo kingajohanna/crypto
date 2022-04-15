@@ -27,7 +27,7 @@ export const getFavsMarket = async (userId: string = "") => {
 export const getCoins = async () => {
     try {
         const response = await axios.get(`${BASEURL}/crypto/coinlist`);
-        fetchCoinsAction(response.data.message);
+        if (response.data.message !== []) fetchCoinsAction(response.data.message);
     } catch (error) {
         console.log(error);
     }

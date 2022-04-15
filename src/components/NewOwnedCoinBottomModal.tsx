@@ -48,19 +48,19 @@ export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference,
         >
             <Container>
                 <Title>Add coin</Title>
-                <RowContainer>
+                <RowContainer style={{ zIndex: 2 }}>
                     <Text>Purchased crypto coin</Text>
                     <Autocomplete onChangeText={setCoinName} data={data} placeholder="crypto coin" />
                 </RowContainer>
                 <RowContainer>
                     <Text>Purchased holdings</Text>
-                    <TextInput onChangeText={setHoldings} placeholder="holdings" width={120} keyboardType="numeric" returnKeyType="done" />
+                    <TextInput onChangeText={setHoldings} placeholder="holdings" width={150} keyboardType="numeric" returnKeyType="done" />
                 </RowContainer>
                 <RowContainer>
                     <Text>Total cost</Text>
-                    <TextInput onChangeText={setTotalCost} placeholder="cost" width={120} keyboardType="numeric" returnKeyType="done" />
+                    <TextInput onChangeText={setTotalCost} placeholder="cost" width={150} keyboardType="numeric" returnKeyType="done" />
                 </RowContainer>
-                <RowContainer>
+                <RowContainer style={{ zIndex: 1 }}>
                     <Text>Currency</Text>
                     <Autocomplete onChangeText={setCurrency} data={currency} placeholder="crypto coin" />
                 </RowContainer>
