@@ -1,5 +1,5 @@
-import { MarketData } from "@constants/DataTypes";
-import { FETCHCOINS, FETCHFAVS, FETCHMARKET, FETCHOWNEDCOINS, LOGIN, LOGOUT } from "@stores/Actions";
+import { Coins, KeyValue, MarketData } from "@constants/DataTypes";
+import { FETCHCOINS, FETCHFAVS, FETCHMARKET, FETCHOWNEDCOINS, LOGIN, LOGOUT, SETERROR } from "@stores/Actions";
 import { AnyAction } from "redux";
 
 export type User = {
@@ -22,6 +22,8 @@ const initialUser = {
 export type Crypto = {
     marketCoins: MarketData[];
     favs: MarketData[];
+    ownedCoins: Coins[];
+    coins: KeyValue[];
 };
 
 const initialCrypto = {
@@ -29,6 +31,14 @@ const initialCrypto = {
     favs: [],
     coins: [],
     ownedCoins: [],
+};
+
+export type Error = {
+    error: string;
+};
+
+const initialError = {
+    error: "",
 };
 
 export const authReducer = (state = initialUser, action: AnyAction) => {
@@ -70,7 +80,19 @@ export const cryptoReducer = (state = initialCrypto, action: AnyAction) => {
         case FETCHOWNEDCOINS:
             return {
                 ...state,
-                ownedCoins: action.ownedCoins.slice(),
+                ownedCoins: action.ownedCoins,
+            };
+        default:
+            return state;
+    }
+};
+
+export const errorReducer = (state = initialError, action: AnyAction) => {
+    switch (action.type) {
+        case SETERROR:
+            return {
+                ...state,
+                error: action.error.slice(),
             };
         default:
             return state;

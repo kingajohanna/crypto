@@ -1,10 +1,11 @@
 import { BASEURL } from "@constants/server";
-import { fetchOwnedCoinsAction } from "@stores/Actions";
+import { fetchOwnedCoinsAction, setErrorAction } from "@stores/Actions";
 import axios from "axios";
 import moment from "moment";
 
 export const addUser = async (id: string, email: string = "", createdAt: string = moment.now().toLocaleString(), name: string = "", photoURL: string = "") => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/adduser`, {
             id,
             name,
@@ -12,49 +13,53 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
             createdAt,
             photoURL,
         });
-        console.log(response.data.message);
-    } catch (error) {
-        console.log(error);
+        console.log(`[${response.data.status}]`, "[/users/adduser]", response.data.message);
+    } catch (error: any) {
+        setErrorAction("[/users/adduser] " + error.message);
     }
 };
 
 export const removeUser = async (id: string) => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/removeuser`, {
             id,
         });
-        console.log(response.data.message);
-    } catch (error) {
-        console.log(error);
+        console.log(`[${response.data.status}]`, "[/users/removeuser]", response.data.message);
+    } catch (error: any) {
+        setErrorAction("[/users/removeuser] " + error.message);
     }
 };
 
 export const addFav = async (userId: string, coinId: string) => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/addfav`, {
             userId,
             coinId,
         });
-        console.log(response.data.message);
-    } catch (error) {
-        console.log(error);
+        console.log(`[${response.data.status}]`, "[/users/addfav]", response.data.message);
+    } catch (error: any) {
+        setErrorAction("[/users/addfav] " + error.message);
     }
 };
 
 export const removeFav = async (userId: string, coinId: string) => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/removefav`, {
             userId,
             coinId,
         });
-        console.log(response.data.message);
-    } catch (error) {
-        console.log(error);
+        console.log(`[${response.data.status}]`, "[/users/removefav]", response.data.message);
+    } catch (error: any) {
+        setErrorAction("[/users/removefav] " + error.message);
     }
 };
 
 export const addCoin = async (userId: string, coinId: string, holdings: number, price: number, currency: string) => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/addcoin`, {
             userId,
             coinId,
@@ -62,26 +67,29 @@ export const addCoin = async (userId: string, coinId: string, holdings: number, 
             price,
             currency,
         });
-        console.log(response.data.message);
-    } catch (error) {
-        console.log(error);
+        console.log(`[${response.data.status}]`, "[/users/addcoin]", response.data.message);
+    } catch (error: any) {
+        setErrorAction("[/users/addcoin] " + error.message);
     }
 };
 
 export const getOwnedCoins = async (userId: string) => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/getcoins`, {
             userId,
         });
 
+        console.log(`[${response.data.status}]`, "[/users/getcoins]", response.data.message);
         fetchOwnedCoinsAction(response.data.data);
-    } catch (error) {
-        console.log(error);
+    } catch (error: any) {
+        setErrorAction("[/users/getcoins] " + error.message);
     }
 };
 
 export const setCoin = async (id: string, purchasedHoldings: string, purchasedTotalCost: string, soldHoldings: string, soldTotalCost: string) => {
     try {
+        setErrorAction("");
         const response = await axios.post(`${BASEURL}/users/setcoin`, {
             id,
             purchasedHoldings,
@@ -89,8 +97,9 @@ export const setCoin = async (id: string, purchasedHoldings: string, purchasedTo
             soldHoldings,
             soldTotalCost,
         });
-        console.log(response.data.message);
-    } catch (error) {
-        console.log(error);
+        console.log(`[${response.data.status}]`, "[/users/setcoin]", response.data.message);
+        fetchOwnedCoinsAction(response.data.data);
+    } catch (error: any) {
+        setErrorAction("[/users/setcoin] " + error.message);
     }
 };

@@ -10,6 +10,8 @@ export const FETCHCOINS = "FETCHCOINS";
 
 export const FETCHOWNEDCOINS = "FETCHOWNEDCOINS";
 
+export const SETERROR = "SETERROR";
+
 const userLogin = (id: string, email: string, createdAt: string, name?: string, photoURL?: string) => ({
     type: LOGIN,
     id,
@@ -43,6 +45,11 @@ const fetchOwnedCoins = (ownedCoins: KeyValue[]) => ({
     ownedCoins,
 });
 
+const setError = (error: String) => ({
+    type: SETERROR,
+    error,
+});
+
 export const loginAction = (uid: string, email: string, createdAt: string, name?: string, photoURL?: string) => {
     try {
         store.dispatch(userLogin(uid, email, createdAt, name, photoURL));
@@ -54,6 +61,8 @@ export const loginAction = (uid: string, email: string, createdAt: string, name?
 export const logoutAction = () => {
     try {
         store.dispatch(userLogout());
+        store.dispatch(fetchMarket([]));
+        store.dispatch(fetchFavs([]));
     } catch (error) {
         console.log(error);
     }
@@ -86,6 +95,14 @@ export const fetchCoinsAction = (coins: KeyValue[]) => {
 export const fetchOwnedCoinsAction = (ownedCoins: KeyValue[]) => {
     try {
         store.dispatch(fetchOwnedCoins(ownedCoins));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const setErrorAction = (error: string) => {
+    try {
+        store.dispatch(setError(error));
     } catch (error) {
         console.log(error);
     }

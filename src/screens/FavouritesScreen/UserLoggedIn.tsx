@@ -1,35 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, FlatList } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
-
+import React, { useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
-
-import { getFavsMarket, getMarketData } from "@services/CryptoServices";
-import { addFav, removeFav } from "@services/UserServices";
-
 import { MarketData } from "@constants/DataTypes";
-import { Tabs } from "@constants/Tabs";
-
+import { getFavsMarket, getMarketData } from "@services/CryptoServices";
+import { ActivityIndicator, FlatList } from "react-native";
 import { CryptoCoin } from "@components/CryptoCoin";
-import { ScreenBackground } from "@components/ScreenBackground";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
+import RBSheet from "react-native-raw-bottom-sheet";
 
-export const MarketScreen = () => {
+export const UserLoggedIn = () => {
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
     const user = useSelector((state: RootState) => state.user, shallowEqual);
 
-    const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
+    const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
 
-    const fetchMarketData = async () => {
-        if (user.isLoggedIn) {
-            await getMarketData(user.id);
-            await getFavsMarket(user.id);
-        } else await getMarketData();
+    const refRBSheet = React.useRef() as React.MutableRefObject<RBSheet>;
 
+    const fetchFavData = async () => {
+        await getFavsMarket(user.id);
+        await getMarketData(user.id);
         setLoading(false);
     };
 
@@ -40,19 +31,18 @@ export const MarketScreen = () => {
 
     const onRefresh = async () => {
         setLoading(true);
-        await fetchMarketData();
+        await fetchFavData();
     };
 
     return (
-        <ScreenBackground title={Tabs.market}>
+        <>
             {loading && <ActivityIndicator animating size="large" style={{ paddingTop: 16 }} />}
-
             <FlatList
                 keyExtractor={(item) => item.id}
-                data={crypto.marketCoins}
+                data={user.isLoggedIn ? crypto.favs : []}
+                initialNumToRender={100}
                 onRefresh={() => onRefresh()}
                 refreshing={loading}
-                initialNumToRender={100}
                 getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
                 renderItem={({ item, index }) => (
                     <CryptoCoin
@@ -68,8 +58,7 @@ export const MarketScreen = () => {
                     />
                 )}
             />
-
             <SelectedCoinGraph selectedCoinData={selectedCoinData!} reference={refRBSheet} />
-        </ScreenBackground>
+        </>
     );
 };

@@ -8,6 +8,8 @@ import { RootState } from "@stores/store";
 
 import { Colors } from "@theme/Colors";
 import FastImage from "react-native-fast-image";
+import { MarketData } from "@constants/DataTypes";
+import { useFavouriteStatus } from "@utils/useFavouritesStatus";
 
 type CryptoCoinProps = {
     id: string;
@@ -17,13 +19,12 @@ type CryptoCoinProps = {
     price: number;
     priceChange: number;
     isFavourite: boolean;
-    favAdd: () => void;
-    favRemove: () => void;
+    index: number;
 } & PressableProps;
 
-const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, isFavourite, onPress, favAdd, favRemove }) => {
+const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, isFavourite, onPress, index }) => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
-    const [fav, setFav] = useState(isFavourite);
+    const [fav, setFav] = useFavouriteStatus(isFavourite, id, index);
 
     return (
         <Container onPress={onPress}>
@@ -46,28 +47,8 @@ const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, sh
                     <Title>${price!.toLocaleString("en-US", { currency: "USD" })}</Title>
                     <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
                 </RightTitleContainer>
-                {user.isLoggedIn && fav && (
-                    <Icon
-                        name="heart"
-                        color={Colors.cadetBlue}
-                        size={36}
-                        onPress={() => {
-                            setFav(!fav);
-                            favRemove();
-                        }}
-                    />
-                )}
-                {user.isLoggedIn && !fav && (
-                    <Icon
-                        name="heart-outline"
-                        color={Colors.cadetBlue}
-                        size={36}
-                        onPress={() => {
-                            setFav(!fav);
-                            favAdd();
-                        }}
-                    />
-                )}
+                {user.isLoggedIn && fav && <Icon name="heart" color={Colors.cadetBlue} size={36} onPress={() => setFav(!fav)} />}
+                {user.isLoggedIn && !fav && <Icon name="heart-outline" color={Colors.cadetBlue} size={36} onPress={() => setFav(!fav)} />}
             </RightContainer>
         </Container>
     );

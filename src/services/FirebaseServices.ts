@@ -1,11 +1,11 @@
-import auth, { firebase } from "@react-native-firebase/auth";
+import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { initializeApp } from "firebase/app";
 import { addUser, removeUser } from "@services/UserServices";
-import { loginAction, logoutAction } from "@stores/Actions";
+import { loginAction, logoutAction, setErrorAction } from "@stores/Actions";
 import { ReLogin } from "@components/Alert";
 
 export async function login(email: string, password: string, handleModal: (arg0?: string) => void) {
+    setErrorAction("");
     auth()
         .signInWithEmailAndPassword(email, password)
         .then((res) => {
@@ -14,11 +14,13 @@ export async function login(email: string, password: string, handleModal: (arg0?
         })
         .catch(async (error) => {
             handleModal(error.toString().split("] ", 2)[1]);
+            setErrorAction("[login] " + error.toString().split("] ", 2)[1]);
         });
 }
 
 export async function googleSignIn() {
     try {
+        setErrorAction("");
         const data = await GoogleSignin.signIn();
 
         const googleCredential = auth.GoogleAuthProvider.credential(data.idToken);
@@ -30,24 +32,13 @@ export async function googleSignIn() {
         });
         return user;
     } catch (error: any) {
-        if (error.code === "SIGN_IN_CANCELLED") {
-            // user cancelled the login flow
-            console.log("User cancelled the login flow");
-        } else if (error.code === "IN_PROGRESS") {
-            // operation (e.g. sign in) is in progress already
-            console.log("Peration (e.g. sign in) is in progress already: ", error.toString());
-        } else if (error.code === "PLAY_SERVICES_NOT_AVAILABLE") {
-            // play services not available or outdated
-            console.log("Play services not available or outdated");
-        } else {
-            // some other error happened
-            console.log("Some other error happened: ", error.toString());
-        }
+        setErrorAction("[google signin] " + error.message);
     }
     return null;
 }
 
 export async function signup(email: string, password: string, passwordConf: string, handleModal: (arg0?: string) => void) {
+    setErrorAction("");
     if (password === passwordConf)
         return auth()
             .createUserWithEmailAndPassword(email, password)
@@ -59,19 +50,22 @@ export async function signup(email: string, password: string, passwordConf: stri
             })
             .catch((error) => {
                 handleModal(error.toString().split("] ", 2)[1]);
+                setErrorAction("[signup] " + error.toString().split("] ", 2)[1]);
             });
 }
 
 export async function logOut() {
+    setErrorAction("");
     return auth()
         .signOut()
         .then(() => logoutAction())
-        .catch((error) => {
-            console.error(error);
+        .catch((error: any) => {
+            setErrorAction("[Logout] " + error.message);
         });
 }
 
 export async function deleteAccount() {
+    setErrorAction("");
     const user = auth().currentUser;
     return auth()
         .currentUser?.delete()
@@ -86,7 +80,7 @@ export async function deleteAccount() {
                     ReLogin();
                     break;
                 default:
-                    console.error(error.code);
+                    setErrorAction("[Delete account] " + error.code);
             }
         });
 }

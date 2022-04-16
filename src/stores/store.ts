@@ -1,4 +1,4 @@
-import { authReducer, cryptoReducer } from "@stores/reducer";
+import { authReducer, cryptoReducer, errorReducer } from "@stores/reducer";
 import { combineReducers, createStore } from "redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer } from "redux-persist";
@@ -7,6 +7,7 @@ import persistStore from "redux-persist/es/persistStore";
 const rootReducer = combineReducers({
     user: authReducer,
     crypto: cryptoReducer,
+    error: errorReducer,
 });
 
 const persistConfig = {
