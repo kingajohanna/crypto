@@ -15,19 +15,14 @@ import { MyCoinsScreen } from "@screens/MyCoinsScreen";
 import { Colors } from "@theme/Colors";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
-import { getFavsMarket, getMarketData } from "@services/CryptoServices";
-import { getOwnedCoins } from "@services/UserServices";
+import { fetchData } from "@utils/FetchData";
 
 export const BottomNavigator = () => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const error = useSelector((state: RootState) => state.error, shallowEqual);
 
     const fetchMarketData = async () => {
-        if (user.isLoggedIn) {
-            await getMarketData(user.id);
-            await getFavsMarket(user.id);
-            await getOwnedCoins(user.id);
-        } else await getMarketData();
+        fetchData(user);
     };
 
     useEffect(() => {

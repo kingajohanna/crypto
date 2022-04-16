@@ -1,14 +1,6 @@
 import { Coins, KeyValue, MarketData } from "@constants/DataTypes";
-import { FETCHCOINS, FETCHFAVS, FETCHMARKET, FETCHOWNEDCOINS, LOGIN, LOGOUT, SETERROR } from "@stores/Actions";
+import { FETCHCOINS, FETCHFAVS, FETCHMARKET, FETCHOWNEDCOINS, LOGIN, LOGOUT, SETERROR, USEWITHOUTINTERNET } from "@stores/Actions";
 import { AnyAction } from "redux";
-
-export type User = {
-    id: string;
-    email: string;
-    createdAt: string;
-    name?: string;
-    photoURL?: string;
-};
 
 const initialUser = {
     id: "",

@@ -46,3 +46,12 @@ export interface KeyValue {
     id: string;
     name: string;
 }
+
+export type User = {
+    id: string;
+    email: string;
+    createdAt: string;
+    name?: string;
+    photoURL?: string;
+    isLoggedIn?: boolean;
+};
