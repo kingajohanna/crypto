@@ -34,10 +34,14 @@ export const removeUser = async (id: string) => {
 export const addFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
-        const response = await axios.post(`${BASEURL}/users/addfav`, {
-            userId,
-            coinId,
-        });
+        const response = await axios.post(
+            `${BASEURL}/users/addfav`,
+            {
+                userId,
+                coinId,
+            },
+            { timeout: 1000 },
+        );
         console.log(`[${response.data.status}]`, "[/users/addfav]", response.data.message);
     } catch (error: any) {
         setErrorAction("[/users/addfav] " + error.message);
@@ -47,10 +51,14 @@ export const addFav = async (userId: string, coinId: string) => {
 export const removeFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
-        const response = await axios.post(`${BASEURL}/users/removefav`, {
-            userId,
-            coinId,
-        });
+        const response = await axios.post(
+            `${BASEURL}/users/removefav`,
+            {
+                userId,
+                coinId,
+            },
+            { timeout: 1000 },
+        );
         console.log(`[${response.data.status}]`, "[/users/removefav]", response.data.message);
     } catch (error: any) {
         setErrorAction("[/users/removefav] " + error.message);
