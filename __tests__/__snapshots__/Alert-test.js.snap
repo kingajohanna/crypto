@@ -1,0 +1,652 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onHide={[Function]}
+      renderToHardwareTextureAndroid={true}
+      transparent={true}
+      useNativeDriver={false}
+      visible={true}
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+      <View
+        collapsable={false}
+        needsOffscreenAlphaCompositing={true}
+        pointerEvents="box-none"
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "opacity": 0,
+            "transform": Array [
+              Object {
+                "scale": 1.2,
+              },
+            ],
+          }
+        }
+      >
+        <View
+          onLayout={[Function]}
+          style={
+            Array [
+              Object {
+                "marginTop": 22,
+              },
+              Object {
+                "paddingBottom": 0,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderRadius": 13,
+                  "flexDirection": "column",
+                  "overflow": "hidden",
+                  "width": 270,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": Object {
+                      "semantic": Array [
+                        "systemGray6",
+                      ],
+                    },
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  undefined,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "margin": 18,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": Object {
+                        "semantic": Array [
+                          "label",
+                        ],
+                      },
+                      "fontSize": 18,
+                      "fontWeight": "600",
+                      "textAlign": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Account delete
+              </Text>
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": Object {
+                        "semantic": Array [
+                          "label",
+                        ],
+                      },
+                      "fontSize": 13,
+                      "marginTop": 4,
+                      "textAlign": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Do you want to delete this account? Please enter 'DELETE' in the editbox.
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": Object {
+                      "semantic": Array [
+                        "systemGray5",
+                      ],
+                    },
+                    "borderColor": Object {
+                      "semantic": Array [
+                        "separator",
+                      ],
+                    },
+                    "borderRadius": 6,
+                    "borderWidth": 0.5,
+                    "marginBottom": 20,
+                    "marginHorizontal": 20,
+                    "paddingHorizontal": 8,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <TextInput
+                onChangeText={[Function]}
+                placeholderTextColor={
+                  Object {
+                    "semantic": Array [
+                      "placeholderText",
+                    ],
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "color": Object {
+                        "semantic": Array [
+                          "label",
+                        ],
+                      },
+                    },
+                    undefined,
+                    Object {
+                      "height": 32,
+                    },
+                  ]
+                }
+                underlineColorAndroid={
+                  Object {
+                    "semantic": Array [
+                      "@android:color/hint_foreground_light",
+                    ],
+                  }
+                }
+                value=""
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": Object {
+                    "semantic": Array [
+                      "separator",
+                    ],
+                  },
+                  "height": 0.5,
+                  "width": "100%",
+                }
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                  },
+                  null,
+                  undefined,
+                ]
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "height": 46,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "color": Object {
+                          "semantic": Array [
+                            "link",
+                          ],
+                        },
+                        "fontSize": 17,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "color": "#007ff9",
+                        "fontWeight": "normal",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Cancel
+                </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": Object {
+                        "semantic": Array [
+                          "separator",
+                        ],
+                      },
+                      "height": "100%",
+                      "width": 0.5,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "height": 46,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "color": Object {
+                          "semantic": Array [
+                            "link",
+                          ],
+                        },
+                        "fontSize": 17,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "color": "#007ff9",
+                        "fontWeight": "normal",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Delete
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  </View>,
+  <View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onHide={[Function]}
+      renderToHardwareTextureAndroid={true}
+      transparent={true}
+      useNativeDriver={false}
+      visible={true}
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+      <View
+        collapsable={false}
+        needsOffscreenAlphaCompositing={true}
+        pointerEvents="box-none"
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "opacity": 0,
+            "transform": Array [
+              Object {
+                "scale": 1.2,
+              },
+            ],
+          }
+        }
+      >
+        <View
+          onLayout={[Function]}
+          style={
+            Array [
+              Object {
+                "marginTop": 22,
+              },
+              Object {
+                "paddingBottom": 0,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderRadius": 13,
+                  "flexDirection": "column",
+                  "overflow": "hidden",
+                  "width": 270,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": Object {
+                      "semantic": Array [
+                        "systemGray6",
+                      ],
+                    },
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  undefined,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "margin": 18,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": Object {
+                        "semantic": Array [
+                          "label",
+                        ],
+                      },
+                      "fontSize": 18,
+                      "fontWeight": "600",
+                      "textAlign": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Logout
+              </Text>
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": Object {
+                        "semantic": Array [
+                          "label",
+                        ],
+                      },
+                      "fontSize": 13,
+                      "marginTop": 4,
+                      "textAlign": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Click OK to logout!
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": Object {
+                    "semantic": Array [
+                      "separator",
+                    ],
+                  },
+                  "height": 0.5,
+                  "width": "100%",
+                }
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                  },
+                  null,
+                  undefined,
+                ]
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "height": 46,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "color": Object {
+                          "semantic": Array [
+                            "link",
+                          ],
+                        },
+                        "fontSize": 17,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "color": "#007ff9",
+                        "fontWeight": "normal",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Cancel
+                </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": Object {
+                        "semantic": Array [
+                          "separator",
+                        ],
+                      },
+                      "height": "100%",
+                      "width": 0.5,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "height": 46,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "color": Object {
+                          "semantic": Array [
+                            "link",
+                          ],
+                        },
+                        "fontSize": 17,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "color": "#007ff9",
+                        "fontWeight": "normal",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  OK
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  </View>,
+]
+`;

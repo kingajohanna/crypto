@@ -4,20 +4,6 @@ import { addUser, removeUser } from "@services/UserServices";
 import { loginAction, logoutAction, setErrorAction } from "@stores/Actions";
 import { ReLogin } from "@components/Alert";
 
-export async function login(email: string, password: string, handleModal: (arg0?: string) => void) {
-    setErrorAction("");
-    auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((res) => {
-            loginAction(res.user.uid, res.user.email!, res.user.metadata.creationTime!);
-            handleModal();
-        })
-        .catch(async (error) => {
-            handleModal(error.toString().split("] ", 2)[1]);
-            setErrorAction("[login] " + error.toString().split("] ", 2)[1]);
-        });
-}
-
 export async function googleSignIn() {
     try {
         setErrorAction("");
@@ -32,12 +18,25 @@ export async function googleSignIn() {
         });
         return user;
     } catch (error: any) {
-        setErrorAction("[google signin] " + error.message);
+        console.log("[google signin] " + error.message);
     }
     return null;
 }
 
-export async function signup(email: string, password: string, passwordConf: string, handleModal: (arg0?: string) => void) {
+export async function login(email: string, password: string) {
+    setErrorAction("");
+    auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((res) => {
+            loginAction(res.user.uid, res.user.email!, res.user.metadata.creationTime!);
+        })
+        .catch(async (error) => {
+            console.log("[login] " + error.toString().split("] ", 2)[1]);
+            return error.toString().split("] ", 2)[1];
+        });
+}
+
+export async function signup(email: string, password: string, passwordConf: string) {
     setErrorAction("");
     if (password === passwordConf)
         return auth()
@@ -46,11 +45,10 @@ export async function signup(email: string, password: string, passwordConf: stri
                 const user = auth().currentUser!;
                 addUser(user.uid, user.email!, user.metadata.creationTime);
                 loginAction(user.uid, user.email!, user.metadata.creationTime!);
-                handleModal();
             })
             .catch((error) => {
-                handleModal(error.toString().split("] ", 2)[1]);
-                setErrorAction("[signup] " + error.toString().split("] ", 2)[1]);
+                console.log("[signup] " + error.toString().split("] ", 2)[1]);
+                return error.toString().split("] ", 2)[1];
             });
 }
 
@@ -60,7 +58,7 @@ export async function logOut() {
         .signOut()
         .then(() => logoutAction())
         .catch((error: any) => {
-            setErrorAction("[Logout] " + error.message);
+            console.log("[Logout] " + error.message);
         });
 }
 
@@ -80,7 +78,7 @@ export async function deleteAccount() {
                     ReLogin();
                     break;
                 default:
-                    setErrorAction("[Delete account] " + error.code);
+                    console.log("[Delete account] " + error.code);
             }
         });
 }

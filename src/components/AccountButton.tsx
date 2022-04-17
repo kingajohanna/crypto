@@ -7,8 +7,6 @@ import { Colors } from "@theme/Colors";
 
 enum ButtonVariant {
     google = "google",
-    apple = "apple",
-    facebook = "facebook",
     emailLogIn = "emailLogIn",
     emailSignIn = "emailSignIn",
     logout = "logout",
@@ -32,10 +30,6 @@ const socialText = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
             return "Continue with Google";
-        case ButtonVariant.apple:
-            return "Continue with Apple";
-        case ButtonVariant.facebook:
-            return "Continue with facebook";
         case ButtonVariant.logout:
             return "Tap to logout";
         case ButtonVariant.delete:
@@ -52,10 +46,6 @@ const socialIcon = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
             return <Image style={{ width: 24, height: 24 }} source={require("@assets/googleLogo.png")} />;
-        case ButtonVariant.apple:
-            return <Icon name="logo-apple" size={24} color={Colors.white} />;
-        case ButtonVariant.facebook:
-            return <Icon name="logo-facebook" size={24} color={Colors.white} />;
         case ButtonVariant.logout:
             return <Icon name="log-out" size={24} color={Colors.fluorescentBlue} />;
         case ButtonVariant.delete:
@@ -69,12 +59,8 @@ const socialIcon = (variant: ButtonVariant) => {
 
 const backgroundColor = (variant: ButtonVariant) => {
     switch (variant) {
-        case ButtonVariant.facebook:
-            return Colors.facebookBlue;
         case ButtonVariant.google:
             return Colors.white;
-        case ButtonVariant.apple:
-            return Colors.black;
         case ButtonVariant.logout:
         case ButtonVariant.delete:
         case ButtonVariant.emailLogIn:
@@ -88,9 +74,6 @@ const fontColor = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
             return Colors.gray;
-        case ButtonVariant.apple:
-        case ButtonVariant.facebook:
-            return Colors.white;
         case ButtonVariant.emailLogIn:
         case ButtonVariant.emailSignIn:
         case ButtonVariant.logout:
@@ -121,17 +104,11 @@ const ButtonContainer = styled.Pressable<ButtonProps>((props: ButtonProps) => ({
     alignItems: "center",
     flexDirection: "row",
     borderColor: Colors.cadetBlue,
-    borderWidth: props.variant !== ButtonVariant.facebook && props.variant !== ButtonVariant.google ? 2 : 0,
+    borderWidth: props.variant === ButtonVariant.google ? 0 : 2,
 }));
 
 const Google = styled(ButtonComponent).attrs(() => ({
     variant: ButtonVariant.google,
-}))({});
-const Apple = styled(ButtonComponent).attrs(() => ({
-    variant: ButtonVariant.apple,
-}))({});
-const Facebook = styled(ButtonComponent).attrs(() => ({
-    variant: ButtonVariant.facebook,
 }))({});
 const EmailSignIn = styled(ButtonComponent).attrs(() => ({
     variant: ButtonVariant.emailSignIn,
@@ -148,8 +125,6 @@ const Delete = styled(ButtonComponent).attrs(() => ({
 
 export const AccountButton = {
     Google: Google,
-    Apple: Apple,
-    Facebook: Facebook,
     EmailLogIn: EmailLogIn,
     EmailSignIn: EmailSignIn,
     Logout: Logout,

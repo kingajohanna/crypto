@@ -1,6 +1,7 @@
 import { AccountBottomModal } from "@components/AccountBottomModal";
 import { AccountButton } from "@components/AccountButton";
 import { TextInput } from "@components/InputField";
+import { isFulfilled } from "@reduxjs/toolkit";
 import { googleSignIn, login, signup } from "@services/FirebaseServices";
 import { Colors, hexToRGBA } from "@theme/Colors";
 import { getModalHeight } from "@utils/BottomModalHeight";
@@ -23,6 +24,16 @@ export const UserNotLoggedIn = () => {
         setSignInError("");
     };
 
+    const onLogin = () => {
+        const err = login(email, password);
+        if (err) handleFirebaseActions(err.toString());
+    };
+
+    const onSignUp = () => {
+        const err = signup(email, password, passwordConf);
+        if (err) handleFirebaseActions(err.toString());
+    };
+
     const closeModal = () => {
         logIn.current?.close();
         signUp.current?.close();
@@ -42,7 +53,7 @@ export const UserNotLoggedIn = () => {
                 <AccountBottomModal
                     errorText={signInError}
                     primaryButtonText="Register"
-                    primaryButtonOnPress={() => signup(email, password, passwordConf, handleFirebaseActions)}
+                    primaryButtonOnPress={() => onSignUp()}
                     secondaryButtonText="Cancel"
                     secondaryButtonOnPress={() => closeModal()}
                 >
@@ -52,13 +63,7 @@ export const UserNotLoggedIn = () => {
                 </AccountBottomModal>
             </RBSheet>
             <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.37)} customStyles={modalStyle}>
-                <AccountBottomModal
-                    errorText={signInError}
-                    primaryButtonText="Login"
-                    primaryButtonOnPress={() => login(email, password, handleFirebaseActions)}
-                    secondaryButtonText="Cancel"
-                    secondaryButtonOnPress={() => closeModal()}
-                >
+                <AccountBottomModal errorText={signInError} primaryButtonText="Login" primaryButtonOnPress={() => onLogin()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
                     <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} />
                 </AccountBottomModal>
