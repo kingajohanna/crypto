@@ -7,7 +7,7 @@
         "ios": "react-native run-ios",
         "start": "react-native start",
         "pod": "cd ios && pod install",
-        "test": "jest --config ./jest.config.js",
+        "test": "jest --config ./jest.config.js --runInBand --detectOpenHandles",
         "clean": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && watchman watch-del-all && rm -rf node_modules/ && yarn && rm -rf ios/build && cd ios && rm -rf Pods && pod install && cd .. && cd android && ./gradlew clean && cd .."
     },
     "dependencies": {
@@ -52,6 +52,7 @@
         "@babel/runtime": "^7.17.7",
         "@react-native-community/eslint-config": "^3.0.1",
         "@redux-devtools/core": "^3.11.0",
+        "@testing-library/react-native": "^9.1.0",
         "@types/jest": "^27.4.1",
         "@types/react": "^17.0.40",
         "@types/react-native": "^0.67.3",
@@ -62,6 +63,7 @@
         "babel-plugin-module-resolver": "^4.1.0",
         "eslint": "^8.11.0",
         "gts": "^3.1.0",
+        "identity-obj-proxy": "^3.0.0",
         "jest": "^27.5.1",
         "jest-styled-components": "^7.0.8",
         "metro-react-native-babel-preset": "^0.69.1",
