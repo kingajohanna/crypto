@@ -83,14 +83,14 @@ export const UserNotLoggedIn = () => {
                     secondaryButtonOnPress={() => closeModal()}
                 >
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
-                    <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} />
-                    <TextInput placeholder="Confirm password" title="Password" onChangeText={setPasswordConf} value={passwordConf} />
+                    <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} isSecret />
+                    <TextInput placeholder="Confirm password" title="Password" onChangeText={setPasswordConf} value={passwordConf} isSecret />
                 </AccountBottomModal>
             </RBSheet>
             <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.37)} customStyles={modalStyle}>
                 <AccountBottomModal errorText={signInError} primaryButtonText="Login" primaryButtonOnPress={() => onLogin()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
-                    <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} />
+                    <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} isSecret />
                 </AccountBottomModal>
             </RBSheet>
         </>

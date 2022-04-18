@@ -7,12 +7,13 @@ type StyledTextInputProps = {
     title?: string;
     errorText?: string;
     width?: number;
+    isSecret?: boolean;
 } & TextInputProps;
 
 /*
     basic inputfield
 */
-const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, errorText, width, keyboardType }) => {
+const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, errorText, width, keyboardType, isSecret }) => {
     return (
         <Container>
             {title && <TitleText>{title}</TitleText>}
@@ -23,6 +24,7 @@ const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder
                 onChangeText={onChangeText}
                 width={width}
                 keyboardType={keyboardType ? keyboardType : "default"}
+                secureTextEntry={isSecret ? true : false}
             />
 
             {errorText && <ErrorText>{errorText}</ErrorText>}
