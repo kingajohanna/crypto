@@ -1,5 +1,5 @@
 import { BASEURL } from "@constants/server";
-import { fetchOwnedCoinsAction, setErrorAction } from "@stores/Actions";
+import { fetchMarketAction, fetchOwnedCoinsAction, setErrorAction } from "@stores/Actions";
 import axios from "axios";
 import moment from "moment";
 
@@ -39,8 +39,6 @@ export const addFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
 
-        //jest testing - await needed
-        await process.nextTick(() => {});
         const response = await axios.post(
             `${BASEURL}/users/addfav`,
             {
@@ -61,8 +59,6 @@ export const removeFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
 
-        //jest testing - await needed
-        await process.nextTick(() => {});
         const response = await axios.post(
             `${BASEURL}/users/removefav`,
             {
@@ -72,6 +68,7 @@ export const removeFav = async (userId: string, coinId: string) => {
             { timeout: 1000 },
         );
         console.log(`[${response.data.status}]`, "[/users/removefav]", response.data.message);
+        fetchMarketAction([]);
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/removefav] " + error.message);
@@ -83,8 +80,6 @@ export const addCoin = async (userId: string, coinId: string, holdings: number, 
     try {
         setErrorAction("");
 
-        //jest testing - await needed
-        await process.nextTick(() => {});
         const response = await axios.post(`${BASEURL}/users/addcoin`, {
             userId,
             coinId,
@@ -104,13 +99,12 @@ export const getOwnedCoins = async (userId: string) => {
     try {
         setErrorAction("");
 
-        //jest testing - await needed
-        await process.nextTick(() => {});
         const response = await axios.post(`${BASEURL}/users/getcoins`, {
             userId,
         });
 
         console.log(`[${response.data.status}]`, "[/users/getcoins]", response.data.message);
+        fetchOwnedCoinsAction([]);
         fetchOwnedCoinsAction(response.data.data);
         return response.data;
     } catch (error: any) {
@@ -123,8 +117,6 @@ export const setCoin = async (id: string, purchasedHoldings: string, purchasedTo
     try {
         setErrorAction("");
 
-        //jest testing - await needed
-        await process.nextTick(() => {});
         const response = await axios.post(`${BASEURL}/users/setcoin`, {
             id,
             purchasedHoldings,

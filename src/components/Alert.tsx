@@ -8,6 +8,9 @@ type AlertProps = {
     setVisible: (arg0: boolean) => void;
 };
 
+/*
+    alert with textbox what shows when the users try to to delete their account
+*/
 export const DeleteAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
     const [text, setText] = useState("");
     return (
@@ -37,6 +40,9 @@ export const DeleteAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
     );
 };
 
+/*
+    alert that shows when the user try to logout
+*/
 export const LogoutAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
     return (
         <View>
@@ -56,6 +62,10 @@ export const LogoutAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
     );
 };
 
+/*
+    to delete google sso in account if the user logged in earlier then 5 minutes
+    #errorhandling
+*/
 export const ReLogin = () => {
     Alert.alert(
         "",

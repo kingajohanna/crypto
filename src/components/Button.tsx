@@ -1,13 +1,15 @@
 import React from "react";
-import styled from "styled-components/native";
-
-import { Colors } from "@theme/Colors";
 import { PressableProps } from "react-native";
+import styled from "styled-components/native";
+import { Colors } from "@theme/Colors";
 
 type ButtonProps = {
     title: string;
 } & PressableProps;
 
+/*
+    basic button
+*/
 export const Button: React.FC<ButtonProps> = ({ title, onPress }) => {
     return (
         <Container onPress={onPress}>
@@ -16,7 +18,8 @@ export const Button: React.FC<ButtonProps> = ({ title, onPress }) => {
     );
 };
 
-const Container = styled.Pressable({
+//export for jest test
+export const Container = styled.Pressable({
     backgroundColor: Colors.fluorescentBlue,
     width: 120,
     height: 44,

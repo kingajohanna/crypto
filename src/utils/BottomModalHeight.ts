@@ -1,4 +1,4 @@
-import { NAVBARHEIGHT } from "@constants/androidHelper";
+import { NAVBARHEIGHT } from "@utils/androidHelper";
 import { Dimensions, Platform } from "react-native";
 
 const { height: SIZE } = Dimensions.get("window");

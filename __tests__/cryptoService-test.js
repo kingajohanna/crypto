@@ -21,10 +21,10 @@ describe("getMarketData", () => {
             mock.onPost(`${BASEURL}/crypto/allcoins`).replyOnce(200, marketdata);
 
             // when
+
             const result = await getMarketData();
 
             // then
-
             expect(result).toEqual(marketdata);
         });
     });

@@ -1,11 +1,8 @@
 import React from "react";
 import { shallowEqual, useSelector } from "react-redux";
-
 import { RootState } from "@stores/store";
 import { Tabs } from "@constants/Tabs";
-
 import { ScreenBackground } from "@components/ScreenBackground";
-
 import { UserLoggedIn } from "@screens/AccountScreen/UserLoggedIn";
 import { UserNotLoggedIn } from "@screens/AccountScreen/UserNotLoggedIn";
 

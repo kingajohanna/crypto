@@ -4,6 +4,9 @@ import { addUser, removeUser } from "@services/UserServices";
 import { loginAction, logoutAction, setErrorAction } from "@stores/Actions";
 import { ReLogin } from "@components/Alert";
 
+/*
+   google sso
+*/
 export async function googleSignIn() {
     try {
         setErrorAction("");

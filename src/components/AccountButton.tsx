@@ -2,7 +2,6 @@ import React from "react";
 import { Image, PressableProps } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
-
 import { Colors } from "@theme/Colors";
 
 enum ButtonVariant {
@@ -17,6 +16,9 @@ type ButtonProps = {
     variant: ButtonVariant;
 } & PressableProps;
 
+/*
+    Account action buttons
+*/
 const ButtonComponent: React.FC<ButtonProps> = ({ variant, onPress }) => {
     return (
         <ButtonContainer variant={variant} onPress={onPress}>
@@ -130,3 +132,5 @@ export const AccountButton = {
     Logout: Logout,
     Delete: Delete,
 };
+
+AccountButton.EmailLogIn.displayName = "EmailLogIn";

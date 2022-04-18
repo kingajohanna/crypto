@@ -7,6 +7,9 @@ type ErrorProps = {
     retry: () => {};
 } & PressableProps;
 
+/*
+    rendering when something happen with the markedData or the connection
+*/
 export const ErrorComponent: React.FC<PressableProps> = (props) => {
     return (
         <Container onPress={props.onPress}>

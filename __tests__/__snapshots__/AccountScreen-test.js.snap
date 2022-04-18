@@ -1,0 +1,523 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Screen UserLoggedIn renders correctly 1`] = `
+Array [
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#1F2833",
+          "borderColor": "#45A29E",
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "flexDirection": "row",
+          "height": 54,
+          "marginTop": 12,
+          "paddingHorizontal": 15,
+          "width": 342,
+        },
+      ]
+    }
+    variant="logout"
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "marginRight": 15,
+          },
+        ]
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "#4CECE0",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#4CECE0",
+            "fontSize": 18,
+            "lineHeight": 24,
+          },
+        ]
+      }
+      variant="logout"
+    >
+      Tap to logout
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#1F2833",
+          "borderColor": "#45A29E",
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "flexDirection": "row",
+          "height": 54,
+          "marginTop": 12,
+          "paddingHorizontal": 15,
+          "width": 342,
+        },
+      ]
+    }
+    variant="delete"
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "marginRight": 15,
+          },
+        ]
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "#4CECE0",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#4CECE0",
+            "fontSize": 18,
+            "lineHeight": 24,
+          },
+        ]
+      }
+      variant="delete"
+    >
+      Tap to delete account
+    </Text>
+  </View>,
+  <View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onHide={[Function]}
+      renderToHardwareTextureAndroid={true}
+      transparent={true}
+      useNativeDriver={false}
+      visible={false}
+    />
+  </View>,
+  <View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onHide={[Function]}
+      renderToHardwareTextureAndroid={true}
+      transparent={true}
+      useNativeDriver={false}
+      visible={false}
+    />
+  </View>,
+]
+`;
+
+exports[`Account Screen UserNotLoggedIn renders correctly 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <UserNotLoggedIn />
+</Context.Provider>
+`;
+
+exports[`Account Screen renders correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "#1F2833",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0B0C10",
+          "flexBasis": 0,
+          "flexDirection": "column",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1F2833",
+            "borderBottomLeftRadius": 15,
+            "borderBottomRightRadius": 15,
+            "borderColor": "#1F2833",
+            "borderWidth": 1,
+            "height": 50,
+            "justifyContent": "center",
+            "width": "100%",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#C5C6C7",
+              "fontSize": 24,
+            },
+          ]
+        }
+      >
+        Account
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#45A29E",
+            "borderRadius": 10,
+            "borderWidth": 0,
+            "flexDirection": "row",
+            "height": 54,
+            "marginTop": 12,
+            "paddingHorizontal": 15,
+            "width": 342,
+          },
+        ]
+      }
+      variant="google"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "marginRight": 15,
+            },
+          ]
+        }
+      >
+        <Image
+          source="test-file-stub"
+          style={
+            Object {
+              "height": 24,
+              "width": 24,
+            }
+          }
+        />
+      </View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#8B8B8B",
+              "fontSize": 18,
+              "lineHeight": 24,
+            },
+          ]
+        }
+        variant="google"
+      >
+        Continue with Google
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1F2833",
+            "borderColor": "#45A29E",
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "flexDirection": "row",
+            "height": 54,
+            "marginTop": 12,
+            "paddingHorizontal": 15,
+            "width": 342,
+          },
+        ]
+      }
+      variant="emailLogIn"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "marginRight": 15,
+            },
+          ]
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#4CECE0",
+                "fontSize": 24,
+              },
+              undefined,
+              Object {
+                "fontFamily": "Ionicons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#4CECE0",
+              "fontSize": 18,
+              "lineHeight": 24,
+            },
+          ]
+        }
+        variant="emailLogIn"
+      >
+        Login with email
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1F2833",
+            "borderColor": "#45A29E",
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "flexDirection": "row",
+            "height": 54,
+            "marginTop": 12,
+            "paddingHorizontal": 15,
+            "width": 342,
+          },
+        ]
+      }
+      variant="emailSignIn"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "marginRight": 15,
+            },
+          ]
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#4CECE0",
+                "fontSize": 24,
+              },
+              undefined,
+              Object {
+                "fontFamily": "Ionicons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#4CECE0",
+              "fontSize": 18,
+              "lineHeight": 24,
+            },
+          ]
+        }
+        variant="emailSignIn"
+      >
+        Register with email
+      </Text>
+    </View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      supportedOrientations={
+        Array [
+          "portrait",
+          "portrait-upside-down",
+          "landscape",
+          "landscape-left",
+          "landscape-right",
+        ]
+      }
+      transparent={true}
+      visible={false}
+    />
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      supportedOrientations={
+        Array [
+          "portrait",
+          "portrait-upside-down",
+          "landscape",
+          "landscape-left",
+          "landscape-right",
+        ]
+      }
+      transparent={true}
+      visible={false}
+    />
+  </View>
+</RCTSafeAreaView>
+`;

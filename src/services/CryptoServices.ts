@@ -1,12 +1,13 @@
 import { BASEURL } from "@constants/server";
 import { fetchCoinsAction, fetchFavsAction, fetchMarketAction, setErrorAction } from "@stores/Actions";
 import axios from "axios";
+process.nextTick = setImmediate;
 
 export const getMarketData = async (userId: string = "") => {
     try {
         setErrorAction("");
 
-        //jest testing - await needed
+        //jest testing
         await process.nextTick(() => {});
         const response = await axios.post(
             `${BASEURL}/crypto/allcoins`,
@@ -28,8 +29,6 @@ export const getFavsMarket = async (userId: string = "") => {
     try {
         setErrorAction("");
 
-        //jest testing - await needed
-        await process.nextTick(() => {});
         const response = await axios.post(`${BASEURL}/crypto/getfavs`, {
             userId,
         });

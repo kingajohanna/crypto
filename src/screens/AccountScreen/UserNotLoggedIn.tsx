@@ -1,13 +1,17 @@
+import React, { useRef, useState } from "react";
+import RBSheet from "react-native-raw-bottom-sheet";
 import { AccountBottomModal } from "@components/AccountBottomModal";
 import { AccountButton } from "@components/AccountButton";
 import { TextInput } from "@components/InputField";
-import { isFulfilled } from "@reduxjs/toolkit";
+import { authError } from "@constants/authError";
 import { googleSignIn, login, signup } from "@services/FirebaseServices";
 import { Colors, hexToRGBA } from "@theme/Colors";
 import { getModalHeight } from "@utils/BottomModalHeight";
-import React, { useRef, useState } from "react";
-import RBSheet from "react-native-raw-bottom-sheet";
+import { firebaseEmail, firebasePassword } from "@utils/regex";
 
+/*
+    login and register screen
+*/
 export const UserNotLoggedIn = () => {
     const signUp = useRef() as React.MutableRefObject<RBSheet>;
     const logIn = useRef() as React.MutableRefObject<RBSheet>;
@@ -25,13 +29,38 @@ export const UserNotLoggedIn = () => {
     };
 
     const onLogin = () => {
-        const err = login(email, password);
-        if (err) handleFirebaseActions(err.toString());
+        if (!password.match(firebasePassword)) {
+            setSignInError(authError.invalidPassword);
+        } else if (!email.match(firebaseEmail)) {
+            setSignInError(authError.invalidEmail);
+        } else {
+            const err = login(email, password);
+            if (err) setSignInError(err.toString());
+            else closeModal();
+        }
     };
 
     const onSignUp = () => {
-        const err = signup(email, password, passwordConf);
-        if (err) handleFirebaseActions(err.toString());
+        if (password !== passwordConf) {
+            setSignInError(authError.passwordsMatch);
+        } else if (!password.match(firebasePassword)) {
+            setSignInError(authError.invalidPassword);
+        } else if (!email.match(firebaseEmail)) {
+            setSignInError(authError.invalidEmail);
+        } else {
+            const err = signup(email, password, passwordConf);
+
+            if (err) setSignInError(err.toString());
+            else closeModal();
+        }
+    };
+
+    const onLoginPress = () => {
+        logIn.current!.open();
+    };
+
+    const onSignUpPress = () => {
+        signUp.current!.open();
     };
 
     const closeModal = () => {
@@ -40,15 +69,11 @@ export const UserNotLoggedIn = () => {
         resetStates();
     };
 
-    const handleFirebaseActions = (error?: string) => {
-        if (error) setSignInError(error);
-        else closeModal();
-    };
     return (
         <>
             <AccountButton.Google onPress={() => googleSignIn()} />
-            <AccountButton.EmailLogIn onPress={() => logIn.current!.open()} />
-            <AccountButton.EmailSignIn onPress={() => signUp.current!.open()} />
+            <AccountButton.EmailLogIn onPress={() => onLoginPress()} />
+            <AccountButton.EmailSignIn onPress={() => onSignUpPress()} />
             <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.45)} customStyles={modalStyle}>
                 <AccountBottomModal
                     errorText={signInError}

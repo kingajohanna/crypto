@@ -2,7 +2,10 @@ import "react-native-gesture-handler/jestSetup";
 import MockedAsyncStorage from "@react-native-async-storage/async-storage/jest/async-storage-mock";
 import "../__mocks__/@react-native-google-signin/google-signin.js";
 
-//jest.setTimeout(25000);
+import { configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+
+configure({ adapter: new Adapter() });
 
 jest.mock("@react-native-async-storage/async-storage", () => MockedAsyncStorage);
 jest.mock("react-native-reanimated", () => {

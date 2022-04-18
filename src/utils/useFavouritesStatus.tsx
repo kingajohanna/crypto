@@ -11,6 +11,9 @@ export function useFavouriteStatus(fav: boolean, id: string, index: number) {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
 
+    /*
+        handle add favourite and remove favourite
+    */
     async function setFav(value: boolean) {
         setIsFav(value);
         const coin = { ...crypto.marketCoins[index], fav: value };
@@ -28,7 +31,6 @@ export function useFavouriteStatus(fav: boolean, id: string, index: number) {
 
             favs = [...crypto.favs.slice(0, index), ...crypto.favs.slice(index + 1)];
             market = [...favs, coin, ...crypto.marketCoins.slice(favs.length + 1)];
-            fetchMarketAction([]);
         }
         fetchMarketAction(market);
         fetchFavsAction(favs);

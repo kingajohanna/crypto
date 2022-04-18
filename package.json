@@ -63,6 +63,8 @@
         "axios-mock-adapter": "^1.20.0",
         "babel-jest": "^27.5.1",
         "babel-plugin-module-resolver": "^4.1.0",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.6",
         "eslint": "^8.11.0",
         "gts": "^3.1.0",
         "identity-obj-proxy": "^3.0.0",

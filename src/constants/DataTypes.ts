@@ -1,3 +1,6 @@
+/*
+    base coin data type
+*/
 export interface MarketData {
     ath: number;
     ath_change_percentage: number;
@@ -30,6 +33,9 @@ export interface MarketData {
     fav: boolean;
 }
 
+/*
+    owned coin data type
+*/
 export interface Coins {
     id: string;
     userId: string;
@@ -42,11 +48,17 @@ export interface Coins {
     current_price: number;
 }
 
+/*
+    key value interface for currencies
+*/
 export interface KeyValue {
     id: string;
     name: string;
 }
 
+/*
+    user data type
+*/
 export type User = {
     id: string;
     email: string;

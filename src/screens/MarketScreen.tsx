@@ -52,7 +52,7 @@ export const MarketScreen = () => {
                 data={crypto.marketCoins}
                 onRefresh={() => onRefresh()}
                 refreshing={loading}
-                initialNumToRender={100}
+                initialNumToRender={150}
                 getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
                 renderItem={({ item, index }) => (
                     <CryptoCoin

@@ -18,6 +18,9 @@ type OwnedCoinProp = {
     holdings: number;
 } & PressableProps;
 
+/*
+    base component for owned coins, use in mycoins screen
+*/
 const OwnedCoinsComponent: React.FC<OwnedCoinProp> = (props) => {
     return (
         <Container onPress={props.onPress}>
