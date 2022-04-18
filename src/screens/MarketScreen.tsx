@@ -1,19 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
-
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
-
 import { getFavsMarket, getMarketData } from "@services/CryptoServices";
-import { addFav, removeFav } from "@services/UserServices";
-
 import { MarketData } from "@constants/DataTypes";
 import { Tabs } from "@constants/Tabs";
-
 import { CryptoCoin } from "@components/CryptoCoin";
 import { ScreenBackground } from "@components/ScreenBackground";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
+import { Searchbar } from "@components/SearchBar";
 
 export const MarketScreen = () => {
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
@@ -21,6 +17,8 @@ export const MarketScreen = () => {
 
     const [selectedCoinData, setSelectedCoinData] = useState<MarketData | null>(null);
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(crypto.marketCoins);
+    const [text, setText] = useState("");
 
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
@@ -43,13 +41,27 @@ export const MarketScreen = () => {
         await fetchMarketData();
     };
 
+    const searchData = (text: string) => {
+        const filterdData = text
+            ? data.filter((item: MarketData) => {
+                  const itemData = item.name.toUpperCase();
+                  const textData = text.toUpperCase();
+                  return itemData.indexOf(textData) > -1;
+              })
+            : crypto.marketCoins;
+
+        setData(filterdData);
+        setText(text);
+    };
+
     return (
         <ScreenBackground title={Tabs.market}>
             {loading && <ActivityIndicator animating size="large" style={{ paddingTop: 16 }} />}
 
+            <Searchbar onChangeText={(text) => searchData(text)} value={text} placeholder="Search here..." />
             <FlatList
                 keyExtractor={(item) => item.id}
-                data={crypto.marketCoins}
+                data={data}
                 onRefresh={() => onRefresh()}
                 refreshing={loading}
                 initialNumToRender={150}
