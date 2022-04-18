@@ -1,13 +1,11 @@
 import React from "react";
-import { Dimensions, Platform, PressableProps } from "react-native";
+import { PressableProps } from "react-native";
 import styled from "styled-components/native";
 import RBSheet from "react-native-raw-bottom-sheet";
-
 import { Colors, hexToRGBA } from "@theme/Colors";
 import { TextInput } from "@components/InputField";
+import { getModalHeight } from "@utils/BottomModalHeight";
 import { Button } from "@components/Button";
-import { NAVBARHEIGHT } from "@constants/androidHelper";
-const { height: SIZE } = Dimensions.get("window");
 
 type BottomModalProps = {
     reference: React.MutableRefObject<RBSheet>;
@@ -19,6 +17,9 @@ type BottomModalProps = {
     onCancel: () => void;
 } & PressableProps;
 
+/*
+    bottommodal for editing owned coin
+*/
 export const EditOwnedCoinBottomModal: React.FC<BottomModalProps> = (props) => {
     return (
         <RBSheet
@@ -26,7 +27,7 @@ export const EditOwnedCoinBottomModal: React.FC<BottomModalProps> = (props) => {
             closeOnPressMask={true}
             closeDuration={180}
             openDuration={180}
-            height={Platform.OS === "ios" ? SIZE * 0.55 : SIZE * 0.55 + NAVBARHEIGHT}
+            height={getModalHeight(0.55)}
             customStyles={{
                 container: {
                     borderTopLeftRadius: 15,

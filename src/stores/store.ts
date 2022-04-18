@@ -2,7 +2,7 @@ import { authReducer, cryptoReducer, errorReducer } from "@stores/reducer";
 import { combineReducers, createStore } from "redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer } from "redux-persist";
-import persistStore from "redux-persist/es/persistStore";
+import persistStore from "redux-persist/lib/persistStore";
 
 const rootReducer = combineReducers({
     user: authReducer,

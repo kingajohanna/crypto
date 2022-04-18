@@ -1,8 +1,11 @@
-import { Colors } from "@theme/Colors";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
+import { Colors } from "@theme/Colors";
 
+/*
+    component that rendering on mycoins and favourites screeen when the user not logged in, 
+*/
 export const UserRequiredContent = () => {
     return (
         <Container>

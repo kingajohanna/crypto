@@ -1,14 +1,11 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import { PressableProps } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
-
+import FastImage from "react-native-fast-image";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
-
 import { Colors } from "@theme/Colors";
-import FastImage from "react-native-fast-image";
-import { MarketData } from "@constants/DataTypes";
 import { useFavouriteStatus } from "@utils/useFavouritesStatus";
 
 type CryptoCoinProps = {
@@ -22,6 +19,9 @@ type CryptoCoinProps = {
     index: number;
 } & PressableProps;
 
+/*
+    use for flatlist in marketscreen and favourites screen
+*/
 const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, isFavourite, onPress, index }) => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const [fav, setFav] = useFavouriteStatus(isFavourite, id, index);

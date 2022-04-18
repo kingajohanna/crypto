@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { Button, TextInputProps, View } from "react-native";
+import { TextInputProps, ScrollView } from "react-native";
+import { Menu } from "react-native-paper";
 import styled from "styled-components/native";
 import { Colors, hexToRGBA } from "@theme/Colors";
-import { List, Menu, Provider } from "react-native-paper";
 import { KeyValue } from "@constants/DataTypes";
-import { ScrollView } from "react-native-gesture-handler";
 
 type AutocompleteProps = {
-    title?: string;
-    errorText?: string;
     width?: number;
     data: KeyValue[];
 } & TextInputProps;
 
-export const Autocomplete: React.FC<AutocompleteProps> = ({ data, title, placeholder, onChangeText, errorText, width }) => {
+/*
+    textinput with scrollable suggestion
+*/
+export const Autocomplete: React.FC<AutocompleteProps> = ({ data, placeholder, onChangeText, width }) => {
     const [value, setValue] = useState("");
     const [menuVisible, setMenuVisible] = useState(false);
-    const [filteredData, setFilteredData] = useState<KeyValue[] | null>(null);
+    const [filteredData, setFilteredData] = useState<KeyValue[]>(data);
 
     const filterData = (text: string) => {
         return data.filter((item) => item.name.toLowerCase().startsWith(text.toLowerCase()));
@@ -24,7 +24,6 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ data, title, placeho
 
     return (
         <Container>
-            {title && <TitleText>{title}</TitleText>}
             <StyledInput
                 width={width}
                 placeholderTextColor={hexToRGBA(Colors.cadetBlue, 0.5)}
@@ -34,7 +33,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ data, title, placeho
                     if (text.length > 0) {
                         setFilteredData(filterData(text));
                     } else if (text.length === 0) {
-                        setFilteredData(null);
+                        setFilteredData([]);
                     }
                     setMenuVisible(true);
                     setValue(text);
@@ -47,7 +46,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ data, title, placeho
 
             {menuVisible && filteredData && (
                 <SearchContainer>
-                    <ScrollView style={{ position: "absolute", borderColor: Colors.cadetBlue, borderWidth: 1, borderRadius: 5, maxHeight: 230 }}>
+                    <ScrollView style={{ position: "absolute", borderColor: Colors.cadetBlue, borderWidth: 1, borderRadius: 5, maxHeight: 230, backgroundColor: Colors.gunmetal }}>
                         {filteredData.map((word, i) => (
                             <Menu.Item
                                 key={i}
@@ -73,12 +72,6 @@ const Container = styled.View({
     padding: 8,
 });
 
-const TitleText = styled.Text(() => ({
-    fontSize: 16,
-    color: Colors.cadetBlue,
-    marginBottom: 4,
-}));
-
 const SearchContainer = styled.View({
     flexDirection: "column",
     width: 150,
@@ -86,7 +79,7 @@ const SearchContainer = styled.View({
     backgroundColor: Colors.gunmetal,
 });
 
-const StyledInput = styled.TextInput<Partial<AutocompleteProps>>(({ width }) => ({
+export const StyledInput = styled.TextInput<Partial<AutocompleteProps>>(({ width }) => ({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

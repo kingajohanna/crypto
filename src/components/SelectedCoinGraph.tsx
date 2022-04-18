@@ -1,18 +1,18 @@
+import React from "react";
+import RBSheet from "react-native-raw-bottom-sheet";
 import { CryptoChart } from "@components/CryptoChart";
-import { NAVBARHEIGHT } from "@constants/androidHelper";
 import { MarketData } from "@constants/DataTypes";
 import { Colors, hexToRGBA } from "@theme/Colors";
-import React from "react";
-import { Dimensions, Platform } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
-
-const { height: SIZE } = Dimensions.get("window");
+import { getModalHeight } from "@utils/BottomModalHeight";
 
 type SelectedProps = {
     selectedCoinData?: MarketData;
     reference: React.MutableRefObject<RBSheet>;
 };
 
+/*
+    bottom modal for selected coin details in market screen and favourites screen
+*/
 export const SelectedCoinGraph: React.FC<SelectedProps> = ({ selectedCoinData, reference }) => {
     return (
         <RBSheet
@@ -20,7 +20,7 @@ export const SelectedCoinGraph: React.FC<SelectedProps> = ({ selectedCoinData, r
             closeOnPressMask={true}
             closeDuration={180}
             openDuration={180}
-            height={Platform.OS === "ios" ? SIZE * 0.5 : SIZE * 0.5 + NAVBARHEIGHT}
+            height={getModalHeight(0.5)}
             customStyles={{
                 container: {
                     borderTopLeftRadius: 15,

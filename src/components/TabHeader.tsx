@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
-
 import { Colors } from "@theme/Colors";
 
 type TabHeaderProps = {
     title: string;
 };
 
+/*
+    tabheader, used in every tab with different title
+*/
 export const TabHeader: React.FC<TabHeaderProps> = ({ title }) => {
     return (
         <Background>

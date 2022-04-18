@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
-import { RootState } from "@stores/store";
-import { Coins, MarketData } from "@constants/DataTypes";
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
-
 import RBSheet from "react-native-raw-bottom-sheet";
+import { RootState } from "@stores/store";
+import { Coins } from "@constants/DataTypes";
 import { Currency } from "@constants/currency";
 import { addCoin, getOwnedCoins, setCoin } from "@services/UserServices";
 import { OwnedCoin } from "@components/OwnedCoins";
@@ -12,6 +11,9 @@ import { FAB } from "react-native-paper";
 import { NewOwnedCoinBottomModal } from "@components/NewOwnedCoinBottomModal";
 import { EditOwnedCoinBottomModal } from "@components/EditOwnedCoinBottomModal";
 
+/*
+    contains the owned coins of the user
+*/
 export const UserLoggedIn = () => {
     const addCoinRef = useRef() as React.MutableRefObject<RBSheet>;
     const editCoinRef = useRef() as React.MutableRefObject<RBSheet>;
@@ -76,7 +78,6 @@ export const UserLoggedIn = () => {
                 keyExtractor={(item) => item.id}
                 data={user.isLoggedIn ? crypto.ownedCoins : []}
                 refreshing={loading}
-                initialNumToRender={3}
                 onRefresh={() => onRefresh()}
                 getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
                 renderItem={({ item }) => (
@@ -106,8 +107,8 @@ export const UserLoggedIn = () => {
                 setCurrency={setCurrency}
                 data={crypto.coins}
                 currency={currencyData}
-                onSave={() => {
-                    addCoin(user.id, coinName, Number(holdings), Number(totalCost), currency);
+                onSave={async () => {
+                    await addCoin(user.id, coinName, Number(holdings), Number(totalCost), currency);
                     fetchCoins();
                     addCoinRef.current!.close();
                     reset();
@@ -123,8 +124,8 @@ export const UserLoggedIn = () => {
                 setPurchasedTotalCost={setPurchasedTotalCost}
                 setSoldHoldings={setSoldHoldings}
                 setSoldTotalCost={setSoldTotalCost}
-                onSave={() => {
-                    setCoin(selectedCoin!.id, purchasedHoldings, purchasedTotalCost, soldHoldings, soldTotalCost);
+                onSave={async () => {
+                    await setCoin(selectedCoin!.id, purchasedHoldings, purchasedTotalCost, soldHoldings, soldTotalCost);
                     fetchCoins();
                     editCoinRef.current!.close();
                     reset();

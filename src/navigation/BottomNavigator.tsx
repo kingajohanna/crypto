@@ -1,7 +1,8 @@
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { shallowEqual, useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -13,15 +14,17 @@ import { MarketScreen } from "@screens/MarketScreen";
 import { MyCoinsScreen } from "@screens/MyCoinsScreen";
 
 import { Colors } from "@theme/Colors";
-import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 import { fetchData } from "@utils/FetchData";
 
+/*
+    bottom navigator, app.ts render this
+*/
 export const BottomNavigator = () => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const error = useSelector((state: RootState) => state.error, shallowEqual);
 
-    const fetchMarketData = async () => {
+    const fetch = async () => {
         fetchData(user);
     };
 
@@ -30,7 +33,7 @@ export const BottomNavigator = () => {
     }, [error.error]);
 
     useEffect(() => {
-        fetchMarketData();
+        fetch();
     }, [user.isLoggedIn]);
 
     const Tab = createMaterialBottomTabNavigator();

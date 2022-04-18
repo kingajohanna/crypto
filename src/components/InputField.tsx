@@ -9,6 +9,9 @@ type StyledTextInputProps = {
     width?: number;
 } & TextInputProps;
 
+/*
+    basic inputfield
+*/
 const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, errorText, width, keyboardType }) => {
     return (
         <Container>

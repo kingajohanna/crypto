@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { ActivityIndicator, FlatList } from "react-native";
 import { shallowEqual, useSelector } from "react-redux";
+import RBSheet from "react-native-raw-bottom-sheet";
 import { RootState } from "@stores/store";
 import { MarketData } from "@constants/DataTypes";
 import { getFavsMarket, getMarketData } from "@services/CryptoServices";
-import { ActivityIndicator, FlatList } from "react-native";
 import { CryptoCoin } from "@components/CryptoCoin";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
-import RBSheet from "react-native-raw-bottom-sheet";
 
+/*
+    contains users favourites
+*/
 export const UserLoggedIn = () => {
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
     const user = useSelector((state: RootState) => state.user, shallowEqual);

@@ -10,6 +10,9 @@ type ModalProps = {
     secondaryButtonOnPress: Function;
 };
 
+/*
+    bottom modal, with optional error text for the Account screen
+*/
 export const AccountBottomModal: React.FC<ModalProps> = ({ errorText, children, primaryButtonText, secondaryButtonText, primaryButtonOnPress, secondaryButtonOnPress }) => {
     return (
         <Container>

@@ -14,6 +14,9 @@ type ScreenBackgroundProps = {
     title: string;
 };
 
+/*
+    base background, with header
+*/
 export const ScreenBackground: React.FC<ScreenBackgroundProps> = ({ title, children }) => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const error = useSelector((state: RootState) => state.error.error, shallowEqual);

@@ -63,6 +63,7 @@ export const logoutAction = () => {
         store.dispatch(userLogout());
         store.dispatch(fetchMarket([]));
         store.dispatch(fetchFavs([]));
+        store.dispatch(fetchOwnedCoins([]));
     } catch (error) {
         console.log(error);
     }

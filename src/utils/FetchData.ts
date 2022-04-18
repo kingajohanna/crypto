@@ -1,5 +1,5 @@
 import { User } from "@constants/DataTypes";
-import { getFavsMarket, getMarketData } from "@services/CryptoServices";
+import { getCoins, getFavsMarket, getMarketData } from "@services/CryptoServices";
 import { getOwnedCoins } from "@services/UserServices";
 
 export const fetchData = async (user: User) => {
@@ -8,4 +8,5 @@ export const fetchData = async (user: User) => {
         await getFavsMarket(user.id);
         await getOwnedCoins(user.id);
     } else await getMarketData();
+    await getCoins();
 };
