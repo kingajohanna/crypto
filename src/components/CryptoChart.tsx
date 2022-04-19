@@ -13,14 +13,6 @@ type CryptoChartProps = {
     priceChange?: number;
     sparkline?: any;
 };
-
-const format = (n: string) => {
-    return parseFloat(n).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-    });
-};
-
 /*
     chart about the last 7 day price changes
 */
@@ -42,9 +34,11 @@ export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortN
             </LowerContainer>
             <LineChart.Provider data={sparkline.price}>
                 <LineChart.PriceText
-                    format={({ value }) => {
+                    format={({ formatted }) => {
                         "worklet";
-                        if (value) return `${format(value)}`;
+                        if (formatted) {
+                            return `$${formatted}`;
+                        }
                         return "";
                     }}
                     style={{ color: Colors.silverSand }}

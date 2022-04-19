@@ -3,10 +3,6 @@ import React from "react";
 import { PressableProps } from "react-native";
 import styled from "styled-components/native";
 
-type ErrorProps = {
-    retry: () => {};
-} & PressableProps;
-
 /*
     rendering when something happen with the markedData or the connection
 */
