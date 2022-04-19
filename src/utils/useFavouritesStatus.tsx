@@ -5,7 +5,7 @@ import { addFav, removeFav } from "@services/UserServices";
 import { fetchFavsAction, fetchMarketAction } from "@stores/Actions";
 import { MarketData } from "@constants/DataTypes";
 
-export function useFavouriteStatus(fav: boolean, id: string, index: number) {
+export function useFavouriteStatus(fav: boolean, id: string) {
     const [isFav, setIsFav] = useState(fav);
 
     const user = useSelector((state: RootState) => state.user, shallowEqual);
@@ -16,7 +16,10 @@ export function useFavouriteStatus(fav: boolean, id: string, index: number) {
     */
     async function setFav(value: boolean) {
         setIsFav(value);
-        const coin = { ...crypto.marketCoins[index], fav: value };
+
+        let coin = crypto.marketCoins.find((coin: MarketData) => coin.id === id);
+        const index = crypto.marketCoins.indexOf(coin);
+        coin = { ...coin, fav: value };
 
         let market: MarketData[] = [];
         let favs: MarketData[] = [];

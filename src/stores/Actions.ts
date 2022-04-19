@@ -52,6 +52,7 @@ const setError = (error: String) => ({
 
 export const loginAction = (uid: string, email: string, createdAt: string, name?: string, photoURL?: string) => {
     try {
+        store.dispatch(fetchMarket([]));
         store.dispatch(userLogin(uid, email, createdAt, name, photoURL));
     } catch (error) {
         console.log(error);

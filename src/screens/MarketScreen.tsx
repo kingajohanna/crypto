@@ -73,7 +73,7 @@ export const MarketScreen = () => {
                         refreshing={loading}
                         initialNumToRender={150}
                         getItemLayout={(data, index) => ({ length: 72, offset: 72 * index, index })}
-                        renderItem={({ item, index }) => (
+                        renderItem={({ item }) => (
                             <CryptoCoin
                                 id={item.id}
                                 isFavourite={item.fav}
@@ -83,7 +83,6 @@ export const MarketScreen = () => {
                                 price={item.current_price}
                                 priceChange={item.price_change_percentage_7d_in_currency}
                                 imageUrl={item.image}
-                                index={index}
                             />
                         )}
                     />
