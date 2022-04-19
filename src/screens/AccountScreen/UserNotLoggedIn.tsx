@@ -74,7 +74,7 @@ export const UserNotLoggedIn = () => {
             <AccountButton.Google onPress={() => googleSignIn()} />
             <AccountButton.EmailLogIn onPress={() => onLoginPress()} />
             <AccountButton.EmailSignIn onPress={() => onSignUpPress()} />
-            <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.45)} customStyles={modalStyle}>
+            <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.47)} customStyles={modalStyle}>
                 <AccountBottomModal
                     errorText={signInError}
                     primaryButtonText="Register"

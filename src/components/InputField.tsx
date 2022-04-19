@@ -25,6 +25,7 @@ const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder
                 width={width}
                 keyboardType={keyboardType ? keyboardType : "default"}
                 secureTextEntry={isSecret ? true : false}
+                autoCapitalize="none"
             />
 
             {errorText && <ErrorText>{errorText}</ErrorText>}
