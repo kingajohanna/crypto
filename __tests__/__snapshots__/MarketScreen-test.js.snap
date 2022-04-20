@@ -54,10 +54,65 @@ exports[`renders correctly 1`] = `
         Market
       </Text>
     </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1F2833",
+            "borderColor": "#4CECE0",
+            "borderRadius": 15,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "height": 40,
+            "marginTop": 8,
+            "paddingHorizontal": 16,
+            "paddingLeft": 16,
+            "width": 340,
+          },
+        ]
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "#4CECE0",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Search here..."
+        placeholderTextColor="rgba(69, 162, 158, 0.5)"
+        style={
+          Array [
+            Object {
+              "color": "#45A29E",
+              "paddingLeft": 12,
+            },
+          ]
+        }
+        value=""
+      />
+    </View>
     <RCTScrollView
       data={Array []}
       getItemLayout={[Function]}
-      initialNumToRender={100}
+      initialNumToRender={150}
       keyExtractor={[Function]}
       onRefresh={[Function]}
       refreshing={false}

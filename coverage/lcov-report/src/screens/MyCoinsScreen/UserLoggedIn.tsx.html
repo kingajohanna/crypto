@@ -202,12 +202,12 @@
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
 <a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -215,6 +215,9 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -280,7 +283,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -341,13 +343,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useRef, useState } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useRef, useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
-import { RootState } from "@stores/store";
-import { Coins, MarketData } from "@constants/DataTypes";
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
-&nbsp;
 import RBSheet from "react-native-raw-bottom-sheet";
+import { RootState } from "@stores/store";
+import { Coins } from "@constants/DataTypes";
 import { Currency } from "@constants/currency";
 import { addCoin, getOwnedCoins, setCoin } from "@services/UserServices";
 import { OwnedCoin } from "@components/OwnedCoins";
@@ -355,6 +356,9 @@ import { FAB } from "react-native-paper";
 import { NewOwnedCoinBottomModal } from "@components/NewOwnedCoinBottomModal";
 import { EditOwnedCoinBottomModal } from "@components/EditOwnedCoinBottomModal";
 &nbsp;
+/*
+    contains the owned coins of the user
+*/
 export const UserLoggedIn = () =&gt; {
     const addCoinRef = useRef() as React.MutableRefObject&lt;RBSheet&gt;;
     const editCoinRef = useRef() as React.MutableRefObject&lt;RBSheet&gt;;
@@ -419,7 +423,6 @@ export const UserLoggedIn = () =&gt; {
                 keyExtractor={<span class="fstat-no" title="function not covered" >(i</span>tem) =&gt; <span class="cstat-no" title="statement not covered" >item.id}</span>
                 data={user.isLoggedIn ? <span class="branch-0 cbranch-no" title="branch not covered" >crypto.ownedCoins </span>: []}
                 refreshing={loading}
-                initialNumToRender={3}
                 onRefresh={<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >onRefresh()}</span>
                 getItemLayout={<span class="fstat-no" title="function not covered" >(d</span>ata, index) =&gt; (<span class="cstat-no" title="statement not covered" >{ length: 72, offset: 72 * index, index })</span>}
                 renderItem={<span class="fstat-no" title="function not covered" >({</span> item }) =&gt; (
@@ -449,8 +452,8 @@ export const UserLoggedIn = () =&gt; {
                 setCurrency={setCurrency}
                 data={crypto.coins}
                 currency={currencyData}
-                onSave={<span class="fstat-no" title="function not covered" >() =</span>&gt; {
-<span class="cstat-no" title="statement not covered" >                    addCoin(user.id, coinName, Number(holdings), Number(totalCost), currency);</span>
+                onSave={<span class="fstat-no" title="function not covered" >async </span>() =&gt; {
+<span class="cstat-no" title="statement not covered" >                    await addCoin(user.id, coinName, Number(holdings), Number(totalCost), currency);</span>
 <span class="cstat-no" title="statement not covered" >                    fetchCoins();</span>
 <span class="cstat-no" title="statement not covered" >                    addCoinRef.current!.close();</span>
 <span class="cstat-no" title="statement not covered" >                    reset();</span>
@@ -466,8 +469,8 @@ export const UserLoggedIn = () =&gt; {
                 setPurchasedTotalCost={setPurchasedTotalCost}
                 setSoldHoldings={setSoldHoldings}
                 setSoldTotalCost={setSoldTotalCost}
-                onSave={<span class="fstat-no" title="function not covered" >() =</span>&gt; {
-<span class="cstat-no" title="statement not covered" >                    setCoin(selectedCoin!.id, purchasedHoldings, purchasedTotalCost, soldHoldings, soldTotalCost);</span>
+                onSave={<span class="fstat-no" title="function not covered" >async </span>() =&gt; {
+<span class="cstat-no" title="statement not covered" >                    await setCoin(selectedCoin!.id, purchasedHoldings, purchasedTotalCost, soldHoldings, soldTotalCost);</span>
 <span class="cstat-no" title="statement not covered" >                    fetchCoins();</span>
 <span class="cstat-no" title="statement not covered" >                    editCoinRef.current!.close();</span>
 <span class="cstat-no" title="statement not covered" >                    reset();</span>
@@ -487,7 +490,7 @@ export const UserLoggedIn = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Apr 18 2022 16:07:55 GMT+0200 (GMT+02:00)
+                at Wed Apr 20 2022 11:28:16 GMT+0200 (GMT+02:00)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

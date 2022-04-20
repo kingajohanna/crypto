@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import { TabHeader } from "@components/TabHeader";
 
 import { Colors } from "@theme/Colors";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 import { ErrorComponent } from "@components/ErrorComponent";
@@ -23,6 +23,7 @@ export const ScreenBackground: React.FC<ScreenBackgroundProps> = ({ title, child
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Colors.gunmetal }}>
+            <StatusBar backgroundColor={Colors.gunmetal} barStyle="light-content" />
             <Background>
                 <TabHeader title={title} />
                 {error ? <ErrorComponent onPress={() => fetchData(user)} /> : <>{children}</>}
