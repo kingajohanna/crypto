@@ -79,3 +79,12 @@ Log in again before retrying this request.`,
         ],
     );
 };
+
+export const PasswordReset = () => {
+    Alert.alert("", `The password reset link has been sent to your email address`, [
+        {
+            text: "OK",
+            onPress: () => {},
+        },
+    ]);
+};

@@ -11,6 +11,7 @@ export const FETCHCOINS = "FETCHCOINS";
 export const FETCHOWNEDCOINS = "FETCHOWNEDCOINS";
 
 export const SETERROR = "SETERROR";
+export const SETAUTHERROR = "SETAUTHERROR";
 
 const userLogin = (id: string, email: string, createdAt: string, name?: string, photoURL?: string) => ({
     type: LOGIN,
@@ -47,6 +48,11 @@ const fetchOwnedCoins = (ownedCoins: KeyValue[]) => ({
 
 const setError = (error: String) => ({
     type: SETERROR,
+    error,
+});
+
+const setAuthError = (error: String) => ({
+    type: SETAUTHERROR,
     error,
 });
 
@@ -105,6 +111,14 @@ export const fetchOwnedCoinsAction = (ownedCoins: KeyValue[]) => {
 export const setErrorAction = (error: string) => {
     try {
         store.dispatch(setError(error));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const setAuthErrorAction = (error: string) => {
+    try {
+        store.dispatch(setAuthError(error));
     } catch (error) {
         console.log(error);
     }

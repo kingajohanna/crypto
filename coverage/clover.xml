@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650446896314" clover="3.2.0">
-  <project timestamp="1650446896314" name="All files">
+<coverage generated="1651142919517" clover="3.2.0">
+  <project timestamp="1651142919517" name="All files">
     <metrics statements="843" coveredstatements="611" conditionals="201" coveredconditionals="77" methods="201" coveredmethods="86" elements="1245" coveredelements="774" complexity="0" loc="843" ncloc="843" packages="12" files="45" classes="45"/>
     <package name="src">
       <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -294,8 +294,8 @@
         <line num="21" count="4" type="stmt"/>
         <line num="22" count="4" type="stmt"/>
         <line num="24" count="4" type="stmt"/>
-        <line num="28" count="0" type="cond" truecount="1" falsecount="1"/>
-        <line num="34" count="5" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="5" type="stmt"/>
       </file>
       <file name="SearchBar.tsx" path="/Users/szabokinga/crypto/src/components/SearchBar.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>

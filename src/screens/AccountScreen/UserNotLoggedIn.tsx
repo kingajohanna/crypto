@@ -1,13 +1,17 @@
 import React, { useRef, useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
+import { shallowEqual, useSelector } from "react-redux";
 import { AccountBottomModal } from "@components/AccountBottomModal";
 import { AccountButton } from "@components/AccountButton";
 import { TextInput } from "@components/InputField";
 import { authError } from "@constants/authError";
-import { googleSignIn, login, signup } from "@services/FirebaseServices";
+import { googleSignIn, login, passwordReset, signup } from "@services/FirebaseServices";
 import { Colors, hexToRGBA } from "@theme/Colors";
 import { getModalHeight } from "@utils/BottomModalHeight";
 import { firebaseEmail, firebasePassword } from "@utils/regex";
+import { setAuthErrorAction } from "@stores/Actions";
+import { RootState } from "@stores/store";
+import { Text } from "@components/Text";
 
 /*
     login and register screen
@@ -15,43 +19,55 @@ import { firebaseEmail, firebasePassword } from "@utils/regex";
 export const UserNotLoggedIn = () => {
     const signUp = useRef() as React.MutableRefObject<RBSheet>;
     const logIn = useRef() as React.MutableRefObject<RBSheet>;
+    const error = useSelector((state: RootState) => state.error.authError, shallowEqual);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConf, setPasswordConf] = useState("");
-    const [signInError, setSignInError] = useState("");
 
     const resetStates = () => {
         setEmail("");
         setPassword("");
         setPasswordConf("");
-        setSignInError("");
+        setAuthErrorAction("");
     };
 
     const onLogin = () => {
-        if (!password.match(firebasePassword)) {
-            setSignInError(authError.invalidPassword);
+        setAuthErrorAction("");
+        if (!password || !email) {
+            setAuthErrorAction(authError.missingData);
+        } else if (!password.match(firebasePassword)) {
+            setAuthErrorAction(authError.invalidPassword);
         } else if (!email.match(firebaseEmail)) {
-            setSignInError(authError.invalidEmail);
+            setAuthErrorAction(authError.invalidEmail);
         } else {
-            const err = login(email, password);
-            if (err) setSignInError(err.toString());
-            else closeModal();
+            login(email, password);
+            if (!error) closeModal();
         }
     };
 
     const onSignUp = () => {
-        if (password !== passwordConf) {
-            setSignInError(authError.passwordsMatch);
+        setAuthErrorAction("");
+        if (!password || !passwordConf || !email) {
+            setAuthErrorAction(authError.missingData);
+        } else if (password !== passwordConf) {
+            setAuthErrorAction(authError.passwordsMatch);
         } else if (!password.match(firebasePassword)) {
-            setSignInError(authError.invalidPassword);
+            setAuthErrorAction(authError.invalidPassword);
         } else if (!email.match(firebaseEmail)) {
-            setSignInError(authError.invalidEmail);
+            setAuthErrorAction(authError.invalidEmail);
         } else {
-            const err = signup(email, password, passwordConf);
+            signup(email, password, passwordConf);
+            if (!error) closeModal();
+        }
+    };
 
-            if (err) setSignInError(err.toString());
-            else closeModal();
+    const onPasswordReset = () => {
+        setAuthErrorAction("");
+        if (!email) {
+            setAuthErrorAction(authError.missingEmail);
+        } else {
+            passwordReset(email);
         }
     };
 
@@ -75,22 +91,17 @@ export const UserNotLoggedIn = () => {
             <AccountButton.EmailLogIn onPress={() => onLoginPress()} />
             <AccountButton.EmailSignIn onPress={() => onSignUpPress()} />
             <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.47)} customStyles={modalStyle}>
-                <AccountBottomModal
-                    errorText={signInError}
-                    primaryButtonText="Register"
-                    primaryButtonOnPress={() => onSignUp()}
-                    secondaryButtonText="Cancel"
-                    secondaryButtonOnPress={() => closeModal()}
-                >
+                <AccountBottomModal errorText={error} primaryButtonText="Register" primaryButtonOnPress={() => onSignUp()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
                     <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} isSecret />
                     <TextInput placeholder="Confirm password" title="Password" onChangeText={setPasswordConf} value={passwordConf} isSecret />
                 </AccountBottomModal>
             </RBSheet>
-            <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.37)} customStyles={modalStyle}>
-                <AccountBottomModal errorText={signInError} primaryButtonText="Login" primaryButtonOnPress={() => onLogin()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
+            <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.4)} customStyles={modalStyle}>
+                <AccountBottomModal errorText={error} primaryButtonText="Login" primaryButtonOnPress={() => onLogin()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
                     <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} isSecret />
+                    <Text onPress={() => onPasswordReset()}>Forgot password</Text>
                 </AccountBottomModal>
             </RBSheet>
         </>

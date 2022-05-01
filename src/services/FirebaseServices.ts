@@ -1,15 +1,14 @@
 import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { addUser, removeUser } from "@services/UserServices";
-import { loginAction, logoutAction, setErrorAction } from "@stores/Actions";
-import { ReLogin } from "@components/Alert";
+import { loginAction, logoutAction, setAuthErrorAction, setErrorAction } from "@stores/Actions";
+import { PasswordReset, ReLogin } from "@components/Alert";
 
 /*
    google sso
 */
 export async function googleSignIn() {
     try {
-        setErrorAction("");
         const data = await GoogleSignin.signIn();
 
         const googleCredential = auth.GoogleAuthProvider.credential(data.idToken);
@@ -27,7 +26,7 @@ export async function googleSignIn() {
 }
 
 export async function login(email: string, password: string) {
-    setErrorAction("");
+    setAuthErrorAction("");
     auth()
         .signInWithEmailAndPassword(email, password)
         .then((res) => {
@@ -35,12 +34,12 @@ export async function login(email: string, password: string) {
         })
         .catch(async (error) => {
             console.log("[login] " + error.toString().split("] ", 2)[1]);
-            return error.toString().split("] ", 2)[1];
+            setAuthErrorAction(error.toString().split("] ", 2)[1]);
         });
 }
 
 export async function signup(email: string, password: string, passwordConf: string) {
-    setErrorAction("");
+    setAuthErrorAction("");
     if (password === passwordConf)
         return auth()
             .createUserWithEmailAndPassword(email, password)
@@ -51,12 +50,23 @@ export async function signup(email: string, password: string, passwordConf: stri
             })
             .catch((error) => {
                 console.log("[signup] " + error.toString().split("] ", 2)[1]);
-                return error.toString().split("] ", 2)[1];
+                setAuthErrorAction(error.toString().split("] ", 2)[1]);
             });
 }
 
+export async function passwordReset(email: string) {
+    setAuthErrorAction("");
+    return auth()
+        .sendPasswordResetEmail(email)
+        .then(() => {
+            PasswordReset();
+        })
+        .catch((error) => {
+            setAuthErrorAction(error.toString().split("] ", 2)[1]);
+        });
+}
+
 export async function logOut() {
-    setErrorAction("");
     return auth()
         .signOut()
         .then(() => logoutAction())
@@ -66,7 +76,6 @@ export async function logOut() {
 }
 
 export async function deleteAccount() {
-    setErrorAction("");
     const user = auth().currentUser;
     return auth()
         .currentUser?.delete()

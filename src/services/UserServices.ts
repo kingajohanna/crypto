@@ -17,6 +17,7 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/adduser] " + error.message);
+        console.log("[ERROR][/users/adduser] " + error.message);
         return error.message;
     }
 };
@@ -31,6 +32,7 @@ export const removeUser = async (id: string) => {
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/removeuser] " + error.message);
+        console.log("[ERROR][/users/removeuser] " + error.message);
         return error.message;
     }
 };
@@ -51,6 +53,7 @@ export const addFav = async (userId: string, coinId: string) => {
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/addfav] " + error.message);
+        console.log("[ERROR][/users/addfav] " + error.message);
         return error.message;
     }
 };
@@ -72,6 +75,7 @@ export const removeFav = async (userId: string, coinId: string) => {
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/removefav] " + error.message);
+        console.log("[ERROR][/users/removefav] " + error.message);
         return error.message;
     }
 };
@@ -91,6 +95,7 @@ export const addCoin = async (userId: string, coinId: string, holdings: number, 
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/addcoin] " + error.message);
+        console.log("[ERROR][/users/addcoin] " + error.message);
         return error.message;
     }
 };
@@ -109,6 +114,7 @@ export const getOwnedCoins = async (userId: string) => {
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/getcoins] " + error.message);
+        console.log("[ERROR][/users/getcoins] " + error.message);
         return error.message;
     }
 };
@@ -129,6 +135,7 @@ export const setCoin = async (id: string, purchasedHoldings: string, purchasedTo
         return response.data;
     } catch (error: any) {
         setErrorAction("[/users/setcoin] " + error.message);
+        console.log("[ERROR][/users/setcoin] " + error.message);
         return error.message;
     }
 };
