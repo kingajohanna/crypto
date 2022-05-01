@@ -31,10 +31,12 @@ export async function login(email: string, password: string) {
         .signInWithEmailAndPassword(email, password)
         .then((res) => {
             loginAction(res.user.uid, res.user.email!, res.user.metadata.creationTime!);
+            return true;
         })
         .catch(async (error) => {
             console.log("[login] " + error.toString().split("] ", 2)[1]);
             setAuthErrorAction(error.toString().split("] ", 2)[1]);
+            return false;
         });
 }
 
@@ -47,10 +49,12 @@ export async function signup(email: string, password: string, passwordConf: stri
                 const user = auth().currentUser!;
                 addUser(user.uid, user.email!, user.metadata.creationTime);
                 loginAction(user.uid, user.email!, user.metadata.creationTime!);
+                return true;
             })
             .catch((error) => {
                 console.log("[signup] " + error.toString().split("] ", 2)[1]);
                 setAuthErrorAction(error.toString().split("] ", 2)[1]);
+                return false;
             });
 }
 
@@ -60,9 +64,11 @@ export async function passwordReset(email: string) {
         .sendPasswordResetEmail(email)
         .then(() => {
             PasswordReset();
+            return true;
         })
         .catch((error) => {
             setAuthErrorAction(error.toString().split("] ", 2)[1]);
+            return false;
         });
 }
 

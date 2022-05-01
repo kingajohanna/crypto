@@ -4,14 +4,13 @@ import { shallowEqual, useSelector } from "react-redux";
 import { AccountBottomModal } from "@components/AccountBottomModal";
 import { AccountButton } from "@components/AccountButton";
 import { TextInput } from "@components/InputField";
-import { authError } from "@constants/authError";
-import { googleSignIn, login, passwordReset, signup } from "@services/FirebaseServices";
+import { googleSignIn } from "@services/FirebaseServices";
 import { Colors, hexToRGBA } from "@theme/Colors";
 import { getModalHeight } from "@utils/BottomModalHeight";
-import { firebaseEmail, firebasePassword } from "@utils/regex";
 import { setAuthErrorAction } from "@stores/Actions";
 import { RootState } from "@stores/store";
 import { Text } from "@components/Text";
+import { onLoginValidationAndLogin, onPasswordResetValidationAndReset, onSignUpValidationAndSignup } from "@utils/validation";
 
 /*
     login and register screen
@@ -32,43 +31,24 @@ export const UserNotLoggedIn = () => {
         setAuthErrorAction("");
     };
 
-    const onLogin = () => {
-        setAuthErrorAction("");
-        if (!password || !email) {
-            setAuthErrorAction(authError.missingData);
-        } else if (!password.match(firebasePassword)) {
-            setAuthErrorAction(authError.invalidPassword);
-        } else if (!email.match(firebaseEmail)) {
-            setAuthErrorAction(authError.invalidEmail);
-        } else {
-            login(email, password);
-            if (!error) closeModal();
-        }
+    const closeModal = () => {
+        logIn.current?.close();
+        signUp.current?.close();
+        resetStates();
     };
 
-    const onSignUp = () => {
-        setAuthErrorAction("");
-        if (!password || !passwordConf || !email) {
-            setAuthErrorAction(authError.missingData);
-        } else if (password !== passwordConf) {
-            setAuthErrorAction(authError.passwordsMatch);
-        } else if (!password.match(firebasePassword)) {
-            setAuthErrorAction(authError.invalidPassword);
-        } else if (!email.match(firebaseEmail)) {
-            setAuthErrorAction(authError.invalidEmail);
-        } else {
-            signup(email, password, passwordConf);
-            if (!error) closeModal();
-        }
+    const onSignUp = async () => {
+        const success = await onSignUpValidationAndSignup(email, password, passwordConf);
+        if (success) closeModal();
     };
 
-    const onPasswordReset = () => {
-        setAuthErrorAction("");
-        if (!email) {
-            setAuthErrorAction(authError.missingEmail);
-        } else {
-            passwordReset(email);
-        }
+    const onLogin = async () => {
+        const success = await onLoginValidationAndLogin(email, password);
+        if (success) closeModal();
+    };
+
+    const onPasswordReset = async () => {
+        await onPasswordResetValidationAndReset(email);
     };
 
     const onLoginPress = () => {
@@ -77,12 +57,6 @@ export const UserNotLoggedIn = () => {
 
     const onSignUpPress = () => {
         signUp.current!.open();
-    };
-
-    const closeModal = () => {
-        logIn.current?.close();
-        signUp.current?.close();
-        resetStates();
     };
 
     return (
