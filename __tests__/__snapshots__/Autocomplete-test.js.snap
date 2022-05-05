@@ -3,9 +3,7 @@
 exports[`Onpress called correctly 1`] = `
 <Styled(View)>
   <Styled(TextInput)
-    onBlur={[Function]}
     onChangeText={[Function]}
-    onFocus={[Function]}
     placeholder="Coins"
     placeholderTextColor="rgba(69, 162, 158, 0.5)"
     value=""
