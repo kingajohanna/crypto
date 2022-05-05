@@ -38,10 +38,6 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ data, placeholder, o
                     setMenuVisible(true);
                     setValue(text);
                 }}
-                onFocus={() => {
-                    setMenuVisible(true);
-                }}
-                onBlur={() => setMenuVisible(false)}
             />
 
             {menuVisible && filteredData && (
@@ -74,7 +70,7 @@ const Container = styled.View({
 
 const SearchContainer = styled.View({
     flexDirection: "column",
-    width: 150,
+    width: 140,
     height: 16,
     backgroundColor: Colors.gunmetal,
 });
@@ -85,7 +81,7 @@ export const StyledInput = styled.TextInput<Partial<AutocompleteProps>>(({ width
     justifyContent: "center",
     backgroundColor: Colors.gunmetal,
     height: 40,
-    width: width ? width : 150,
+    width: width ? width : 140,
     borderWidth: 1,
     borderColor: Colors.fluorescentBlue,
     borderRadius: 4,
