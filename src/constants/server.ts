@@ -2,7 +2,7 @@
     base url to the backend
 */
 export const BASEURL = "https://crypto-kinga.herokuapp.com";
-//export const BASEURL = "http://localhost:1337";
+//export const BASEURL = "http://localhost:6060";
 
 /*
     webapi client id for the firebase google sso login

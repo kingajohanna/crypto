@@ -74,7 +74,7 @@ export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference,
 };
 
 const Container = styled.View({
-    padding: 18,
+    padding: 16,
 });
 const RowContainer = styled.Pressable({
     flexDirection: "row",

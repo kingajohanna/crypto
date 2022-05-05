@@ -67,7 +67,7 @@ describe("removeUser", () => {
 
     describe("when API call is successful", () => {
         it("should return success message", async () => {
-            mock.onPost(`${BASEURL}/users/removeuser`).replyOnce(200, removeuser);
+            mock.onDelete(`${BASEURL}/users/removeuser`).replyOnce(200, removeuser);
 
             // when
             const result = await removeUser();
@@ -80,7 +80,7 @@ describe("removeUser", () => {
     describe("when API call fails", () => {
         it("should return network error status", async () => {
             // given
-            mock.onPost(`${BASEURL}/users/removeuser`).networkErrorOnce();
+            mock.onDelete(`${BASEURL}/users/removeuser`).networkErrorOnce();
 
             // when
             const result = await removeUser();
@@ -92,7 +92,7 @@ describe("removeUser", () => {
     describe("when API call fails", () => {
         it("should return internal error (500) status", async () => {
             // given
-            mock.onPost(`${BASEURL}/users/removeuser`).replyOnce(500);
+            mock.onDelete(`${BASEURL}/users/removeuser`).replyOnce(500);
 
             // when
             const result = await removeUser();
@@ -165,7 +165,7 @@ describe("removeFav", () => {
 
     describe("when API call is successful", () => {
         it("should return success message", async () => {
-            mock.onPost(`${BASEURL}/users/removefav`).replyOnce(200, removefav);
+            mock.onDelete(`${BASEURL}/users/removefav`).replyOnce(200, removefav);
 
             // when
             const result = await removeFav();
@@ -178,7 +178,7 @@ describe("removeFav", () => {
     describe("when API call fails", () => {
         it("should return network error status", async () => {
             // given
-            mock.onPost(`${BASEURL}/users/removefav`).networkErrorOnce();
+            mock.onDelete(`${BASEURL}/users/removefav`).networkErrorOnce();
 
             // when
             const result = await removeFav();
@@ -190,7 +190,7 @@ describe("removeFav", () => {
     describe("when API call fails", () => {
         it("should return internal error (500) status", async () => {
             // given
-            mock.onPost(`${BASEURL}/users/removefav`).replyOnce(500);
+            mock.onDelete(`${BASEURL}/users/removefav`).replyOnce(500);
 
             // when
             const result = await removeFav();

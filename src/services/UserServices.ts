@@ -6,13 +6,7 @@ import moment from "moment";
 export const addUser = async (id: string, email: string = "", createdAt: string = moment.now().toLocaleString(), name: string = "", photoURL: string = "") => {
     try {
         setErrorAction("");
-        const response = await axios.post(`${BASEURL}/users/adduser`, {
-            id,
-            name,
-            email,
-            createdAt,
-            photoURL,
-        });
+        const response = await axios.post(`${BASEURL}/users/adduser`, { id, email, createdAt, name, photoURL });
         console.log(`[${response.data.status}]`, "[/users/adduser]", response.data.message);
         return response.data;
     } catch (error: any) {
@@ -25,8 +19,10 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
 export const removeUser = async (id: string) => {
     try {
         setErrorAction("");
-        const response = await axios.post(`${BASEURL}/users/removeuser`, {
-            id,
+        const response = await axios.delete(`${BASEURL}/users/removeuser`, {
+            data: {
+                id,
+            },
         });
         console.log(`[${response.data.status}]`, "[/users/removeuser]", response.data.message);
         return response.data;
@@ -62,14 +58,12 @@ export const removeFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
 
-        const response = await axios.post(
-            `${BASEURL}/users/removefav`,
-            {
+        const response = await axios.delete(`${BASEURL}/users/removefav`, {
+            data: {
                 userId,
                 coinId,
             },
-            { timeout: 1000 },
-        );
+        });
         console.log(`[${response.data.status}]`, "[/users/removefav]", response.data.message);
         fetchMarketAction([]);
         return response.data;
