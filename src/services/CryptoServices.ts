@@ -1,5 +1,6 @@
 import { BASEURL } from "@constants/server";
-import { fetchCoinsAction, fetchFavsAction, fetchMarketAction, setErrorAction } from "@stores/Actions";
+import { fetchCoinsAction, fetchFavsAction, fetchMarketAction } from "@actions/CryptoActions";
+import { setErrorAction } from "@actions/ErrorActions";
 import axios from "axios";
 process.nextTick = setImmediate;
 

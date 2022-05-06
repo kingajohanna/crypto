@@ -1,5 +1,7 @@
 import { BASEURL } from "@constants/server";
-import { fetchMarketAction, fetchOwnedCoinsAction, setErrorAction } from "@stores/Actions";
+import { fetchMarketAction, fetchOwnedCoinsAction } from "@actions/CryptoActions";
+import { setErrorAction } from "@actions/ErrorActions";
+
 import axios from "axios";
 import moment from "moment";
 

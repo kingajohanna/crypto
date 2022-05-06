@@ -1,6 +1,6 @@
 import { authError } from "@constants/authError";
 import { login, passwordReset, signup } from "@services/FirebaseServices";
-import { setAuthErrorAction } from "@stores/Actions";
+import { setAuthErrorAction } from "@actions/ErrorActions";
 import { firebaseEmail, firebasePassword } from "@utils/regex";
 
 export const onSignUpValidationAndSignup = async (email: string, password: string, passwordConf: string, onClose?: Function) => {

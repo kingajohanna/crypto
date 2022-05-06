@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 import { addFav, removeFav } from "@services/UserServices";
-import { fetchFavsAction, fetchMarketAction } from "@stores/Actions";
+import { fetchFavsAction, fetchMarketAction } from "@actions/CryptoActions";
 import { MarketData } from "@constants/DataTypes";
 
 export function useFavouriteStatus(fav: boolean, id: string) {
@@ -10,6 +10,7 @@ export function useFavouriteStatus(fav: boolean, id: string) {
 
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
+    const error = useSelector((state: RootState) => state.error.error, shallowEqual);
 
     /*
         handle add favourite and remove favourite
@@ -27,16 +28,21 @@ export function useFavouriteStatus(fav: boolean, id: string) {
         if (value) {
             await addFav(user.id, id);
 
-            market = [coin, ...crypto.marketCoins.slice(0, index), ...crypto.marketCoins.slice(index + 1)];
-            favs = [coin, ...crypto.favs];
+            if (!error) {
+                market = [coin, ...crypto.marketCoins.slice(0, index), ...crypto.marketCoins.slice(index + 1)];
+                favs = [coin, ...crypto.favs];
+                fetchMarketAction(market);
+                fetchFavsAction(favs);
+            }
         } else {
             await removeFav(user.id, id);
-
-            favs = [...crypto.favs.slice(0, index), ...crypto.favs.slice(index + 1)];
-            market = [...favs, coin, ...crypto.marketCoins.slice(favs.length + 1)];
+            if (!error) {
+                favs = [...crypto.favs.slice(0, index), ...crypto.favs.slice(index + 1)];
+                market = [...favs, coin, ...crypto.marketCoins.slice(favs.length + 1)];
+                fetchMarketAction(market);
+                fetchFavsAction(favs);
+            }
         }
-        fetchMarketAction(market);
-        fetchFavsAction(favs);
     }
 
     return [isFav, setFav] as const;

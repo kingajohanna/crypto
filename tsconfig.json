@@ -24,6 +24,8 @@
             "@assets/*": ["./assets/*"],
             "@services/*": ["src/services/*"],
             "@stores/*": ["src/stores/*"],
+            "@reducers/*": ["src/stores/reducers/*"],
+            "@actions/*": ["src/stores/actions/*"],
             "@utils/*": ["src/utils/*"]
         },
         "typeRoots": ["./types", "./node_modules/@types"]

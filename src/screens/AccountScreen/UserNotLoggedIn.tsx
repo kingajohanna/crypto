@@ -7,7 +7,7 @@ import { TextInput } from "@components/InputField";
 import { googleSignIn } from "@services/FirebaseServices";
 import { Colors, hexToRGBA } from "@theme/Colors";
 import { getModalHeight } from "@utils/BottomModalHeight";
-import { setAuthErrorAction } from "@stores/Actions";
+import { setAuthErrorAction } from "@actions/ErrorActions";
 import { RootState } from "@stores/store";
 import { Text } from "@components/Text";
 import { onLoginValidationAndLogin, onPasswordResetValidationAndReset, onSignUpValidationAndSignup } from "@utils/validation";

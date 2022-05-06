@@ -1,7 +1,8 @@
 import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { addUser, removeUser } from "@services/UserServices";
-import { loginAction, logoutAction, setAuthErrorAction, setErrorAction } from "@stores/Actions";
+import { loginAction, logoutAction } from "@stores/actions/UserActions";
+import { setAuthErrorAction } from "@actions/ErrorActions";
 import { PasswordReset, ReLogin } from "@components/Alert";
 
 /*
