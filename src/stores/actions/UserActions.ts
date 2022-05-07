@@ -1,6 +1,5 @@
-import { KeyValue, MarketData } from "@constants/DataTypes";
-import { fetchFavsAction, fetchMarketAction, fetchOwnedCoinsAction } from "@actions/CryptoActions";
 import { store } from "@stores/store";
+import { fetchFavsAction, fetchMarketAction, fetchOwnedCoinsAction } from "@actions/CryptoActions";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";

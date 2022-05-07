@@ -1,8 +1,6 @@
-import { Coins, KeyValue, MarketData } from "@constants/DataTypes";
-import { LOGIN, LOGOUT } from "@stores/actions/UserActions";
-import { FETCHCOINS, FETCHFAVS, FETCHMARKET, FETCHOWNEDCOINS } from "@actions/CryptoActions";
-import { SETAUTHERROR, SETERROR } from "@actions/ErrorActions";
 import { AnyAction } from "redux";
+import { Coins, KeyValue, MarketData } from "@constants/DataTypes";
+import { FETCHCOINS, FETCHFAVS, FETCHMARKET, FETCHOWNEDCOINS } from "@actions/CryptoActions";
 
 export type Crypto = {
     marketCoins: MarketData[];
