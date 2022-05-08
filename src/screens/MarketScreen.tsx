@@ -47,13 +47,18 @@ export const MarketScreen = () => {
     }, [crypto.marketCoins]);
 
     const searchData = (text: string) => {
+        console.log(text);
+
         const filterdData = text
-            ? data.filter((item: MarketData) => {
+            ? crypto.marketCoins.filter((item: MarketData) => {
                   const itemData = item.name.toUpperCase();
                   const textData = text.toUpperCase();
+                  console.log(itemData + ";" + textData);
+
                   return itemData.indexOf(textData) > -1;
               })
             : crypto.marketCoins;
+        console.log(filterdData!);
 
         setData(filterdData);
         setText(text);
@@ -65,7 +70,7 @@ export const MarketScreen = () => {
 
             {crypto.marketCoins ? (
                 <>
-                    <Searchbar onChangeText={(text) => searchData(text)} value={text} placeholder="Search here..." />
+                    <Searchbar onChangeText={(text: string) => searchData(text)} value={text} placeholder="Search here..." />
                     <FlatList
                         keyExtractor={(item) => item.id}
                         data={data}

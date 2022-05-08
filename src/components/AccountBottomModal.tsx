@@ -42,8 +42,8 @@ const ButtonContainer = styled.View({
 });
 
 const ErrorText = styled.Text({
-    paddingLeft: 18,
-    paddingRight: 18,
+    alignSelf: "center",
+    width: 340,
     paddingBottom: 8,
     fontSize: 14,
     fontWeight: 400,

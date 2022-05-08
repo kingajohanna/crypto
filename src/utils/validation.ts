@@ -15,7 +15,7 @@ export const onSignUpValidationAndSignup = async (email: string, password: strin
     } else if (!email.match(firebaseEmail)) {
         setAuthErrorAction(authError.invalidEmail);
     } else {
-        return await signup(email, password, passwordConf);
+        return await signup(email, password);
     }
     return false;
 };

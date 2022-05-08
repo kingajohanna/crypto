@@ -129,12 +129,12 @@ Array [
       style={
         Array [
           Object {
+            "alignSelf": "center",
             "color": "#ff0000",
             "fontSize": 14,
             "fontWeight": "400",
             "paddingBottom": 8,
-            "paddingLeft": 18,
-            "paddingRight": 18,
+            "width": 340,
           },
         ]
       }

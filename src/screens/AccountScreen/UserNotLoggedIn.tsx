@@ -64,14 +64,14 @@ export const UserNotLoggedIn = () => {
             <AccountButton.Google onPress={() => googleSignIn()} />
             <AccountButton.EmailLogIn onPress={() => onLoginPress()} />
             <AccountButton.EmailSignIn onPress={() => onSignUpPress()} />
-            <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.47)} customStyles={modalStyle}>
+            <RBSheet ref={signUp} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.475)} customStyles={modalStyle}>
                 <AccountBottomModal errorText={error} primaryButtonText="Register" primaryButtonOnPress={() => onSignUp()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
                     <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} isSecret />
                     <TextInput placeholder="Confirm password" title="Password" onChangeText={setPasswordConf} value={passwordConf} isSecret />
                 </AccountBottomModal>
             </RBSheet>
-            <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.4)} customStyles={modalStyle}>
+            <RBSheet ref={logIn} closeOnPressMask={true} onClose={() => resetStates()} closeDuration={180} openDuration={180} height={getModalHeight(0.405)} customStyles={modalStyle}>
                 <AccountBottomModal errorText={error} primaryButtonText="Login" primaryButtonOnPress={() => onLogin()} secondaryButtonText="Cancel" secondaryButtonOnPress={() => closeModal()}>
                     <TextInput placeholder="Email address" title="Email" onChangeText={setEmail} value={email} />
                     <TextInput placeholder="Password" title="Password" onChangeText={setPassword} value={password} isSecret />

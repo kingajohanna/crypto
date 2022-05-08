@@ -9,7 +9,7 @@ type StyledTextInputProps = {} & TextInputProps;
 /*
     searchbar
 */
-const SearchBarComponent: React.FC<StyledTextInputProps> = ({ placeholder, value, onChangeText }) => {
+export const Searchbar: React.FC<StyledTextInputProps> = ({ placeholder, value, onChangeText }) => {
     return (
         <Container>
             <Icon name="search-outline" size={24} color={Colors.fluorescentBlue} />
@@ -37,5 +37,3 @@ const StyledInput = styled.TextInput({
     paddingLeft: 12,
     color: Colors.cadetBlue,
 });
-
-export const Searchbar = SearchBarComponent;
