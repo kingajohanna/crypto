@@ -25,6 +25,10 @@ export const EditOwnedCoinBottomModal: React.FC<BottomModalProps> = (props) => {
         <RBSheet
             ref={props.reference}
             closeOnPressMask={true}
+            onClose={() => {
+                props.reference.current.close();
+                props.onCancel();
+            }}
             closeDuration={180}
             openDuration={180}
             height={getModalHeight(0.55)}

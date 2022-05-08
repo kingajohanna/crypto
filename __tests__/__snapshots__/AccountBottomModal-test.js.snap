@@ -133,6 +133,7 @@ Array [
             "color": "#ff0000",
             "fontSize": 14,
             "fontWeight": "400",
+            "justifyContent": "center",
             "paddingBottom": 8,
             "width": 340,
           },

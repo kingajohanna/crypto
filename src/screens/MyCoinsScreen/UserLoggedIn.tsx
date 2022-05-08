@@ -36,6 +36,9 @@ export const UserLoggedIn = () => {
     const [soldHoldings, setSoldHoldings] = useState("");
     const [soldTotalCost, setSoldTotalCost] = useState("");
 
+    const [modalError, setModalError] = useState("");
+    const [ref, setRef] = useState(addCoinRef);
+
     const fetchCoins = async () => {
         await getOwnedCoins(user.id);
     };
@@ -64,6 +67,7 @@ export const UserLoggedIn = () => {
         setPurchasedTotalCost("");
         setSoldHoldings("");
         setSoldTotalCost("");
+        setModalError("");
     };
 
     const percentage = (current: number, total: number) => {
@@ -98,23 +102,33 @@ export const UserLoggedIn = () => {
                     />
                 )}
             />
-            <FAB style={styles.fab} icon="plus" onPress={() => addCoinRef.current!.open()} />
+            <FAB
+                style={styles.fab}
+                icon="plus"
+                onPress={() => {
+                    setRef(addCoinRef);
+                    ref.current.open();
+                    console.log("kaki");
+                }}
+            />
             <NewOwnedCoinBottomModal
-                reference={addCoinRef}
+                reference={ref}
                 setCoinName={setCoinName}
                 setHoldings={setHoldings}
                 setTotalCost={setTotalCost}
                 setCurrency={setCurrency}
                 data={crypto.coins}
                 currency={currencyData}
+                error={modalError}
                 onSave={async () => {
-                    await addCoin(user.id, coinName, Number(holdings), Number(totalCost), currency);
-                    fetchCoins();
-                    addCoinRef.current!.close();
-                    reset();
+                    if (coinName && holdings && totalCost && currency) {
+                        await addCoin(user.id, coinName, Number(holdings), Number(totalCost), currency);
+                        fetchCoins();
+                        addCoinRef.current!.close();
+                        reset();
+                    } else setModalError("Missing attribute, please fill all the textinputs!");
                 }}
                 onCancel={() => {
-                    addCoinRef.current!.close();
                     reset();
                 }}
             />
@@ -131,7 +145,6 @@ export const UserLoggedIn = () => {
                     reset();
                 }}
                 onCancel={() => {
-                    editCoinRef.current!.close();
                     reset();
                 }}
             />

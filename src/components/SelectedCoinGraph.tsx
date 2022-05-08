@@ -20,7 +20,6 @@ export const SelectedCoinGraph: React.FC<SelectedProps> = ({ selectedCoinData, r
             closeOnPressMask={true}
             closeDuration={180}
             openDuration={180}
-            height={getModalHeight(0.5)}
             customStyles={{
                 container: {
                     borderTopLeftRadius: 15,

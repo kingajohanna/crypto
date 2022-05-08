@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Button } from "@components/Button";
+import { ErrorText } from "@components/ErrorText";
 
 type ModalProps = {
     errorText?: string;
@@ -39,13 +40,4 @@ const ButtonContainer = styled.View({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 24,
-});
-
-const ErrorText = styled.Text({
-    alignSelf: "center",
-    width: 340,
-    paddingBottom: 8,
-    fontSize: 14,
-    fontWeight: 400,
-    color: "#ff0000",
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { PressableProps } from "react-native";
 import styled from "styled-components/native";
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -8,6 +8,7 @@ import { Autocomplete } from "@components/Autocomplete";
 import { Button } from "@components/Button";
 import { KeyValue } from "@constants/DataTypes";
 import { getModalHeight } from "@utils/BottomModalHeight";
+import { ErrorText } from "@components/ErrorText";
 
 type BottomModalProps = {
     reference: React.MutableRefObject<RBSheet>;
@@ -17,6 +18,7 @@ type BottomModalProps = {
     setCurrency: React.Dispatch<React.SetStateAction<string>>;
     data: KeyValue[];
     currency: KeyValue[];
+    error: string;
     onSave: () => void;
     onCancel: () => void;
 } & PressableProps;
@@ -24,7 +26,7 @@ type BottomModalProps = {
 /*
     Bottom modal for adding a purchased coin to the owned coins
 */
-export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference, setCoinName, setCurrency, setHoldings, setTotalCost, data, currency, onSave, onCancel }) => {
+export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference, setCoinName, setCurrency, setHoldings, setTotalCost, data, currency, onSave, onCancel, error }) => {
     return (
         <RBSheet
             ref={reference}
@@ -32,6 +34,7 @@ export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference,
             closeDuration={180}
             openDuration={180}
             height={getModalHeight(0.55)}
+            onClose={onCancel}
             customStyles={{
                 container: {
                     borderTopLeftRadius: 15,
@@ -47,6 +50,7 @@ export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference,
             }}
         >
             <Container>
+                {error.length !== 0 && <ErrorText>{error}</ErrorText>}
                 <Title>Add coin</Title>
                 <RowContainer style={{ zIndex: 2 }}>
                     <Text>Purchased crypto coin</Text>
@@ -65,7 +69,13 @@ export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference,
                     <Autocomplete onChangeText={setCurrency} data={currency} placeholder="crypto coin" />
                 </RowContainer>
                 <ButtonContainer>
-                    <Button title="Cancel" onPress={() => onCancel()} />
+                    <Button
+                        title="Cancel"
+                        onPress={() => {
+                            reference.current.close();
+                            onCancel();
+                        }}
+                    />
                     <Button title="Save" onPress={() => onSave()} />
                 </ButtonContainer>
             </Container>

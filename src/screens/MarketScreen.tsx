@@ -3,7 +3,6 @@ import { ActivityIndicator, FlatList } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
-import { getFavsMarket, getMarketData } from "@services/CryptoServices";
 import { MarketData } from "@constants/DataTypes";
 import { Tabs } from "@constants/Tabs";
 import { CryptoCoin } from "@components/CryptoCoin";
@@ -11,6 +10,7 @@ import { ScreenBackground } from "@components/ScreenBackground";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
 import { Searchbar } from "@components/SearchBar";
 import { ErrorComponent } from "@components/ErrorComponent";
+import { fetchData } from "@utils/FetchData";
 
 export const MarketScreen = () => {
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
@@ -23,15 +23,6 @@ export const MarketScreen = () => {
 
     const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
 
-    const fetchMarketData = async () => {
-        if (user.isLoggedIn) {
-            await getMarketData(user.id);
-            await getFavsMarket(user.id);
-        } else await getMarketData();
-
-        setLoading(false);
-    };
-
     const openModal = (item: MarketData) => {
         setSelectedCoinData(item);
         refRBSheet.current!.open();
@@ -39,7 +30,8 @@ export const MarketScreen = () => {
 
     const onRefresh = async () => {
         setLoading(true);
-        await fetchMarketData();
+        await fetchData(user);
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -47,30 +39,23 @@ export const MarketScreen = () => {
     }, [crypto.marketCoins]);
 
     const searchData = (text: string) => {
-        console.log(text);
-
         const filterdData = text
             ? crypto.marketCoins.filter((item: MarketData) => {
                   const itemData = item.name.toUpperCase();
                   const textData = text.toUpperCase();
-                  console.log(itemData + ";" + textData);
-
-                  return itemData.indexOf(textData) > -1;
+                  return itemData.includes(textData);
               })
             : crypto.marketCoins;
-        console.log(filterdData!);
-
         setData(filterdData);
         setText(text);
     };
 
     return (
         <ScreenBackground title={Tabs.market}>
-            {loading && <ActivityIndicator animating size="large" style={{ paddingTop: 16 }} />}
-
             {crypto.marketCoins ? (
                 <>
                     <Searchbar onChangeText={(text: string) => searchData(text)} value={text} placeholder="Search here..." />
+                    {loading && <ActivityIndicator animating size="large" style={{ paddingTop: 16 }} />}
                     <FlatList
                         keyExtractor={(item) => item.id}
                         data={data}
@@ -95,7 +80,7 @@ export const MarketScreen = () => {
                     <SelectedCoinGraph selectedCoinData={selectedCoinData!} reference={refRBSheet} />
                 </>
             ) : (
-                <ErrorComponent onPress={() => fetchMarketData()} />
+                <ErrorComponent onPress={() => fetchData(user)} />
             )}
         </ScreenBackground>
     );
