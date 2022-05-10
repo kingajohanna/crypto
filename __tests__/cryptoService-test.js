@@ -16,12 +16,11 @@ describe("getMarketData", () => {
         mock.reset();
     });
 
-    describe("when API call is successful", () => {
+    test("when API call is successful", () => {
         it("should return market coins", async () => {
             mock.onPost(`${BASEURL}/crypto/allcoins`).replyOnce(200, marketdata);
 
             // when
-
             const result = await getMarketData();
 
             // then
@@ -29,7 +28,7 @@ describe("getMarketData", () => {
         });
     });
 
-    describe("when API call fails", () => {
+    test("when API call fails", () => {
         it("should return network error status", async () => {
             // given
             mock.onPost(`${BASEURL}/crypto/allcoins`).networkErrorOnce();
@@ -38,11 +37,10 @@ describe("getMarketData", () => {
             const result = await getMarketData();
 
             // then
-
             expect(result).toEqual("Network Error");
         });
     });
-    describe("when API call fails", () => {
+    test("when API call fails", () => {
         it("should return internal error (500) status", async () => {
             // given
             mock.onPost(`${BASEURL}/crypto/allcoins`).replyOnce(500);
@@ -51,7 +49,6 @@ describe("getMarketData", () => {
             const result = await getMarketData();
 
             // then
-
             expect(result).toEqual("Request failed with status code 500");
         });
     });
@@ -68,7 +65,7 @@ describe("getFavsData", () => {
         mock.reset();
     });
 
-    describe("when API call is successful", () => {
+    test("when API call is successful", () => {
         it("should return favourite coins market", async () => {
             mock.onPost(`${BASEURL}/crypto/getfavs`).replyOnce(200, favData);
 
@@ -80,7 +77,7 @@ describe("getFavsData", () => {
         });
     });
 
-    describe("when API call fails", () => {
+    test("when API call fails", () => {
         it("should return network error status", async () => {
             // given
             mock.onPost(`${BASEURL}/crypto/getfavs`).networkErrorOnce();
@@ -92,7 +89,7 @@ describe("getFavsData", () => {
             expect(result).toEqual("Network Error");
         });
     });
-    describe("when API call fails", () => {
+    test("when API call fails", () => {
         it("should return internal error (500) status", async () => {
             // given
             mock.onPost(`${BASEURL}/crypto/getfavs`).replyOnce(500);
@@ -101,7 +98,6 @@ describe("getFavsData", () => {
             const result = await getFavsMarket();
 
             // then
-
             expect(result).toEqual("Request failed with status code 500");
         });
     });
@@ -118,7 +114,7 @@ describe("getCoins", () => {
         mock.reset();
     });
 
-    describe("when API call is successful", () => {
+    test("when API call is successful", () => {
         it("should return market coins", async () => {
             mock.onGet(`${BASEURL}/crypto/coinlist`).replyOnce(200, coins);
 
@@ -126,12 +122,11 @@ describe("getCoins", () => {
             const result = await getCoins();
 
             // then
-
             expect(result).toEqual(coins);
         });
     });
 
-    describe("when API call fails", () => {
+    test("when API call fails", () => {
         it("should return network error status", async () => {
             // given
             mock.onGet(`${BASEURL}/crypto/coinlist`).networkErrorOnce();
@@ -140,11 +135,10 @@ describe("getCoins", () => {
             const result = await getCoins();
 
             // then
-
             expect(result).toEqual("Network Error");
         });
     });
-    describe("when API call fails", () => {
+    test("when API call fails", () => {
         it("should return internal error (500) status", async () => {
             // given
             mock.onGet(`${BASEURL}/crypto/coinlist`).replyOnce(500);
@@ -153,7 +147,6 @@ describe("getCoins", () => {
             const result = await getCoins();
 
             // then
-
             expect(result).toEqual("Request failed with status code 500");
         });
     });

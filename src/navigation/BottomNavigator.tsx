@@ -13,6 +13,7 @@ import { MarketScreen } from "@screens/MarketScreen";
 import { MyCoinsScreen } from "@screens/MyCoinsScreen";
 
 import { Colors } from "@theme/Colors";
+import { androidBottomPadding } from "@utils/androidHelper";
 
 /*
     bottom navigator, app.ts render this
@@ -74,5 +75,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 15,
         borderColor: "transparent",
         overflow: "hidden",
+        paddingBottom: androidBottomPadding,
     },
 });

@@ -37,7 +37,6 @@ export const UserLoggedIn = () => {
     const [soldTotalCost, setSoldTotalCost] = useState("");
 
     const [modalError, setModalError] = useState("");
-    const [ref, setRef] = useState(addCoinRef);
 
     const fetchCoins = async () => {
         await getOwnedCoins(user.id);
@@ -106,13 +105,11 @@ export const UserLoggedIn = () => {
                 style={styles.fab}
                 icon="plus"
                 onPress={() => {
-                    setRef(addCoinRef);
-                    ref.current.open();
-                    console.log("kaki");
+                    addCoinRef.current.open();
                 }}
             />
             <NewOwnedCoinBottomModal
-                reference={ref}
+                reference={addCoinRef}
                 setCoinName={setCoinName}
                 setHoldings={setHoldings}
                 setTotalCost={setTotalCost}

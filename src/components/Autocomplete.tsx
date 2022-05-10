@@ -51,7 +51,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ data, placeholder, o
                                     setValue(word.name);
                                     setMenuVisible(false);
                                 }}
-                                style={{ backgroundColor: Colors.gunmetal, height: 40, width: 150 }}
+                                style={{ backgroundColor: Colors.gunmetal, height: 40, width: width }}
                                 titleStyle={{ color: Colors.fluorescentBlue }}
                                 title={word.name}
                             />
@@ -70,12 +70,12 @@ const Container = styled.View({
 
 const SearchContainer = styled.View({
     flexDirection: "column",
-    width: 140,
+    width: 130,
     height: 16,
     backgroundColor: Colors.gunmetal,
 });
 
-export const StyledInput = styled.TextInput<Partial<AutocompleteProps>>(({ width }) => ({
+const StyledInput = styled.TextInput<Partial<AutocompleteProps>>(({ width }) => ({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

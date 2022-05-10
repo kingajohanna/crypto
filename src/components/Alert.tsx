@@ -43,23 +43,17 @@ export const DeleteAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
 /*
     alert that shows when the user try to logout
 */
-export const LogoutAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
-    return (
-        <View>
-            <Dialog.Container visible={visible}>
-                <Dialog.Title>Logout</Dialog.Title>
-                <Dialog.Description>Click OK to logout!</Dialog.Description>
-                <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
-                <Dialog.Button
-                    label="OK"
-                    onPress={() => {
-                        logOut();
-                        setVisible(false);
-                    }}
-                />
-            </Dialog.Container>
-        </View>
-    );
+export const LogoutAlert = () => {
+    Alert.alert("Logout", `Click OK to logout!`, [
+        {
+            text: "Cancel",
+            onPress: () => {},
+        },
+        {
+            text: "OK",
+            onPress: () => logOut(),
+        },
+    ]);
 };
 
 /*

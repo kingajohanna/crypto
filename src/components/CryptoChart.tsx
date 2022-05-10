@@ -1,8 +1,10 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import { LineChart } from "react-native-wagmi-charts";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { Colors } from "@theme/Colors";
+
 const { height: SIZE } = Dimensions.get("window");
 
 type CryptoChartProps = {
@@ -32,23 +34,25 @@ export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortN
                 <Price>${price?.toLocaleString("en-US")}</Price>
                 <PriceChangeText priceChange={priceChange}>{priceChange?.toFixed(2)}%</PriceChangeText>
             </LowerContainer>
-            <LineChart.Provider data={sparkline.price}>
-                <LineChart.PriceText
-                    format={({ formatted }) => {
-                        "worklet";
-                        if (formatted) {
-                            return `$${formatted}`;
-                        }
-                        return "";
-                    }}
-                    style={{ color: Colors.silverSand }}
-                />
-                <LineChart.DatetimeText style={{ color: Colors.silverSand }} />
-                <LineChart height={SIZE * 0.3}>
-                    <LineChart.Path color={Colors.cadetBlue} />
-                    <LineChart.CursorCrosshair color={Colors.fluorescentBlue} />
-                </LineChart>
-            </LineChart.Provider>
+            <GestureHandlerRootView>
+                <LineChart.Provider data={sparkline.price}>
+                    <LineChart.PriceText
+                        format={({ formatted }) => {
+                            "worklet";
+                            if (formatted) {
+                                return `$${formatted}`;
+                            }
+                            return "";
+                        }}
+                        style={{ color: Colors.silverSand }}
+                    />
+                    <LineChart.DatetimeText style={{ color: Colors.silverSand }} />
+                    <LineChart height={SIZE * 0.3}>
+                        <LineChart.Path color={Colors.cadetBlue} />
+                        <LineChart.CursorCrosshair color={Colors.fluorescentBlue} />
+                    </LineChart>
+                </LineChart.Provider>
+            </GestureHandlerRootView>
         </Container>
     );
 };
