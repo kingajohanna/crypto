@@ -169,17 +169,6 @@ Array [
       visible={false}
     />
   </View>,
-  <View>
-    <Modal
-      animationType="none"
-      hardwareAccelerated={false}
-      onHide={[Function]}
-      renderToHardwareTextureAndroid={true}
-      transparent={true}
-      useNativeDriver={false}
-      visible={false}
-    />
-  </View>,
 ]
 `;
 
