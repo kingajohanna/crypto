@@ -1,6 +1,6 @@
-/*
-    supported currencies
-*/
+/**
+ *    supported currencies
+ */
 export enum Currency {
     huf = "huf",
     eur = "eur",

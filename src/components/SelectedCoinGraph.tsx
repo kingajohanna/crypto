@@ -10,9 +10,9 @@ type SelectedProps = {
     reference: React.MutableRefObject<RBSheet>;
 };
 
-/*
-    bottom modal for selected coin details in market screen and favourites screen
-*/
+/**
+ *    bottom modal for the selected coin details in market screen and favourites screen
+ */
 export const SelectedCoinGraph: React.FC<SelectedProps> = ({ selectedCoinData, reference }) => {
     return (
         <RBSheet

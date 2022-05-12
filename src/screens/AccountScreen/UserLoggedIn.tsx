@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { AccountButton } from "@components/AccountButton";
 import { DeleteAlert, LogoutAlert } from "@components/Alert";
 
-/*
-    account logout and delete buttons
-*/
+/**
+ *    account logout and delete buttons, rendered in account screen when the user is logged in
+ */
 export const UserLoggedIn = () => {
     const [deletePopup, setDeletePopup] = useState(false);
 

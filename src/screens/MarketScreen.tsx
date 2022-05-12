@@ -12,6 +12,9 @@ import { Searchbar } from "@components/SearchBar";
 import { ErrorComponent } from "@components/ErrorComponent";
 import { fetchData } from "@utils/FetchData";
 
+/**
+ * renders the market coins with the searchbar and the bottom chart
+ */
 export const MarketScreen = () => {
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
     const user = useSelector((state: RootState) => state.user, shallowEqual);

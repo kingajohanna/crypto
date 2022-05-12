@@ -13,7 +13,7 @@ export function useFavouriteStatus(fav: boolean, id: string) {
     const error = useSelector((state: RootState) => state.error.error, shallowEqual);
 
     /*
-        handle add favourite and remove favourite
+        handling favourite coin adding or removing
     */
     async function setFav(value: boolean) {
         setIsFav(value);

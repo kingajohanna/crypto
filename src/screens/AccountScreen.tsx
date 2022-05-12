@@ -6,6 +6,9 @@ import { ScreenBackground } from "@components/ScreenBackground";
 import { UserLoggedIn } from "@screens/AccountScreen/UserLoggedIn";
 import { UserNotLoggedIn } from "@screens/AccountScreen/UserNotLoggedIn";
 
+/**
+ * render the correct screen based on the user's status (logged in or not)
+ */
 export const AccountScreen = () => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
 

@@ -6,6 +6,9 @@ import { UserNotLoggedIn } from "@screens/MyCoinsScreen/UserNotLoggedIn";
 import { shallowEqual, useSelector } from "react-redux";
 import { RootState } from "@stores/store";
 
+/**
+ * render the correct screen based on the user's status (logged in or not)
+ */
 export const MyCoinsScreen = () => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     return (

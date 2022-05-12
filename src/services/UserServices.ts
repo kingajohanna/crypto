@@ -5,6 +5,9 @@ import { setErrorAction } from "@actions/ErrorActions";
 import axios from "axios";
 import moment from "moment";
 
+/**
+ * add new user endpoint
+ */
 export const addUser = async (id: string, email: string = "", createdAt: string = moment.now().toLocaleString(), name: string = "", photoURL: string = "") => {
     try {
         setErrorAction("");
@@ -18,6 +21,9 @@ export const addUser = async (id: string, email: string = "", createdAt: string 
     }
 };
 
+/**
+ * remove user endpoint
+ */
 export const removeUser = async (id: string) => {
     try {
         setErrorAction("");
@@ -35,6 +41,9 @@ export const removeUser = async (id: string) => {
     }
 };
 
+/**
+ * add favourite coin endpoint
+ */
 export const addFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
@@ -56,6 +65,9 @@ export const addFav = async (userId: string, coinId: string) => {
     }
 };
 
+/**
+ * remove favourite coin endpoint
+ */
 export const removeFav = async (userId: string, coinId: string) => {
     try {
         setErrorAction("");
@@ -76,6 +88,9 @@ export const removeFav = async (userId: string, coinId: string) => {
     }
 };
 
+/**
+ * add new owned coin endpoint
+ */
 export const addCoin = async (userId: string, coinId: string, holdings: number, price: number, currency: string) => {
     try {
         setErrorAction("");
@@ -96,6 +111,9 @@ export const addCoin = async (userId: string, coinId: string, holdings: number, 
     }
 };
 
+/**
+ * request all owned coin enpoint
+ */
 export const getOwnedCoins = async (userId: string) => {
     try {
         setErrorAction("");
@@ -115,6 +133,9 @@ export const getOwnedCoins = async (userId: string) => {
     }
 };
 
+/**
+ * edit an owned coin endpoint
+ */
 export const setCoin = async (id: string, purchasedHoldings: string, purchasedTotalCost: string, soldHoldings: string, soldTotalCost: string) => {
     try {
         setErrorAction("");

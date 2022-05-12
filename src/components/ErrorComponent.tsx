@@ -3,9 +3,9 @@ import React from "react";
 import { PressableProps } from "react-native";
 import styled from "styled-components/native";
 
-/*
-    rendering when something happen with the markedData or the connection
-*/
+/**
+ *    rendering when something happen with the markedData or the internet connection during a request
+ */
 export const ErrorComponent: React.FC<PressableProps> = (props) => {
     return (
         <Container onPress={props.onPress}>

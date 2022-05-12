@@ -15,9 +15,9 @@ import { MyCoinsScreen } from "@screens/MyCoinsScreen";
 import { Colors } from "@theme/Colors";
 import { androidBottomPadding } from "@utils/androidHelper";
 
-/*
-    bottom navigator, app.ts render this
-*/
+/**
+ *    bottom navigator, app.ts render this, all screens rendered by BottomNavigator
+ */
 export const BottomNavigator = () => {
     const Tab = createMaterialBottomTabNavigator();
 

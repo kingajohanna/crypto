@@ -8,9 +8,9 @@ import { getFavsMarket, getMarketData } from "@services/CryptoServices";
 import { CryptoCoin } from "@components/CryptoCoin";
 import { SelectedCoinGraph } from "@components/SelectedCoinGraph";
 
-/*
-    contains users favourites
-*/
+/**
+ *    renders users favourite coins in favourites screen when the user is logged in
+ */
 export const UserLoggedIn = () => {
     const crypto = useSelector((state: RootState) => state.crypto, shallowEqual);
     const user = useSelector((state: RootState) => state.user, shallowEqual);

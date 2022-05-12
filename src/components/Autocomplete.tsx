@@ -10,9 +10,10 @@ type AutocompleteProps = {
     data: KeyValue[];
 } & TextInputProps;
 
-/*
-    textinput with scrollable suggestion
-*/
+/**
+ *   textinput with scrollable suggestions
+ *   used in newOwnedCoinBottomModal component
+ */
 export const Autocomplete: React.FC<AutocompleteProps> = ({ data, placeholder, onChangeText, width }) => {
     const [value, setValue] = useState("");
     const [menuVisible, setMenuVisible] = useState(false);

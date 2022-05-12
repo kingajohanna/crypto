@@ -17,9 +17,9 @@ type BottomModalProps = {
     onCancel: () => void;
 } & PressableProps;
 
-/*
-    bottommodal for editing owned coin
-*/
+/**
+ *    bottommodal for editing owned coin
+ */
 export const EditOwnedCoinBottomModal: React.FC<BottomModalProps> = (props) => {
     return (
         <RBSheet

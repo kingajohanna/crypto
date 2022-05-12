@@ -4,6 +4,9 @@ import { setErrorAction } from "@actions/ErrorActions";
 import axios from "axios";
 process.nextTick = setImmediate;
 
+/**
+ * request market data from the backend
+ */
 export const getMarketData = async (userId: string = "") => {
     try {
         setErrorAction("");
@@ -26,6 +29,9 @@ export const getMarketData = async (userId: string = "") => {
     }
 };
 
+/**
+ * request favourites from the backend
+ */
 export const getFavsMarket = async (userId: string = "") => {
     try {
         setErrorAction("");
@@ -42,6 +48,9 @@ export const getFavsMarket = async (userId: string = "") => {
     }
 };
 
+/**
+ * request coin names and ids from the backend
+ */
 export const getCoins = async () => {
     try {
         setErrorAction("");

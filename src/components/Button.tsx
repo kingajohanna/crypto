@@ -7,9 +7,9 @@ type ButtonProps = {
     title: string;
 } & PressableProps;
 
-/*
-    basic button
-*/
+/**
+ * basic button component with custom text
+ */
 export const Button: React.FC<ButtonProps> = ({ title, onPress }) => {
     return (
         <Container onPress={onPress}>
@@ -18,7 +18,9 @@ export const Button: React.FC<ButtonProps> = ({ title, onPress }) => {
     );
 };
 
-//export for jest test
+/**
+ * export for jest test
+ */
 export const Container = styled.Pressable({
     backgroundColor: Colors.fluorescentBlue,
     width: 120,

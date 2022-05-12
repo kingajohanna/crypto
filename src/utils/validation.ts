@@ -3,7 +3,10 @@ import { login, passwordReset, signup } from "@services/FirebaseServices";
 import { setAuthErrorAction } from "@actions/ErrorActions";
 import { firebaseEmail, firebasePassword } from "@utils/regex";
 
-export const onSignUpValidationAndSignup = async (email: string, password: string, passwordConf: string, onClose?: Function) => {
+/**
+ * validate email and passwords
+ */
+export const onSignUpValidationAndSignup = async (email: string, password: string, passwordConf: string) => {
     setAuthErrorAction("");
     if (!password || !passwordConf || !email) {
         setAuthErrorAction(authError.missingData);
@@ -20,6 +23,9 @@ export const onSignUpValidationAndSignup = async (email: string, password: strin
     return false;
 };
 
+/**
+ * validate email and password
+ */
 export const onLoginValidationAndLogin = async (email: string, password: string) => {
     setAuthErrorAction("");
     if (!password || !email) {
@@ -34,6 +40,9 @@ export const onLoginValidationAndLogin = async (email: string, password: string)
     return false;
 };
 
+/**
+ * validate email
+ */
 export const onPasswordResetValidationAndReset = async (email: string) => {
     setAuthErrorAction("");
     if (!email) {

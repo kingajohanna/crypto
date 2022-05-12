@@ -2,6 +2,9 @@ import React from "react";
 import { TextProps } from "react-native";
 import styled from "styled-components/native";
 
+/**
+ * basic error text component, used in bottom modals
+ */
 export const ErrorText: React.FC<TextProps> = (props) => {
     return <Text>{props.children}</Text>;
 };

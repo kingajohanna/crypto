@@ -1,6 +1,6 @@
-/*
-    tab names
-*/
+/**
+ *   tab names
+ */
 export enum Tabs {
     account = "Account",
     mycoins = "My coins",

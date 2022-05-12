@@ -12,9 +12,9 @@ import { RootState } from "@stores/store";
 import { Text } from "@components/Text";
 import { onLoginValidationAndLogin, onPasswordResetValidationAndReset, onSignUpValidationAndSignup } from "@utils/validation";
 
-/*
-    login and register screen
-*/
+/**
+ *    this screen rendered in the account screen when the user not logged in, and want to login or register
+ */
 export const UserNotLoggedIn = () => {
     const signUp = useRef() as React.MutableRefObject<RBSheet>;
     const logIn = useRef() as React.MutableRefObject<RBSheet>;

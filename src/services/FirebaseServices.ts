@@ -6,9 +6,9 @@ import { setAuthErrorAction } from "@actions/ErrorActions";
 import { PasswordReset, ReLogin } from "@components/Alert";
 import { errorToMessage } from "@utils/errorUtil";
 
-/*
-   google sso
-*/
+/**
+ *   handle google social login in frebase auth and on the backend
+ */
 export async function googleSignIn() {
     try {
         const data = await GoogleSignin.signIn();
@@ -28,6 +28,9 @@ export async function googleSignIn() {
     return null;
 }
 
+/**
+ * handle login in firebase auth and in redux
+ */
 export async function login(email: string, password: string) {
     setAuthErrorAction("");
     auth()
@@ -44,6 +47,9 @@ export async function login(email: string, password: string) {
         });
 }
 
+/**
+ * handle register/signup in firebase auth, in redux and on the backend
+ */
 export async function signup(email: string, password: string) {
     setAuthErrorAction("");
     return auth()
@@ -62,6 +68,9 @@ export async function signup(email: string, password: string) {
         });
 }
 
+/**
+ * request password reset from firebase auth
+ */
 export async function passwordReset(email: string) {
     setAuthErrorAction("");
     return auth()
@@ -77,6 +86,9 @@ export async function passwordReset(email: string) {
         });
 }
 
+/**
+ * handle logout in firebase auth and in redux
+ */
 export async function logOut() {
     return auth()
         .signOut()
@@ -89,6 +101,9 @@ export async function logOut() {
         });
 }
 
+/**
+ * handle login in firebase auth, in redux and on the backend
+ */
 export async function deleteAccount() {
     const user = auth().currentUser;
     return auth()

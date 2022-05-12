@@ -8,9 +8,9 @@ type AlertProps = {
     setVisible: (arg0: boolean) => void;
 };
 
-/*
-    alert with textbox what shows when the users try to to delete their account
-*/
+/**
+ * alert with textbox what shows when the users try to to delete their account
+ */
 export const DeleteAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
     const [text, setText] = useState("");
     return (
@@ -40,9 +40,9 @@ export const DeleteAlert: React.FC<AlertProps> = ({ visible, setVisible }) => {
     );
 };
 
-/*
-    alert that shows when the user try to logout
-*/
+/**
+ * alert that shows when the user try to logout
+ */
 export const LogoutAlert = () => {
     Alert.alert("Logout", `Click OK to logout!`, [
         {
@@ -56,10 +56,9 @@ export const LogoutAlert = () => {
     ]);
 };
 
-/*
-    to delete google sso in account if the user logged in earlier then 5 minutes
-    #errorhandling
-*/
+/**
+ * shows when user try to delete google account and the user logged in earlier then 5 minutes, this is a firebase error handling
+ */
 export const ReLogin = () => {
     Alert.alert(
         "",
@@ -74,6 +73,9 @@ Log in again before retrying this request.`,
     );
 };
 
+/**
+ * confirm the password reset request
+ */
 export const PasswordReset = () => {
     Alert.alert("", `The password reset link has been sent to your email address`, [
         {

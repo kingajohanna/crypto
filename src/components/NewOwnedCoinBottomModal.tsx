@@ -23,9 +23,9 @@ type BottomModalProps = {
     onCancel: () => void;
 } & PressableProps;
 
-/*
-    Bottom modal for adding a purchased coin to the owned coins
-*/
+/**
+ *    Bottom modal for adding a purchased coin to the users owned coins
+ */
 export const NewOwnedCoinBottomModal: React.FC<BottomModalProps> = ({ reference, setCoinName, setCurrency, setHoldings, setTotalCost, data, currency, onSave, onCancel, error }) => {
     return (
         <RBSheet

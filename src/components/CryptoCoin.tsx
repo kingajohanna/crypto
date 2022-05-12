@@ -18,9 +18,9 @@ type CryptoCoinProps = {
     isFavourite: boolean;
 } & PressableProps;
 
-/*
-    use for flatlist in marketscreen and favourites screen
-*/
+/**
+ *   used for flatlist element in marketscreen and favourites screen
+ */
 const CryptoCoinComponent: React.FC<CryptoCoinProps> = ({ id, imageUrl, name, shortName, price, priceChange, isFavourite, onPress }) => {
     const user = useSelector((state: RootState) => state.user, shallowEqual);
     const [fav, setFav] = useFavouriteStatus(isFavourite, id);

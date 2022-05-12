@@ -6,9 +6,9 @@ type TabHeaderProps = {
     title: string;
 };
 
-/*
-    tabheader, used in every tab with different title
-*/
+/**
+ *    tabheader, used in every tab with different title
+ */
 export const TabHeader: React.FC<TabHeaderProps> = ({ title }) => {
     return (
         <Background>

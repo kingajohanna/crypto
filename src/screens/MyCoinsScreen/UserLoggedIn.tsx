@@ -11,9 +11,9 @@ import { FAB } from "react-native-paper";
 import { NewOwnedCoinBottomModal } from "@components/NewOwnedCoinBottomModal";
 import { EditOwnedCoinBottomModal } from "@components/EditOwnedCoinBottomModal";
 
-/*
-    contains the owned coins of the user
-*/
+/**
+ *    contains the owned coins of the user in the my coins screen when the user is logged in
+ */
 export const UserLoggedIn = () => {
     const addCoinRef = useRef() as React.MutableRefObject<RBSheet>;
     const editCoinRef = useRef() as React.MutableRefObject<RBSheet>;

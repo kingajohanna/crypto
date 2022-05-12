@@ -5,15 +5,14 @@ import { Colors, hexToRGBA } from "@theme/Colors";
 
 type StyledTextInputProps = {
     title?: string;
-    errorText?: string;
     width?: number;
     isSecret?: boolean;
 } & TextInputProps;
 
-/*
-    basic inputfield
-*/
-const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, errorText, width, keyboardType, isSecret }) => {
+/**
+ *   basic inputfield with custom title placeholder
+ */
+export const TextInput: React.FC<StyledTextInputProps> = ({ title, placeholder, value, onChangeText, width, keyboardType, isSecret }) => {
     return (
         <Container>
             {title && <TitleText>{title}</TitleText>}
@@ -27,8 +26,6 @@ const TextInputComponent: React.FC<StyledTextInputProps> = ({ title, placeholder
                 secureTextEntry={isSecret ? true : false}
                 autoCapitalize="none"
             />
-
-            {errorText && <ErrorText>{errorText}</ErrorText>}
         </Container>
     );
 };
@@ -44,12 +41,6 @@ const TitleText = styled.Text(() => ({
     marginBottom: 4,
 }));
 
-const ErrorText = styled.Text(() => ({
-    fontSize: 14,
-    fontWeight: 400,
-    color: "#ff0000",
-}));
-
 const StyledInput = styled.TextInput<Partial<StyledTextInputProps>>(({ width }) => ({
     flexDirection: "row",
     alignItems: "center",
@@ -63,5 +54,3 @@ const StyledInput = styled.TextInput<Partial<StyledTextInputProps>>(({ width }) 
     color: Colors.cadetBlue,
     paddingHorizontal: 16,
 }));
-
-export const TextInput = TextInputComponent;

@@ -6,9 +6,9 @@ import { Colors, hexToRGBA } from "@theme/Colors";
 
 type StyledTextInputProps = {} & TextInputProps;
 
-/*
-    searchbar
-*/
+/**
+ *   searchbar component, used in market screen
+ */
 export const Searchbar: React.FC<StyledTextInputProps> = ({ placeholder, value, onChangeText }) => {
     return (
         <Container>

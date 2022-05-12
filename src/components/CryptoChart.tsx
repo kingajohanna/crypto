@@ -15,9 +15,9 @@ type CryptoChartProps = {
     priceChange?: number;
     sparkline?: any;
 };
-/*
-    chart about the last 7 day price changes
-*/
+/**
+ *    chart about the last 7 day price changes
+ */
 export const CryptoChart: React.FC<CryptoChartProps> = ({ imageUrl, name, shortName, price, priceChange, sparkline }) => {
     return (
         <Container>

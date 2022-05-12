@@ -1,6 +1,6 @@
-/*
-    signup and login errors
-*/
+/**
+ *    signup and login errors
+ */
 export enum authError {
     passwordsMatch = "Passwords do not match, please retype.",
     invalidPassword = "Invalid password. Minimum 6 characters with any latin alphabet, numbers and characters",

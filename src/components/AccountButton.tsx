@@ -16,9 +16,9 @@ type ButtonProps = {
     variant: ButtonVariant;
 } & PressableProps;
 
-/*
-    Account action buttons
-*/
+/**
+ * Account buttons, like login os account delete button
+ */
 const ButtonComponent: React.FC<ButtonProps> = ({ variant, onPress }) => {
     return (
         <ButtonContainer variant={variant} onPress={onPress}>
@@ -28,6 +28,11 @@ const ButtonComponent: React.FC<ButtonProps> = ({ variant, onPress }) => {
     );
 };
 
+/**
+ *
+ * @param variant of the button
+ * @returns the button's text
+ */
 const socialText = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
@@ -44,6 +49,11 @@ const socialText = (variant: ButtonVariant) => {
     }
 };
 
+/**
+ *
+ * @param variant of the button
+ * @returns icon of the buttons
+ */
 const socialIcon = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
@@ -59,6 +69,11 @@ const socialIcon = (variant: ButtonVariant) => {
     }
 };
 
+/**
+ *
+ * @param variant of the button
+ * @returns the background color of the button
+ */
 const backgroundColor = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
@@ -72,6 +87,11 @@ const backgroundColor = (variant: ButtonVariant) => {
     }
 };
 
+/**
+ *
+ * @param variant of the button
+ * @returns the font color of the button
+ */
 const fontColor = (variant: ButtonVariant) => {
     switch (variant) {
         case ButtonVariant.google:
@@ -109,6 +129,9 @@ const ButtonContainer = styled.Pressable<ButtonProps>((props: ButtonProps) => ({
     borderWidth: props.variant === ButtonVariant.google ? 0 : 2,
 }));
 
+/**
+ * creating the different button variants
+ */
 const Google = styled(ButtonComponent).attrs(() => ({
     variant: ButtonVariant.google,
 }))({});
@@ -125,6 +148,9 @@ const Delete = styled(ButtonComponent).attrs(() => ({
     variant: ButtonVariant.delete,
 }))({});
 
+/**
+ * export the differrent button variants
+ */
 export const AccountButton = {
     Google: Google,
     EmailLogIn: EmailLogIn,
@@ -133,4 +159,7 @@ export const AccountButton = {
     Delete: Delete,
 };
 
+/**
+ * jest needs this for testing
+ */
 AccountButton.EmailLogIn.displayName = "EmailLogIn";
