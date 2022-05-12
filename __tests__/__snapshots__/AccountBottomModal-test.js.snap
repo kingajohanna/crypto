@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accoun Bottom Modal tests renders correctly 1`] = `
+exports[`Account Bottom Modal tests renders correctly 1`] = `
 <View
   style={
     Array [
@@ -117,7 +117,7 @@ exports[`Accoun Bottom Modal tests renders correctly 1`] = `
 </View>
 `;
 
-exports[`Accoun Bottom Modal tests renders correctly with error 1`] = `
+exports[`Account Bottom Modal tests renders correctly with error 1`] = `
 <View
   style={
     Array [
